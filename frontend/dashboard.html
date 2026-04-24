@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLV Reservation</title>
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="menu">
+      <input type="checkbox" id="menu"/>
+
+      <div class="logo">
+          CSMS
+        <label for="menu"></label>
+      </div>
+
+        <div class="items">
+          <a href="#" class="item"><img src="assets/img/home.png" alt="Home Icon" class="nav-icon">Home</a>
+          <a href="campus.html" class="item"><img src="assets/img/clip.png" alt="Home Icon" class="nav-icon">Reservation</a>
+          <a href="#" class="item"><img src="assets/img/info.png" alt="Home Icon" class="nav-icon">About</a>
+        </div>
+
+    </div>
+
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <div class="sidebar-menu">
+          <div class="sidebar-card sidebar-card--outline">
+              <a href="profile2.html">
+                <i class="fa-regular fa-circle-user" style="font-size: 60px; color: #043AA3;"></i>
+              </a>
+            <span>Profile</span>
+          </div>
+
+          <div class="sidebar-card sidebar-card--light">
+                <i class="fa-solid fa-table-cells-large" style="font-size: 40px; color: white;"></i>
+            <span>Dashboard</span>
+          </div>
+
+          <div class="sidebar-card sidebar-card--selected">
+              <a href="campus.html">
+                <i class="fa-regular fa-building" style="font-size: 60px; color: #043AA3;"></i>
+              </a>
+            <span>Campus</span>
+          </div>
+
+
+        </div>
+        <a href="homepage.html">
+        <button class="logout-btn" type="button">Log out</button>
+        </a>
+      </aside>
+
+      <main class="content">
+        <section class="hero-row">
+          <div class="hero-copy">
+            <h1>
+              <span class="accent">Schedule</span> 
+              <span class="your">your</span>
+              <br>
+              <span class="accent">Room</span>
+            </h1>
+          </div>
+
+          <div class="hero-actions">
+            <div><button class="ghost-btn" type="button">My Room</button></div>
+
+            <button class="solid-btn" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 8v8"></path>
+                <path d="M8 12h8"></path>
+              </svg>
+              <span>Reserved Room</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="schedule-panel">
+          <div class="container">
+
+    <div class="schedule-header">
+        <button class="schedule-btn">My Schedule</button>
+
+     <div class="calendar-wrapper">
+            <button id="toggleCalendar">Select Date ▼</button>
+                <div id="calendarContainer" style="display: none;">
+                    <div class="calendar">
+                        <div class="header">
+                            <div id="prev" class="btn"><i class="fa-solid fa-arrow-left"></i></div>
+                            <div id="month-year"></div>
+                            <div id="next" class="btn"><i class="fa-solid fa-arrow-right"></i></div>
+                        </div>
+
+                              <div class="weekdays">
+                                  <div>Sun</div>
+                                  <div>Mon</div>
+                                  <div>Tue</div>
+                                  <div>Wed</div>
+                                  <div>Thu</div>
+                                  <div>Fri</div>
+                                  <div>Sat</div>
+                                    </div>
+                                        <div class="days" id="days"></div>
+                                    </div>
+                                </div>
+                      </div>
+                </div>
+      </div>
+
+    <div class="cards">
+          <div class="campus-grid">
+            <article class="campus-card">
+              <div class="campus-image-holder">
+                <img class="campus-image" src="assets/img/maysan.jpg" alt="Maysan Campus">
+              </div>
+              <h2>Maysan Campus</h2>
+                <p class="no-schedule">No Schedule</p>
+            </article>
+
+            <article class="campus-card">
+              <div class="campus-image-holder">
+                <img class="campus-image" src="assets/img/annex.jpg" alt="Annex Campus">
+              </div>
+              <h2>Annex Campus</h2>
+              <p class="no-schedule">No Schedule</p>
+            </article>
+
+            <article class="campus-card">
+              <div class="campus-image-holder">
+                <img class="campus-image" src="assets/img/cpag.jpg" alt="CPAG Campus">
+              </div>
+              <h2>CPAG Campus</h2>
+                <p class="no-schedule">No Schedule</p>  
+            </article>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  
+        <script src="assets/js/calendar.js"></script>
+</body>
+</html>

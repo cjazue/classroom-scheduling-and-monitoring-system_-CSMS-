@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PLV Reservation</title>
-  <link rel="stylesheet" href="campus.css">
+  <link rel="stylesheet" href="assets/css/building.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
+
 </head>
 <body>
     <div class="menu">
@@ -23,9 +23,9 @@
       </div>
 
       <div class="items">
-        <a href="dashboard.html" class="item"><img src="ASSETS/home.png" alt="Home Icon" class="nav-icon">Home</a>
-        <a href="campus.html" class="item"><img src="ASSETS/clip.png" alt="Home Icon" class="nav-icon">Reservation</a>
-        <a href="#" class="item"><img src="ASSETS/info.png" alt="Home Icon" class="nav-icon">About</a>
+        <a href="dashboard.html" class="item"><img src="assets/img/home.png" alt="Home Icon" class="nav-icon">Home</a>
+        <a href="campus.html" class="item"><img src="assets/img/clip.png" alt="Home Icon" class="nav-icon">Reservation</a>
+        <a href="#" class="item"><img src="assets/img/info.png" alt="Home Icon" class="nav-icon">About</a>
       </div>
 
     </div>
@@ -68,9 +68,10 @@
               <br>
               <span class="accent">Room</span>
             </h1>
-            <a class="section-link" href="#">All campus</a>
+            <a class="section-link" href="campus.html">All campus</a>
+            <a class="section-link" href="#">Buildings</a>
           </div>
-
+          
           <div class="hero-actions">
             <div><a href="dashboard.html"><button class="ghost-btn" type="button">My Room</button></a></div>
 
@@ -80,40 +81,37 @@
                 <path d="M12 8v8"></path>
                 <path d="M8 12h8"></path>
               </svg>
-              <span>Reserved Room</span>
+              <a href="campus.html"><span>Reserved Room</span></a>
             </button>
           </div>
         </section>
 
         <section class="schedule-panel">
           <div class="campus-grid">
-            <article class="campus-card">
-              <div class="campus-image-holder">
-                <img class="campus-image" src="ASSETS/maysan.jpg" alt="Maysan Campus">
-              </div>
-              <h2>Maysan Campus</h2>
-              <a href="campus.html"><button class="card-action-btn" type="button">Reserved Room</button></a>
-            </article>
 
-            <article class="campus-card">
-              <div class="campus-image-holder">
-                <img class="campus-image" src="ASSETS/annex.jpg" alt="Annex Campus">
-              </div>
-              <h2>Annex Campus</h2>
-              <a href="building.html">
-              <button class="card-action-btn" type="button">Reserved Room</button>
-              </a>
-            </article>
+                <article class="campus-card">
+                  
+                  <div class="campus-image-holder">
+                    <a href="room.html"><img class="campus-image" src="assets/img/cas.png" alt="Maysan Campus">
+                  </div>
+                  <h2>College of Arts and Science</h2>
+                  </a>
+                </article>
 
-            <article class="campus-card">
-              <div class="campus-image-holder">
-                <img class="campus-image" src="ASSETS/cpag.jpg" alt="CPAG Campus">
-              </div>
-              <h2>CPAG Campus</h2>
-              <button class="card-action-btn" type="button">Reserved Room</button>
-            </article>
+                <article class="campus-card">
+                  <div class="campus-image-holder">
+                    <img class="campus-image" src="assets/img/nb.png" alt="Maysan Campus">
+                  </div>
+                  <h2>New Building</h2>
+                </article>
+
+                <article class="campus-card">
+                  <div class="campus-image-holder">
+                    <img class="campus-image" src="assets/img/admin.png" alt="Maysan Campus">
+                  </div>
+                  <h2>Administration Building</h2>
+                </article>
           </div>
-        </div>
         </section>
       </main>
     </div>
