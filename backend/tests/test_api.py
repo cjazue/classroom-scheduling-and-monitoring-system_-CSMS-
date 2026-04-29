@@ -1,8 +1,3 @@
-"""
-As u can see, there are some tests here for auth, superadmin, rooms, and reservations. These are not exhaustive but cover the main flows. You can run these with pytest to verify the API behavior.
-May comments na rin as a guide for easy navigation. Kau na bahala mag add ng iba. K.
-Run with:  pytest tests/test_api.py -v
-"""
 
 import pytest
 import json
@@ -31,7 +26,6 @@ def client(app):
 
 @pytest.fixture
 def seed_data(app):
-    """Seed minimal data for tests ONLY."""
     with app.app_context():
         # Superadmin
         sa = User(name="Super Admin", email="sa@plv.edu.ph", role="superadmin")
@@ -39,13 +33,13 @@ def seed_data(app):
         db.session.add(sa)
 
         # Admin
-        admin = User(name="Test Admin", email="admin@plv.edu.ph", role="admin", course_section="BSIT")
+        admin = User(name="Test Admin", email="admin@plv.edu.ph", role="admin", course_section="BSIT 1-1")
         admin.set_password("Admin@1234")
         db.session.add(admin)
 
         # Student
         student = User(name="Test Student", email="student@plv.edu.ph", role="student",
-                       student_id="2021-00001", course_section="BSIT-1A")
+                       student_id="21-0001", course_section="BSIT 1-1")
         student.set_password("Student@1234")
         db.session.add(student)
 
@@ -79,7 +73,6 @@ def login(client, email, password):
                        content_type="application/json")
     return resp.get_json()["data"]["access_token"]
 
-# AUTH TESTS
 
 class TestAuth:
 
@@ -88,8 +81,8 @@ class TestAuth:
                            data=json.dumps({
                                "name": "New Student",
                                "email": "new@plv.edu.ph",
-                               "student_id": "2021-00002",
-                               "course_section": "BSIT-1A",
+                               "student_id": "21-0002",
+                               "course_section": "BSIT 1-1",
                                "password": "Password1",
                            }),
                            content_type="application/json")
@@ -97,15 +90,15 @@ class TestAuth:
         data = resp.get_json()
         assert data["success"] is True
         assert data["data"]["role"] == "student"
-        assert data["data"]["student_id"] == "2021-00002"
+        assert data["data"]["student_id"] == "21-0002"
 
     def test_register_duplicate_email(self, client, seed_data):
         resp = client.post("/api/auth/register",
                            data=json.dumps({
                                "name": "Dup",
                                "email": "student@plv.edu.ph",
-                               "student_id": "2021-00099",
-                               "course_section": "BSIT-1A",
+                               "student_id": "21-0099",
+                               "course_section": "BSIT 1-1",
                                "password": "Password1",
                            }),
                            content_type="application/json")
@@ -116,8 +109,8 @@ class TestAuth:
                            data=json.dumps({
                                "name": "Dup ID",
                                "email": "other@plv.edu.ph",
-                               "student_id": "2021-00001",
-                               "course_section": "BSIT-1A",
+                               "student_id": "21-0001",
+                               "course_section": "BSIT 1-1",
                                "password": "Password1",
                            }),
                            content_type="application/json")
@@ -129,7 +122,6 @@ class TestAuth:
                                "name": "Incomplete",
                                "email": "incomplete@plv.edu.ph",
                                "password": "Password1",
-                               # missing student_id and course_section
                            }),
                            content_type="application/json")
         assert resp.status_code == 422
@@ -141,8 +133,8 @@ class TestAuth:
                            data=json.dumps({
                                "name": "Weak",
                                "email": "weak@plv.edu.ph",
-                               "student_id": "2021-00003",
-                               "course_section": "BSIT-1A",
+                               "student_id": "21-0003",
+                               "course_section": "BSIT 1-1",
                                "password": "short",
                            }),
                            content_type="application/json")
@@ -174,7 +166,44 @@ class TestAuth:
         assert resp.status_code == 401
 
 
-# SUPE TESTS
+    def test_register_invalid_student_id(self, client):
+        resp = client.post("/api/auth/register",
+                           data=json.dumps({
+                               "name": "Bad ID",
+                               "email": "badid@plv.edu.ph",
+                               "student_id": "2021-00001",
+                               "course_section": "BSIT 1-1",
+                               "password": "Password1",
+                           }),
+                           content_type="application/json")
+        assert resp.status_code == 422
+        assert "student_id" in resp.get_json()["errors"]
+
+    def test_register_invalid_course_section(self, client):
+        resp = client.post("/api/auth/register",
+                           data=json.dumps({
+                               "name": "Bad CS",
+                               "email": "badcs@plv.edu.ph",
+                               "student_id": "21-0001",
+                               "course_section": "BSIT-3A",
+                               "password": "Password1",
+                           }),
+                           content_type="application/json")
+        assert resp.status_code == 422
+        assert "course_section" in resp.get_json()["errors"]
+
+    def test_register_non_plv_email(self, client):
+        resp = client.post("/api/auth/register",
+                           data=json.dumps({
+                               "name": "Outside",
+                               "email": "student@gmail.com",
+                               "student_id": "21-0002",
+                               "course_section": "BSIT 1-1",
+                               "password": "Password1",
+                           }),
+                           content_type="application/json")
+        assert resp.status_code == 422
+        assert "email" in resp.get_json()["errors"]
 
 class TestSuperadmin:
 
@@ -185,7 +214,7 @@ class TestSuperadmin:
                                "name": "New Admin",
                                "email": "newadmin@plv.edu.ph",
                                "password": "Admin@5678",
-                               "course_section": "CEIT",
+                               "course_section": "BSIT 1-1",
                            }),
                            content_type="application/json",
                            headers={"Authorization": f"Bearer {token}"})
@@ -197,7 +226,7 @@ class TestSuperadmin:
         resp = client.post("/api/superadmin/admins",
                            data=json.dumps({
                                "name": "X",
-                               "email": "x@plv.edu.ph",
+                               "email": "xtest@plv.edu.ph",
                                "password": "Admin@5678",
                            }),
                            content_type="application/json",
@@ -211,8 +240,6 @@ class TestSuperadmin:
         assert resp.status_code == 200
         assert resp.get_json()["data"]["pagination"]["total"] >= 1
 
-
-# ROOM TESTS
 
 class TestRooms:
 
@@ -261,8 +288,6 @@ class TestRooms:
         assert resp.status_code == 403
 
 
-# Reservation tests
-
 class TestReservations:
 
     def _future_date(self):
@@ -274,7 +299,7 @@ class TestReservations:
                            data=json.dumps({
                                "room_id": seed_data["room_id"],
                                "requestor_name": "Prof. Santos",
-                               "course_section": "BSIT-3A",
+                               "course_section": "BSIT 3-1",
                                "date": self._future_date(),
                                "start_time": "09:00",
                                "end_time": "11:00",
@@ -292,7 +317,7 @@ class TestReservations:
                            data=json.dumps({
                                "room_id": seed_data["room_id"],
                                "requestor_name": "Student",
-                               "course_section": "BSIT-1A",
+                               "course_section": "BSIT 1-1",
                                "date": self._future_date(),
                                "start_time": "09:00",
                                "end_time": "11:00",
@@ -307,7 +332,7 @@ class TestReservations:
                         data=json.dumps({
                             "room_id": seed_data["room_id"],
                             "requestor_name": "Prof. Santos",
-                            "course_section": "BSIT-3A",
+                            "course_section": "BSIT 3-1",
                             "date": self._future_date(),
                             "start_time": "13:00",
                             "end_time": "15:00",
@@ -328,7 +353,7 @@ class TestReservations:
         payload = {
             "room_id": seed_data["room_id"],
             "requestor_name": "Prof. Santos",
-            "course_section": "BSIT-3A",
+            "course_section": "BSIT 3-1",
             "date": self._future_date(),
             "start_time": "08:00",
             "end_time": "10:00",
@@ -345,13 +370,13 @@ class TestReservations:
         assert resp.status_code == 409
 
     def test_student_sees_only_approved(self, client, seed_data):
-        # PENDING AS ADMIN
+        # Submit (pending) 
         admin_token = login(client, "admin@plv.edu.ph", "Admin@1234")
         client.post("/api/reservations",
                     data=json.dumps({
                         "room_id": seed_data["room_id"],
                         "requestor_name": "Prof. Santos",
-                        "course_section": "BSIT-3A",
+                        "course_section": "BSIT 3-1",
                         "date": self._future_date(),
                         "start_time": "14:00",
                         "end_time": "16:00",
@@ -359,7 +384,7 @@ class TestReservations:
                     content_type="application/json",
                     headers={"Authorization": f"Bearer {admin_token}"})
 
-        # EXP: 0 RESULTS
+        # 0
         student_token = login(client, "student@plv.edu.ph", "Student@1234")
         resp = client.get("/api/reservations",
                           headers={"Authorization": f"Bearer {student_token}"})
@@ -372,7 +397,7 @@ class TestReservations:
                         data=json.dumps({
                             "room_id": seed_data["room_id"],
                             "requestor_name": "Prof. Santos",
-                            "course_section": "BSIT-3A",
+                            "course_section": "BSIT 3-1",
                             "date": self._future_date(),
                             "start_time": "07:00",
                             "end_time": "09:00",

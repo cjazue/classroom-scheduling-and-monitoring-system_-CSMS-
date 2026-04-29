@@ -2,7 +2,6 @@ from datetime import datetime, date, time
 from flask import jsonify, request
 import re
 
-
 def success_response(data=None, message: str = "Success", status_code: int = 200):
     resp = {"success": True, "message": message}
     if data is not None:
@@ -18,7 +17,6 @@ def error_response(message: str = "An error occurred", status_code: int = 400, e
 
 
 def paginate_query(query, schema_fn):
-  
     page = request.args.get("page", 1, type=int)
     per_page = min(request.args.get("per_page", 20, type=int), 100)
     pagination = query.paginate(page=page, per_page=per_page, error_out=False)
@@ -36,10 +34,23 @@ def paginate_query(query, schema_fn):
 
 
 def validate_email(email: str) -> bool:
-    pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"  
+    pattern = r"^[a-zA-Z0-9_.+-]+@plv\.edu\.ph$"
     return bool(re.match(pattern, email))
 
+
+def validate_student_id(student_id: str) -> bool:
+    return bool(re.fullmatch(r"\d{2}-\d{4}", student_id))
+
+
+def validate_course_section(value: str) -> bool:
+    """
+    Format: AAAA X-X
+    """
+    return bool(re.fullmatch(r"[A-Z]{4} (10|[1-9])-(10|[1-9])", value))
+
+
 def validate_password(password: str) -> tuple[bool, str]:
+    """Minimum: 8 chars, 1 uppercase, 1 lowercase, 1 digit."""
     if len(password) < 8:
         return False, "Password must be at least 8 characters."
     if not re.search(r"[A-Z]", password):
@@ -57,11 +68,13 @@ def parse_date(date_str: str) -> date | None:
     except (ValueError, TypeError):
         return None
 
+
 def parse_time(time_str: str) -> time | None:
     try:
         return datetime.strptime(time_str, "%H:%M").time()
     except (ValueError, TypeError):
         return None
+
 
 def require_json_fields(data: dict, required: list[str]) -> list[str]:
     return [f for f in required if not data.get(f)]
