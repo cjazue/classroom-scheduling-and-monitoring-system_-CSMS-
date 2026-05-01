@@ -2,42 +2,37 @@ from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.extensions import db
 
-ROLES = ("superadmin", "admin", "student")
+ROLES = ("superadmin", "admin", "authorized_user", "student")
 
 
 class User(db.Model):
     __tablename__ = "users"
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(150), nullable=False)
-    email = db.Column(db.String(150), unique=True, nullable=False, index=True)
+    id            = db.Column(db.Integer, primary_key=True)
+    name          = db.Column(db.String(150), nullable=False)
+    email         = db.Column(db.String(150), unique=True, nullable=False, index=True)
     password_hash = db.Column(db.String(256), nullable=False)
 
-    role = db.Column(db.String(20), nullable=False, default="student")
+    # 'superadmin' | 'admin' | 'authorized_user' | 'student'
+    role           = db.Column(db.String(20), nullable=False, default="student")
 
-    student_id = db.Column(db.String(20), unique=True, nullable=True, index=True)
+    student_id     = db.Column(db.String(20), unique=True, nullable=True, index=True)
     course_section = db.Column(db.String(100), nullable=True)
 
-    is_active = db.Column(db.Boolean, default=True, nullable=False)
+    is_active  = db.Column(db.Boolean, default=True, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    updated_at = db.Column(
-        db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
-    )
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
+    # Who created this account
     created_by = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=True)
 
-    # RS (na mas matibay pa sainyo)
     reservations = db.relationship(
-        "Reservation",
-        backref="requester",
-        lazy="dynamic",
+        "Reservation", backref="requester", lazy="dynamic",
         foreign_keys="Reservation.user_id",
     )
     created_users = db.relationship(
-        "User",
-        backref=db.backref("creator", remote_side=[id]),
-        lazy="dynamic",
-        foreign_keys=[created_by],
+        "User", backref=db.backref("creator", remote_side=[id]),
+        lazy="dynamic", foreign_keys=[created_by],
     )
 
     def set_password(self, password: str) -> None:
@@ -48,15 +43,15 @@ class User(db.Model):
 
     def to_dict(self, include_sensitive: bool = False) -> dict:
         data = {
-            "id": self.id,
-            "name": self.name,
-            "email": self.email,
-            "role": self.role,
-            "student_id": self.student_id,
+            "id":             self.id,
+            "name":           self.name,
+            "email":          self.email,
+            "role":           self.role,
+            "student_id":     self.student_id,
             "course_section": self.course_section,
-            "is_active": self.is_active,
-            "created_at": self.created_at.isoformat(),
-            "updated_at": self.updated_at.isoformat() if self.updated_at else None,
+            "is_active":      self.is_active,
+            "created_at":     self.created_at.isoformat(),
+            "updated_at":     self.updated_at.isoformat() if self.updated_at else None,
         }
         if include_sensitive:
             data["created_by"] = self.created_by
