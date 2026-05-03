@@ -1,6 +1,5 @@
 const API_BASE = "http://localhost:5000/api";
 
-
 const Auth = {
   getToken()  { return localStorage.getItem("plv_token"); },
   setToken(t) { localStorage.setItem("plv_token", t); },
@@ -15,10 +14,11 @@ const Auth = {
     localStorage.removeItem("plv_user");
   },
   isLoggedIn() { return !!this.getToken(); },
-  isAdmin()    { const u = this.getUser(); return u && (u.role === "admin" || u.role === "superadmin"); },
-  isSuperadmin(){ const u = this.getUser(); return u && u.role === "superadmin"; },
+  isAdmin()          { const u = this.getUser(); return u && (u.role === "admin" || u.role === "superadmin"); },
+  isAuthorizedUser() { const u = this.getUser(); return u && (u.role === "authorized_user" || u.role === "admin" || u.role === "superadmin"); },
+  isSuperadmin()     { const u = this.getUser(); return u && u.role === "superadmin"; },
+  canReserve()       { const u = this.getUser(); return u && ["authorized_user", "admin", "superadmin"].includes(u.role); },
 };
-
 
 
 async function apiFetch(path, options = {}) {
@@ -27,6 +27,7 @@ async function apiFetch(path, options = {}) {
   if (token) headers["Authorization"] = `Bearer ${token}`;
 
   const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+
 
   if (res.status === 401) {
     const refreshed = await tryRefresh();
@@ -66,13 +67,13 @@ async function tryRefresh() {
   }
 }
 
-
 function requireAuth() {
   if (!Auth.isLoggedIn()) {
     window.location.href = "loginpage.html";
   }
 }
 
+// Meth
 
 const API = {
 
@@ -144,6 +145,7 @@ const API = {
     return apiFetch(`/reservations/${id}/cancel`, { method: "PATCH" });
   },
 };
+
 
 function getParam(key) {
   return new URLSearchParams(window.location.search).get(key);

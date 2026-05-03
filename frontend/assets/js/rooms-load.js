@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const buildingLabel = document.getElementById("buildingLabel");
   if (buildingLabel) buildingLabel.textContent = `${campusName} - ${buildingName}`;
 
+
   const campusNameEl = document.querySelectorAll(".campus-name");
   campusNameEl.forEach(el => el.textContent = campusName);
   const campusBuildingEl = document.querySelectorAll(".campus-building");
@@ -31,14 +32,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await loadRooms(buildingId);
 
+  
   const user = Auth.getUser();
-  if (user && user.role === "student") {
+  if (user && !Auth.canReserve()) {
     document.querySelectorAll(".btn-proceed").forEach(btn => {
       btn.style.display = "none";
     });
     const hint = document.createElement("p");
     hint.style.cssText = "text-align:center;color:#888;font-size:13px;margin-top:8px;";
-    hint.textContent = "Only admins and teachers can reserve rooms.";
+    hint.textContent = "Only authorized users (professors/student officers) can reserve rooms.";
     document.querySelector(".btn-row")?.appendChild(hint);
   }
 });
@@ -84,7 +86,7 @@ async function loadRooms(buildingId) {
 
     document.querySelectorAll(".container2").forEach(el => {
       el.addEventListener("click", function () {
-        if (this.dataset.occupied === "true") return; // occupied — no action
+        if (this.dataset.occupied === "true") return; 
 
         const roomId   = parseInt(this.dataset.roomId);
         const roomName = this.dataset.roomName;
@@ -205,9 +207,8 @@ function closeSuccess() {
 }
 
 
-
 function parseSchedule(displayDate, timeStr) {
-
+ 
   try {
     const dateObj  = new Date(displayDate);
     const isoDate  = dateObj.toISOString().split("T")[0];
@@ -256,6 +257,7 @@ function initLogout() {
     btn.addEventListener("click", () => API.logout());
   });
 }
+
 
 document.addEventListener("click", e => {
   if (e.target.id === "reservationModal") closeReservation();
