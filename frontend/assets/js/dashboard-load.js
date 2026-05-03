@@ -15,7 +15,7 @@ async function loadReservations(filterDate = null) {
   const params = {};
 
   if (filterDate) {
-    params.date = filterDate; 
+    params.date = filterDate; // YYYY-MM-DD
   }
 
   const user = Auth.getUser();
@@ -33,6 +33,7 @@ async function loadReservations(filterDate = null) {
 }
 
 function renderReservations(reservations) {
+
   const byCampus = {};
   reservations.forEach(r => {
     const campus = r.room?.campus || "Unknown Campus";
@@ -55,6 +56,7 @@ function renderReservations(reservations) {
     const campusKey = card.dataset.campus;  // "Main Campus", "Annex Campus", "CPAG Campus"
     const list      = card.querySelector(".reservation-list");
     if (!list) return;
+
 
     const matches = reservations.filter(r =>
       r.room?.campus?.toLowerCase().includes(campusKey.toLowerCase())
@@ -80,8 +82,12 @@ function renderReservations(reservations) {
 
 function canCancel(reservation) {
   const user = Auth.getUser();
-  return user &&
-    (user.role === "admin" || user.role === "superadmin") &&
+  if (!user) return false;
+  if (user.role === "authorized_user") {
+    return reservation.user_id === user.id &&
+      (reservation.status === "pending" || reservation.status === "approved");
+  }
+  return (user.role === "admin" || user.role === "superadmin") &&
     (reservation.status === "pending" || reservation.status === "approved");
 }
 
