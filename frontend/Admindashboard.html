@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSMS Student View</title>
-  <link rel="stylesheet" href="Super Admin.css">
+  <title>CSMS Admin Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -22,14 +22,8 @@
       </div>
 
       <nav class="topnav" aria-label="Primary">
-
-          <span>Home</span>
-        </a>
-
-        <a class="nav-link" href="#">
-
-          <span>About us</span>
-        </a>
+        <a class="nav-link active" href="Admindashboard.html"><span>Home</span></a>
+        <a class="nav-link" href="about us.html"><span>About us</span></a>
       </nav>
     </header>
 
@@ -62,39 +56,47 @@
 
         <button class="logout-btn" type="button">Log out</button>
       </aside>
+
       <main class="content">
         <section class="title-row">
           <h1>Admin</h1>
           <div class="title-line" aria-hidden="true"></div>
         </section>
-         <section class="stats-row">
 
         <section class="stats-row">
-          <a href="PermissionReq.html"><article class="stat-card stat-card-muted">
-            <span class="stat-bar" aria-hidden="true"></span>
-            <div class="stat-copy">
-            <p>Request Permission</p>
-              <strong>0</strong>
-            </div>
-          </article>
+          <a href="PermissionReq.html">
+            <article class="stat-card stat-card-muted">
+              <span class="stat-bar" aria-hidden="true"></span>
+              <div class="stat-copy">
+                <p>Request Permission</p>
+                <strong id="permissionRequestCount">0</strong>
+              </div>
+            </article>
           </a>
 
-        <section class="stats-row">
-          <a href="Reservation.html"><article class="stat-card stat-card-muted">
-            <span class="stat-bar" aria-hidden="true"></span>
-            <div class="stat-copy">
-            <p>Reservation</p>
-              <strong>0</strong>
-            </div>
-          </article>
+          <a href="Reservation.html">
+            <article class="stat-card stat-card-muted">
+              <span class="stat-bar" aria-hidden="true"></span>
+              <div class="stat-copy">
+                <p>Reservation</p>
+                <strong id="pendingReservationCount">0</strong>
+              </div>
+            </article>
           </a>
 
           <article class="stat-card stat-card-bright">
             <span class="stat-bar" aria-hidden="true"></span>
             <div class="stat-copy">
               <p>Total Room</p>
-              <strong>41</strong>
+              <strong id="totalRoomCount">0</strong>
             </div>
           </article>
         </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/admin-dashboard-load.js"></script>
+</body>
 </html>

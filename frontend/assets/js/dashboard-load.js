@@ -74,7 +74,7 @@ function renderReservations(reservations) {
           ${r.start_time} – ${r.end_time}<br>
           <small class="status-badge status-${r.status}">${r.status}</small>
         </span>
-        ${canCancel(r) ? `<button class="cancel-btn" onclick="cancelReservation(${r.id})">✕</button>` : ""}
+        ${canCancel(r) ? `<button class="cancel-btn" onclick="cancelReservation('${r.id}')">✕</button>` : ""}
       </div>
     `).join("");
   });

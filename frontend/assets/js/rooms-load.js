@@ -88,8 +88,9 @@ async function loadRooms(buildingId) {
       el.addEventListener("click", function () {
         if (this.dataset.occupied === "true") return; 
 
-        const roomId   = parseInt(this.dataset.roomId);
+        const roomId   = (this.dataset.roomId || "").trim();
         const roomName = this.dataset.roomName;
+        if (!roomId) return;
 
         document.querySelectorAll(".container2").forEach(r => r.classList.remove("selected"));
         this.classList.add("selected");
@@ -176,7 +177,7 @@ async function showSuccess() {
     await API.createReservation(payload);
 
     document.querySelectorAll(".container2").forEach(el => {
-      if (parseInt(el.dataset.roomId) === selectedRoomId) {
+      if ((el.dataset.roomId || "") === selectedRoomId) {
         el.classList.remove("selected");
         el.classList.add("reserved");
         el.dataset.occupied = "true";

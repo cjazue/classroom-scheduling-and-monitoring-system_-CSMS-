@@ -58,7 +58,9 @@ document.addEventListener('DOMContentLoaded', function () {
           day: "numeric"
         });
 
-        toggleBtn.textContent = formatted;
+        const textEl = toggleBtn.querySelector(".date-text");
+        if (textEl) textEl.textContent = formatted;
+        else toggleBtn.textContent = formatted;
         calendarContainer.style.display = "none";
 
         // Emit ISO date for dashboard filtering

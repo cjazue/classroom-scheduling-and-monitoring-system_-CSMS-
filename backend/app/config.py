@@ -1,5 +1,6 @@
 import os
 from datetime import timedelta
+from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -10,7 +11,10 @@ def get_database_url():
     return (
         os.getenv("SQLALCHEMY_DATABASE_URI")
         or os.getenv("DATABASE_URL")
-        or "sqlite:///app.db"  
+        # Default to the repo's `backend/app.db` (NOT `backend/instance/app.db`).
+        # Flask-SQLAlchemy resolves relative SQLite paths against `app.instance_path`,
+        # which previously pointed at an empty `backend/instance/app.db` and broke login.
+        or f"sqlite:///{(Path(__file__).resolve().parents[1] / 'app.db')}"
     )
 
 

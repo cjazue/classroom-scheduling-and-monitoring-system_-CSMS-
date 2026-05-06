@@ -66,6 +66,9 @@ function buildPicker(timePickable) {
     selects.forEach(sel => {
         sel.addEventListener("change", () => {
             timePickable.value = getTimeString(picker);
+            // Programmatic value changes don't trigger input/change events automatically.
+            timePickable.dispatchEvent(new Event("input", { bubbles: true }));
+            timePickable.dispatchEvent(new Event("change", { bubbles: true }));
         });
     });
 

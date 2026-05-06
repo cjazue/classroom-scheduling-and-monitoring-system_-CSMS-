@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <h2>${b.name}</h2>
         <button
           class="card-action-btn"
-          onclick="goToRooms(${b.id}, '${escapeJs(b.name)}', '${escapeJs(campusName)}')">
+          onclick="goToRooms('${b.id}', '${escapeJs(b.name)}', '${escapeJs(campusName)}')">
           View Rooms
         </button>
       </article>

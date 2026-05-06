@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <h2>${campus.name}</h2>
         <button
           class="card-action-btn"
-          onclick="goToBuildings(${campus.id}, '${escapeHtml(campus.name)}')">
+          onclick="goToBuildings('${campus.id}', '${escapeHtml(campus.name)}')">
           View Buildings
         </button>
       </article>

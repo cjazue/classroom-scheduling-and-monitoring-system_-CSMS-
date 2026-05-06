@@ -1,3 +1,6 @@
+from datetime import datetime
+from uuid import uuid4
+
 from flask import Blueprint, request
 from flask_jwt_extended import get_jwt_identity
 from app.extensions import db
@@ -12,6 +15,9 @@ from app.utils import (
 )
 
 superadmin_bp = Blueprint("superadmin", __name__, url_prefix="/api/superadmin")
+
+def _gen_user_id(prefix: str = "AD") -> str:
+    return f"{prefix}{uuid4().hex[:8].upper()}"
 
 @superadmin_bp.route("/admins", methods=["POST"])
 @superadmin_required
@@ -31,7 +37,7 @@ def create_admin():
     if not email:
         errors["email"] = "Email is required."
     elif not validate_email(email):
-        errors["email"] = "Must be a valid PLV email (@plv.edu.ph)."
+        errors["email"] = "Must be a valid email address."
     if not password:
         errors["password"] = "Password is required."
     else:
@@ -46,12 +52,15 @@ def create_admin():
         return error_response("Email is already registered.", 409)
 
     admin = User(
+        id=_gen_user_id("AD"),
         name=name,
         email=email,
-        role="admin",
         course_section=course_section or None,
         created_by=creator_id,
+        created_at=datetime.utcnow(),
+        updated_at=datetime.utcnow(),
     )
+    admin.set_role("admin")
     admin.set_password(password)
     db.session.add(admin)
     db.session.commit()
@@ -62,7 +71,7 @@ def create_admin():
 @superadmin_bp.route("/admins", methods=["GET"])
 @superadmin_required
 def list_admins():
-    query = User.query.filter_by(role="admin").order_by(User.created_at.desc())
+    query = User.query.filter(User.role == User.db_role("admin")).order_by(User.created_at.desc())
 
     is_active = request.args.get("is_active")
     if is_active is not None:
@@ -78,17 +87,17 @@ def list_admins():
     return success_response(data)
 
 
-@superadmin_bp.route("/admins/<int:admin_id>", methods=["GET"])
+@superadmin_bp.route("/admins/<admin_id>", methods=["GET"])
 @superadmin_required
 def get_admin(admin_id):
-    admin = User.query.filter_by(id=admin_id, role="admin").first_or_404()
+    admin = User.query.filter(User.id == admin_id, User.role == User.db_role("admin")).first_or_404()
     return success_response(admin.to_dict(include_sensitive=True))
 
 
-@superadmin_bp.route("/admins/<int:admin_id>", methods=["PATCH"])
+@superadmin_bp.route("/admins/<admin_id>", methods=["PATCH"])
 @superadmin_required
 def update_admin(admin_id):
-    admin = User.query.filter_by(id=admin_id, role="admin").first_or_404()
+    admin = User.query.filter(User.id == admin_id, User.role == User.db_role("admin")).first_or_404()
     data  = request.get_json(silent=True) or {}
 
     if "name" in data and data["name"].strip():
@@ -107,10 +116,10 @@ def update_admin(admin_id):
     return success_response(admin.to_dict(include_sensitive=True), "Admin updated.")
 
 
-@superadmin_bp.route("/admins/<int:admin_id>", methods=["DELETE"])
+@superadmin_bp.route("/admins/<admin_id>", methods=["DELETE"])
 @superadmin_required
 def delete_admin(admin_id):
-    admin = User.query.filter_by(id=admin_id, role="admin").first_or_404()
+    admin = User.query.filter(User.id == admin_id, User.role == User.db_role("admin")).first_or_404()
     admin.is_active = False
     db.session.commit()
     return success_response(message="Admin account deactivated.")

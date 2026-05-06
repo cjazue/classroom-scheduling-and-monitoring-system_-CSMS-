@@ -1,6 +1,7 @@
 from app.utils.decorators import (
     superadmin_required,
     admin_required,
+    authorized_user_required,
     any_authenticated,
     roles_required,
 )
@@ -20,6 +21,7 @@ from app.utils.helpers import (
 __all__ = [
     "superadmin_required",
     "admin_required",
+    "authorized_user_required",
     "any_authenticated",
     "roles_required",
     "success_response",
