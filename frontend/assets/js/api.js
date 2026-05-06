@@ -38,6 +38,40 @@ const Auth = {
   canReserve()       { const u = this.getUser(); return u && ["authorized_user", "admin", "superadmin"].includes(u.role); },
 };
 
+function getDashboardPath(role) {
+  switch ((role || "").toLowerCase()) {
+    case "superadmin": return "/dashboard/super_admin.html";
+    case "admin": return "/dashboard/admin.html";
+    case "authorized_user": return "/dashboard/authorized_user.html";
+    default: return "/dashboard/student.html";
+  }
+}
+
+function redirectToLogin() {
+  window.location.href = "/loginpage.html";
+}
+
+function requireAuth(allowedRoles) {
+  if (!Auth.isLoggedIn()) {
+    redirectToLogin();
+    return null;
+  }
+
+  const user = Auth.getUser();
+  if (!user || !user.role) {
+    Auth.clear();
+    redirectToLogin();
+    return null;
+  }
+
+  if (Array.isArray(allowedRoles) && allowedRoles.length && !allowedRoles.includes(user.role)) {
+    window.location.href = getDashboardPath(user.role);
+    return null;
+  }
+
+  return user;
+}
+
 
 async function apiFetch(path, options = {}) {
   const token = Auth.getToken();
@@ -56,7 +90,7 @@ async function apiFetch(path, options = {}) {
       return retry.json();
     }
     Auth.clear();
-    window.location.href = "loginpage.html";
+    redirectToLogin();
     return;
   }
 
@@ -94,10 +128,25 @@ async function tryRefresh() {
   }
 }
 
-function requireAuth() {
+function requireAuth(allowedRoles) {
   if (!Auth.isLoggedIn()) {
-    window.location.href = "loginpage.html";
+    redirectToLogin();
+    return null;
   }
+
+  const user = Auth.getUser();
+  if (!user || !user.role) {
+    Auth.clear();
+    redirectToLogin();
+    return null;
+  }
+
+  if (Array.isArray(allowedRoles) && allowedRoles.length && !allowedRoles.includes(user.role)) {
+    window.location.href = getDashboardPath(user.role);
+    return null;
+  }
+
+  return user;
 }
 
 // Meth
@@ -115,7 +164,7 @@ const API = {
   async logout() {
     try { await apiFetch("/auth/logout", { method: "POST" }); } catch {}
     Auth.clear();
-    window.location.href = "homepage.html";
+    window.location.href = "/homepage.html";
   },
 
   async getMe() {
@@ -146,6 +195,14 @@ const API = {
   async getRoomSchedule(roomId, date) {
     const qs = date ? `?date=${date}` : "";
     return apiFetch(`/rooms/${roomId}/schedule${qs}`);
+  },
+
+  getDashboardPath(role) {
+    return getDashboardPath(role);
+  },
+
+  redirectToLogin() {
+    redirectToLogin();
   },
 
   // Reservations

@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => {
   requireAuth();
   if (!Auth.isAdmin()) {
-    window.location.href = "dashboard.html";
-    return;
-  }
-
+      window.location.href = API.getDashboardPath(Auth.getUser()?.role);
+      return;
+    }
   initLogout();
 
   try {

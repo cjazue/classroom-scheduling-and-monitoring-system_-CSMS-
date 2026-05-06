@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   if (Auth.isLoggedIn()) {
-    window.location.href = Auth.isAdmin() ? "Admindashboard.html" : "dashboard.html";
+    const user = Auth.getUser();
+    window.location.href = API.getDashboardPath(user?.role);
     return;
   }
 
@@ -46,8 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("plv_refresh_token", refreshToken);
       Auth.setUser(user);
 
-
-      window.location.href = Auth.isAdmin() ? "Admindashboard.html" : "dashboard.html";
+      window.location.href = API.getDashboardPath(user.role);
     } catch (err) {
       const msg = err?.error || err?.message || "Invalid email or password.";
       showError("loginError", msg);

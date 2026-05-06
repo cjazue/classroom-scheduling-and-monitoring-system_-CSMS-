@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (!buildingId) {
     document.getElementById("roomsContainer").innerHTML =
-      `<p style="color:red;padding:20px;">No building selected. <a href="campus.html">Go back</a></p>`;
+      `<p style="color:red;padding:20px;">No building selected. <a href="/campus.html">Go back</a></p>`;
     return;
   }
 

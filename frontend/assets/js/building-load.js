@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     : (getPageContext("selectedCampus")?.name || "Campus");
 
   if (!campusId) {
-    grid.innerHTML = `<p class="loading-text">No campus selected. <a href="campus.html">Go back</a></p>`;
+    grid.innerHTML = `<p class="loading-text">No campus selected. <a href="/campus.html">Go back</a></p>`;
     return;
   }
 

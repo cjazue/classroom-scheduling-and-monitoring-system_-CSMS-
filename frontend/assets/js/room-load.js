@@ -35,7 +35,7 @@
     if (!buildingId) {
       const container = document.getElementById("roomsContainer");
       if (container) {
-        container.innerHTML = `<p style="padding:20px;color:#b91c1c;">No building selected. <a href="campus.html">Go back</a></p>`;
+        container.innerHTML = `<p style="padding:20px;color:#b91c1c;">No building selected. <a href="/campus.html">Go back</a></p>`;
       }
       return;
     }
@@ -323,7 +323,7 @@
   }
 
   function goHome() {
-    window.location.href = "dashboard.html";
+    window.location.href = API.getDashboardPath(Auth.getUser()?.role);
   }
 
   function wireModalInputs() {
