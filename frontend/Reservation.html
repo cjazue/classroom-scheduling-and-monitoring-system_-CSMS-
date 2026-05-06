@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSMS Student View</title>
+  <link rel="stylesheet" href="Super Admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand-group">
+        <div class="brand">CSMS</div>
+        <div class="brand-divider" aria-hidden="true"></div>
+      </div>
+
+      <nav class="topnav" aria-label="Primary">
+        <a class="nav-link active" href="Admindashboard.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5"></path>
+            <path d="M5.5 9.5V20h4.75v-5.5h3.5V20H18.5V9.5"></path>
+          </svg>
+          <span>Home</span>
+        </a>
+
+        <a class="nav-link" href="#">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 10v6"></path>
+            <path d="M12 7.5h.01"></path>
+          </svg>
+          <span>About us</span>
+        </a>
+      </nav>
+    </header>
+
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <div class="sidebar-menu">
+          <div class="sidebar-card outline">
+            <div class="sidebar-icon-wrap">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <circle cx="32" cy="22" r="10"></circle>
+                <path d="M16 49c3.8-8.6 11.1-13 16-13s12.2 4.4 16 13"></path>
+                <circle cx="32" cy="32" r="24"></circle>
+              </svg>
+            </div>
+            <span>PROFILE</span>
+          </div>
+
+          <div class="sidebar-card selected">
+            <div class="sidebar-icon-wrap">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect x="16" y="16" width="12" height="12" rx="3"></rect>
+                <rect x="36" y="16" width="12" height="12" rx="3"></rect>
+                <rect x="16" y="36" width="12" height="12" rx="3"></rect>
+                <rect x="36" y="36" width="12" height="12" rx="3"></rect>
+              </svg>
+            </div>
+            <span>Dashboard</span>
+          </div>
+        </div>
+
+        <button class="logout-btn" type="button">Log out</button>
+      </aside>
+
+      <main class="content">
+        <section class="title-row">
+          <h1>Admin</h1>
+          <div class="title-line" aria-hidden="true"></div>
+        </section>
+
+        <section class="stats-row">
+          <a href="PermissionReq.html"><article class="stat-card stat-card-muted">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+            <p>Request Permission</p>
+              <strong>0</strong>
+            </div>
+          </article>
+          </a>
+          
+          <a href="Reservation.html"><article class="stat-card">
+          <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Reservation</p>
+              <strong>0</strong>
+            </div>
+          </article>
+           </a>
+
+          <article class="stat-card stat-card-bright">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Total Room</p>
+              <strong>41</strong>
+            </div>
+          </article>
+        </section>
+
+        <div class="bottom-row">
+ 
+        <!-- Reservation Requests -->
+        <div class="request-panel">
+          <div class="panel-header">
+            <span class="panel-title">Reservation Request</span>
+            <i class="fa-solid fa-chevron-right panel-arrow"></i>
+          </div>
+          <div class="request-list">
+            <div class="request-card"
+                data-name="Kent Espelita"
+                data-subject="Intermediate Programming"
+                data-room="CAS - ROOM 101"
+                data-date="May 10, 2026"
+                data-time="1:00 PM - 3:00 PM"
+                data-reason="Group study for finals">
+
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                  View Details »»»
+                </a>
+              </div>
+             <div class="request-actions">
+            <button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+            <button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+            </div>
+            </div>
+            <div class="request-card">
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                View Details &raquo;&raquo;&raquo;
+                </a>
+              </div>
+              <div class="request-actions">
+<button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+<button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+              </div>
+            </div>
+ 
+            <div class="request-card">
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                View Details &raquo;&raquo;&raquo;
+                </a>     
+               </div>
+              <div class="request-actions">
+<button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+<button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+              </div>
+            </div>
+            <div class="request-card">
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                View Details &raquo;&raquo;&raquo;
+                </a>
+              </div>
+              <div class="request-actions">
+<button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+<button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+              </div>
+            </div>
+ 
+            <div class="request-card">
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                View Details &raquo;&raquo;&raquo;
+                </a>
+              </div>
+              <div class="request-actions">
+<button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+<button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+              </div>
+            </div>
+
+            <div class="request-card">
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                View Details &raquo;&raquo;&raquo;
+                </a>
+              </div>
+              <div class="request-actions">
+<button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+<button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+              </div>
+            </div>  
+
+            <div class="request-card">
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                View Details &raquo;&raquo;&raquo;
+                </a>
+              </div>
+              <div class="request-actions">
+<button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+<button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+              </div>
+            </div>
+ 
+          </div>
+        </div>
+ 
+        <!-- Reservation Details -->
+        <div class="details-panel">
+       
+          <div class="details-body">Select a request to view details</div>
+        </div>
+ 
+      </div>
+      <div class="success-overlay" id="successModal">
+    <div class="success-modal">
+
+      <h2>Reservation Details</h2>
+      <p><span>Name:</span> <span id="successStudentName">Joseph Darwin Co</span></p>
+      <p><span>Subject:</span> <span id="successSubject">Intermediate Programming</span></p>
+
+      <hr class="thick">
+
+      <h3>Campus Details</h3>
+      <p class="campus-name">Annex Campus</p>
+      <p class="campus-addr">22 Llenado Compound, Barangay Maysan, Valenzuela City, 1440 Metro Manila</p>
+      <p class="campus-building">CAS Building</p>
+
+      <hr>
+
+      <h3>Schedule Details</h3>
+      <div class="badge-row">
+        <span class="date-badge" id="successDateBadge">—</span>
+        <span class="time-badge" id="successTimeBadge">—</span>
+        <span class="room-badge" id="successRoomBadge">CAS – ROOM 201</span>
+      </div>
+
+      <hr>
+
+      <h3>Reason</h3>
+      <p class="success-reason" id="successReasonBadge">—</p>
+
+      <div class="success-btn-row">
+        <button class="btn-home" onclick="closePanel()">Close</button>
+
+      </div>
+
+    </div>
+  </div>
+
+  
+ 
+<script>
+  
+function acceptRequest(btn) {
+  const card = btn.closest('.request-card');
+  card.remove();
+}
+
+function declineRequest(btn) {
+  const card = btn.closest('.request-card');
+  card.remove();
+}
+
+function closePanel() {
+  if (currentCard) {
+    currentCard.remove(); // remove from list
+  }
+}
+
+function closePanel() {
+  document.getElementById("successModal").classList.remove("active");
+}
+
+let currentCard = null;
+
+function showDetails(el) {
+  const card = el.closest('.request-card');
+  currentCard = card;
+
+  // GET DATA
+  const name = card.dataset.name;
+  const subject = card.dataset.subject;
+  const room = card.dataset.room;
+  const date = card.dataset.date;
+  const time = card.dataset.time;
+  const reason = card.dataset.reason;
+
+  // INSERT INTO RIGHT PANEL
+  document.getElementById("successStudentName").innerText = name;
+  document.getElementById("successSubject").innerText = subject;
+  document.getElementById("successRoomBadge").innerText = room;
+  document.getElementById("successDateBadge").innerText = date;
+  document.getElementById("successTimeBadge").innerText = time;
+  document.getElementById("successReasonBadge").innerText = reason;
+
+  // SHOW PANEL
+  document.getElementById("successModal").classList.add("active");
+}
+</script>
+</body>
+</html>
+</html>

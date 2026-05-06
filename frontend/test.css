@@ -1,0 +1,19 @@
+.flair {
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: white;
+}
+
+.admin {
+  background-color: red;
+}
+
+.president {
+  background-color: gold;
+  color: black;
+}
+
+.member {
+  background-color: gray;
+}
