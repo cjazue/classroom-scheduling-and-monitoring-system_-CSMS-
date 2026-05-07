@@ -7,6 +7,7 @@ from flask import Blueprint, request
 
 from app.extensions import db
 from app.models.room import Campus, Building, Room, ROOM_TYPES
+from app.models.schedule import Schedule, normalize_room_token
 from app.utils import (
     admin_required,
     any_authenticated,
@@ -193,6 +194,10 @@ def list_rooms():
 
         start_hhmm = avail_from.strftime("%H:%M")
         end_hhmm = avail_until.strftime("%H:%M")
+        start_min = avail_from.hour * 60 + avail_from.minute
+        end_min = avail_until.hour * 60 + avail_until.minute
+
+        # ---- Conflicts from approved reservations (date-specific) ----
 
         conflicts = (
             db.session.query(Reservation.room_id)
@@ -205,6 +210,33 @@ def list_rooms():
             .subquery()
         )
         query = query.filter(Room.id.not_in(conflicts))
+
+        # ---- Conflicts from class schedules (weekly by day-of-week) ----
+        if start_min < end_min:
+            day_name = avail_date.strftime("%A")
+
+            # token -> {room_id, ...}
+            token_to_room_ids: dict[str, set[str]] = {}
+            for rid, rcode in db.session.query(Room.id, Room.code).all():
+                for token in (normalize_room_token(rid), normalize_room_token(rcode)):
+                    if not token:
+                        continue
+                    token_to_room_ids.setdefault(token, set()).add(rid)
+
+            schedule_conflict_ids: set[str] = set()
+            schedules = (
+                Schedule.query.filter(db.func.lower(Schedule.day) == day_name.lower()).all()
+            )
+            for s in schedules:
+                if not s or not s.room_token:
+                    continue
+                if not s.overlaps(start_min, end_min):
+                    continue
+                for rid in token_to_room_ids.get(s.room_token, set()):
+                    schedule_conflict_ids.add(rid)
+
+            if schedule_conflict_ids:
+                query = query.filter(~Room.id.in_(sorted(schedule_conflict_ids)))
 
     data = paginate_query(query.order_by(Room.code), lambda r: r.to_dict(include_occupancy=True))
     return success_response(data)
@@ -236,11 +268,41 @@ def get_room_schedule(room_id: str):
         .all()
     )
 
+    # Weekly class schedules that fall on the same weekday as target_date.
+    day_name = target_date.strftime("%A")
+    room_tokens = {normalize_room_token(room.id), normalize_room_token(room.code)}
+    class_schedules = (
+        Schedule.query.filter(db.func.lower(Schedule.day) == day_name.lower()).all()
+    )
+
+    schedule_items = [r.to_dict(include_room=False) for r in reservations]
+    for s in class_schedules:
+        if not s or not s.room_token:
+            continue
+        if s.room_token not in room_tokens:
+            continue
+        if not s.start_hhmm or not s.end_hhmm:
+            continue
+        schedule_items.append(
+            {
+                "id": s.id,
+                "type": "schedule",
+                "section": s.section,
+                "subject": s.subject,
+                "subject_code": s.subject_code,
+                "date": target_date.isoformat(),
+                "start_time": s.start_hhmm,
+                "end_time": s.end_hhmm,
+            }
+        )
+
+    schedule_items.sort(key=lambda x: (x.get("start_time") or "99:99"))
+
     return success_response(
         {
             "room": room.to_dict(),
             "date": target_date.isoformat(),
-            "schedule": [r.to_dict(include_room=False) for r in reservations],
+            "schedule": schedule_items,
         }
     )
 
@@ -313,4 +375,3 @@ def delete_room(room_id: str):
     room.updated_at = datetime.utcnow()
     db.session.commit()
     return success_response(message="Room deactivated.")
-

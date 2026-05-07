@@ -121,6 +121,13 @@
                                         </div>
                                     </div>
                           </div>
+
+              <label class="date-box" style="padding: 0 14px;">
+                <span style="font-weight:600;">Time</span>
+                <input id="slotStart" type="time" value="07:00" style="border:none;outline:none;background:transparent;color:#444;" />
+                <span>to</span>
+                <input id="slotEnd" type="time" value="21:00" style="border:none;outline:none;background:transparent;color:#444;" />
+              </label>
             </div>
           </div>
 
@@ -203,6 +210,8 @@ colorRows();
     const searchInput = document.querySelector('.search-box input');
     const tableShell = document.querySelector('.table-shell');
     const stats = document.querySelectorAll('.stats-row strong');
+    const startInput = document.getElementById('slotStart');
+    const endInput = document.getElementById('slotEnd');
 
     let currentIso = null;
 
@@ -215,6 +224,16 @@ colorRows();
       const d = new Date(iso + 'T00:00:00');
       if (Number.isNaN(d.getTime())) return String(iso);
       return `${fmt2(d.getMonth() + 1)}/${fmt2(d.getDate())}/${d.getFullYear()}`;
+    }
+
+    function to12hCompact(hhmm) {
+      if (!hhmm) return '—';
+      const h = parseInt(String(hhmm).slice(0, 2), 10);
+      const m = String(hhmm).slice(3, 5);
+      if (!Number.isFinite(h) || !m) return String(hhmm);
+      const ap = h < 12 ? 'AM' : 'PM';
+      const hr = h % 12 || 12;
+      return `${hr}:${m}${ap}`;
     }
 
     function setStat(index, value) {
@@ -248,11 +267,17 @@ colorRows();
       return m ? m[1] : String(code);
     }
 
-    function renderRows(rooms, iso) {
+    function getSlotTimes() {
+      const start = startInput && startInput.value ? String(startInput.value) : '07:00';
+      const end = endInput && endInput.value ? String(endInput.value) : '21:00';
+      return { start, end };
+    }
+
+    function renderRows(rooms, iso, slot) {
       clearRows();
 
       const dateLabel = mmddyyyyFromIso(iso);
-      const timeLabel = '7:00AM - 9:00PM';
+      const timeLabel = slot ? `${to12hCompact(slot.start)} - ${to12hCompact(slot.end)}` : '—';
 
       (rooms || []).forEach(function (room) {
         const row = document.createElement('div');
@@ -278,13 +303,22 @@ colorRows();
 
       clearRows();
 
+      const slot = getSlotTimes();
+      if (!slot.start || !slot.end || slot.start >= slot.end) {
+        alert('Invalid time range. Start time must be before end time.');
+        return;
+      }
+
       try {
-        const totalResp = await window.CSMS.api.request('/api/rooms?per_page=1', { method: 'GET' });
+        const totalResp = await window.CSMS.api.request('/api/rooms?is_active=true&per_page=1', { method: 'GET' });
         const totalRooms =
           totalResp && totalResp.data && totalResp.data.pagination ? totalResp.data.pagination.total : null;
 
         const availResp = await window.CSMS.api.request(
-          `/api/rooms?available_on=${encodeURIComponent(iso)}&available_from=07:00&available_until=21:00&per_page=100`,
+          `/api/rooms?is_active=true&available_on=${encodeURIComponent(iso)}` +
+            `&available_from=${encodeURIComponent(slot.start)}` +
+            `&available_until=${encodeURIComponent(slot.end)}` +
+            `&per_page=100`,
           { method: 'GET' }
         );
 
@@ -293,7 +327,7 @@ colorRows();
         const availableRooms =
           availResp && availResp.data && availResp.data.pagination ? availResp.data.pagination.total : rooms.length;
 
-        renderRows(rooms, iso);
+        renderRows(rooms, iso, slot);
 
         if (typeof totalRooms === 'number') setStat(2, totalRooms);
         setStat(1, availableRooms);
@@ -320,6 +354,8 @@ colorRows();
     }
 
     if (searchInput) searchInput.addEventListener('keyup', applySearchFilter);
+    if (startInput) startInput.addEventListener('change', function () { if (currentIso) loadForDate(currentIso); });
+    if (endInput) endInput.addEventListener('change', function () { if (currentIso) loadForDate(currentIso); });
 
     document.addEventListener('csms:date-selected', function (e) {
       const iso = e && e.detail && e.detail.iso ? e.detail.iso : null;
@@ -335,6 +371,11 @@ colorRows();
         loadForDate(iso);
       }
     });
+
+    // Poll to reflect latest DB schedules/reservations.
+    setInterval(function () {
+      if (currentIso) loadForDate(currentIso);
+    }, 30000);
   })();
 </script>
       <script src="calendar.js"></script>
