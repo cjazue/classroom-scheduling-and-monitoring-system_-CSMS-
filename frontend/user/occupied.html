@@ -123,6 +123,13 @@
                                         </div>
                                     </div>
                           </div>
+
+              <label class="date-box" style="padding: 0 14px;">
+                <span style="font-weight:600;">Time</span>
+                <input id="slotStart" type="time" value="07:00" style="border:none;outline:none;background:transparent;color:#444;" />
+                <span>to</span>
+                <input id="slotEnd" type="time" value="21:00" style="border:none;outline:none;background:transparent;color:#444;" />
+              </label>
             </div>
           </div>
 
@@ -206,6 +213,8 @@
     const searchInput = document.querySelector('.search-box input');
     const tableShell = document.querySelector('.table-shell');
     const stats = document.querySelectorAll('.stats-row strong');
+    const startInput = document.getElementById('slotStart');
+    const endInput = document.getElementById('slotEnd');
 
     let currentIso = null;
 
@@ -262,26 +271,51 @@
       return m ? m[1] : String(code);
     }
 
-    function renderRows(reservations) {
+    function getSlotTimes() {
+      const start = startInput && startInput.value ? String(startInput.value) : '07:00';
+      const end = endInput && endInput.value ? String(endInput.value) : '21:00';
+      return { start, end };
+    }
+
+    function renderRows(events, iso) {
       clearRows();
 
-      (reservations || []).forEach(function (r) {
+      const dateLabel = mmddyyyyFromIso(iso);
+
+      (events || []).forEach(function (ev) {
         const row = document.createElement('div');
         row.className = 'table-row';
 
-        const room = r && r.room ? r.room : null;
+        const room = ev && ev.room ? ev.room : null;
         const building = room && room.building_code ? room.building_code : '';
 
         applyRowColor(row, building);
 
-        row.appendChild(makeSpan(r && r.requestor_name ? r.requestor_name : '—'));
-        row.appendChild(makeSpan(r && r.course_section ? r.course_section : '—'));
-        row.appendChild(makeSpan(mmddyyyyFromIso(r && r.date ? r.date : null)));
+        let name = '—';
+        let section = '—';
+        let start = null;
+        let end = null;
+
+        if (ev && ev.type === 'schedule') {
+          const s = ev.schedule || {};
+          name = s.subject_code || s.subject || 'Class';
+          section = s.section || '—';
+          start = s.start_time || null;
+          end = s.end_time || null;
+        } else if (ev && ev.type === 'reservation') {
+          const r = ev.reservation || {};
+          name = r.requestor_name || '—';
+          section = r.course_section || '—';
+          start = r.start_time || null;
+          end = r.end_time || null;
+        }
+
+        row.appendChild(makeSpan(name));
+        row.appendChild(makeSpan(section));
+        row.appendChild(makeSpan(dateLabel));
         row.appendChild(makeSpan(building || (room && room.building ? room.building : '—')));
         row.appendChild(makeSpan(formatRoomCell(room, room && room.id ? room.id : '')));
-        row.appendChild(
-          makeSpan(`${to12hCompact(r && r.start_time)} - ${to12hCompact(r && r.end_time)}`)
-        );
+        row.appendChild(makeSpan(`${to12hCompact(start)} - ${to12hCompact(end)}`));
 
         tableShell.appendChild(row);
       });
@@ -294,39 +328,52 @@
 
       clearRows();
 
+      const slot = getSlotTimes();
+      if (!slot.start || !slot.end || slot.start >= slot.end) {
+        alert('Invalid time range. Start time must be before end time.');
+        return;
+      }
+
       try {
         // Total rooms (for the stat cards).
-        const totalResp = await window.CSMS.api.request('/api/rooms?per_page=1', { method: 'GET' });
+        const totalResp = await window.CSMS.api.request('/api/rooms?is_active=true&per_page=1', { method: 'GET' });
         const totalRooms =
           totalResp && totalResp.data && totalResp.data.pagination ? totalResp.data.pagination.total : null;
 
-        // Available rooms for the whole day (7:00 - 21:00) and occupied reservations for the day.
+        // Available rooms for the selected time slot and occupied rooms/events from schedules + reservations.
         const availResp = await window.CSMS.api.request(
-          `/api/rooms?available_on=${encodeURIComponent(iso)}&available_from=07:00&available_until=21:00&per_page=1`,
+          `/api/rooms?is_active=true&available_on=${encodeURIComponent(iso)}` +
+            `&available_from=${encodeURIComponent(slot.start)}` +
+            `&available_until=${encodeURIComponent(slot.end)}` +
+            `&per_page=1`,
           { method: 'GET' }
         );
         const availableRooms =
           availResp && availResp.data && availResp.data.pagination ? availResp.data.pagination.total : null;
 
-        const resvResp = await window.CSMS.api.request(
-          `/api/reservations?date=${encodeURIComponent(iso)}&per_page=100`,
+        const occResp = await window.CSMS.api.request(
+          `/api/schedules/occupancy?date=${encodeURIComponent(iso)}` +
+            `&available_from=${encodeURIComponent(slot.start)}` +
+            `&available_until=${encodeURIComponent(slot.end)}` +
+            `&include_reservations=true`,
           { method: 'GET' }
         );
-        const items =
-          resvResp && resvResp.data && Array.isArray(resvResp.data.items) ? resvResp.data.items : [];
 
-        renderRows(items);
+        const data = occResp && occResp.data ? occResp.data : null;
+        const items = data && Array.isArray(data.events) ? data.events : [];
+        const occupiedRoomsCount = data && Array.isArray(data.occupied_room_ids) ? data.occupied_room_ids.length : null;
 
-        const occupiedRoomsCount = new Set(
-          items
-            .map((r) => (r && r.room && r.room.id ? r.room.id : null))
-            .filter(Boolean)
-        ).size;
+        renderRows(items, iso);
         if (typeof availableRooms === 'number') setStat(1, availableRooms);
         if (typeof totalRooms === 'number') setStat(2, totalRooms);
-        setStat(0, occupiedRoomsCount);
+        setStat(
+          0,
+          typeof occupiedRoomsCount === 'number'
+            ? occupiedRoomsCount
+            : new Set(items.map((e) => (e && e.room_id ? e.room_id : null)).filter(Boolean)).size
+        );
       } catch (e) {
-        alert(e && e.message ? e.message : 'Failed to load reservations.');
+        alert(e && e.message ? e.message : 'Failed to load occupancy.');
       }
     }
 
@@ -343,6 +390,8 @@
     }
 
     if (searchInput) searchInput.addEventListener('keyup', applySearchFilter);
+    if (startInput) startInput.addEventListener('change', function () { if (currentIso) loadForDate(currentIso).then(applySearchFilter); });
+    if (endInput) endInput.addEventListener('change', function () { if (currentIso) loadForDate(currentIso).then(applySearchFilter); });
 
     document.addEventListener('csms:date-selected', function (e) {
       const iso = e && e.detail && e.detail.iso ? e.detail.iso : null;
@@ -358,6 +407,11 @@
         loadForDate(iso).then(applySearchFilter);
       }
     });
+
+    // Poll to reflect latest DB schedules/reservations.
+    setInterval(function () {
+      if (currentIso) loadForDate(currentIso).then(applySearchFilter);
+    }, 30000);
   })();
 </script>
       <script src="calendar.js"></script>

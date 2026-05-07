@@ -1,6 +1,7 @@
 from app.models.user import User
 from app.models.room import Campus, Building, Room
 from app.models.reservation import Reservation, ReservationStatus
+from app.models.schedule import Schedule
 
 __all__ = [
     "User",
@@ -9,4 +10,5 @@ __all__ = [
     "Room",
     "Reservation",
     "ReservationStatus",
+    "Schedule",
 ]

@@ -9,6 +9,7 @@ from flask_jwt_extended import get_jwt_identity
 from app.extensions import db
 from app.models.reservation import Reservation, ReservationStatus, STATUS_API_TO_DB
 from app.models.room import Room, Building, Campus
+from app.models.schedule import Schedule, normalize_room_token
 from app.models.user import User
 from app.utils import (
     admin_required,
@@ -86,6 +87,19 @@ def create_reservation():
 
     if Reservation.has_conflict(room_id, reserve_date, start_hhmm, end_hhmm):
         return error_response("The requested time slot conflicts with an existing reservation.", 409)
+
+    # Block reservations that overlap an existing class schedule.
+    start_min = start_time.hour * 60 + start_time.minute
+    end_min = end_time.hour * 60 + end_time.minute
+    day_name = reserve_date.strftime("%A")
+    room_tokens = {normalize_room_token(room.id), normalize_room_token(room.code)}
+    class_schedules = Schedule.query.filter(db.func.lower(Schedule.day) == day_name.lower()).all()
+    for s in class_schedules:
+        if not s or not s.room_token or s.room_token not in room_tokens:
+            continue
+        if s.overlaps(start_min, end_min):
+            label = s.subject_code or s.subject or "scheduled class"
+            return error_response(f"Room is occupied by a {label} schedule during this time slot.", 409)
 
     reservation = Reservation(
         id=_gen_id("RES"),
@@ -192,6 +206,30 @@ def approve_reservation(reservation_id: str):
     ):
         return error_response("Cannot approve: another reservation already occupies this slot.", 409)
 
+    # Ensure this approved reservation doesn't overlap a class schedule.
+    room = Room.query.get(reservation.room_id)
+    if room and reservation.date and reservation.start_time and reservation.end_time:
+        day_name = reservation.date.strftime("%A")
+        room_tokens = {normalize_room_token(room.id), normalize_room_token(room.code)}
+
+        start_t = parse_time(reservation.start_time)
+        end_t = parse_time(reservation.end_time)
+        if start_t and end_t:
+            start_min = start_t.hour * 60 + start_t.minute
+            end_min = end_t.hour * 60 + end_t.minute
+        else:
+            start_min = None
+            end_min = None
+
+        if start_min is not None and end_min is not None and start_min < end_min:
+            class_schedules = Schedule.query.filter(db.func.lower(Schedule.day) == day_name.lower()).all()
+            for s in class_schedules:
+                if not s or not s.room_token or s.room_token not in room_tokens:
+                    continue
+                if s.overlaps(start_min, end_min):
+                    label = s.subject_code or s.subject or "scheduled class"
+                    return error_response(f"Cannot approve: room is occupied by a {label} schedule.", 409)
+
     reservation.status = Reservation.db_status(ReservationStatus.APPROVED)
     reservation.reviewed_by = reviewer_id
     reservation.reviewed_at = datetime.utcnow()
@@ -294,6 +332,31 @@ def update_reservation(reservation_id: str):
     if (new_date, new_start, new_end) != (reservation.date, reservation.start_time, reservation.end_time):
         if Reservation.has_conflict(reservation.room_id, new_date, new_start, new_end, exclude_id=reservation.id):
             return error_response("Updated time slot conflicts with an existing reservation.", 409)
+
+        # Also avoid overlapping class schedules.
+        room = Room.query.get(reservation.room_id)
+        if room and new_date and new_start and new_end:
+            day_name = new_date.strftime("%A")
+            room_tokens = {normalize_room_token(room.id), normalize_room_token(room.code)}
+
+            start_t = parse_time(new_start)
+            end_t = parse_time(new_end)
+            if start_t and end_t:
+                start_min = start_t.hour * 60 + start_t.minute
+                end_min = end_t.hour * 60 + end_t.minute
+            else:
+                start_min = None
+                end_min = None
+
+            if start_min is not None and end_min is not None and start_min < end_min:
+                class_schedules = Schedule.query.filter(db.func.lower(Schedule.day) == day_name.lower()).all()
+                for s in class_schedules:
+                    if not s or not s.room_token or s.room_token not in room_tokens:
+                        continue
+                    if s.overlaps(start_min, end_min):
+                        label = s.subject_code or s.subject or "scheduled class"
+                        return error_response(f"Updated time slot overlaps a {label} schedule.", 409)
+
         reservation.date = new_date
         reservation.start_time = new_start
         reservation.end_time = new_end
