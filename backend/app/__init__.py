@@ -100,7 +100,38 @@ def create_app(config_name: str = None) -> Flask:
         if not frontend_dir.exists():
             return jsonify({"success": False, "error": "Frontend directory not found."}), 500
 
-        # Serve files directly from /frontend (html, assets, etc.)
+        # If `frontend/index.html` isn't present, fall back to the auth landing page.
+        # (The repo uses role-based folders like `frontend/auth/*` instead of a root index.)
+        if path == "index.html" and not (frontend_dir / "index.html").exists():
+            from flask import redirect
+
+            return redirect("/auth/homepage.html", code=302)
+
+        # Serve HTML with a tiny bootstrap script injected into <head> so the static
+        # pages can talk to the Flask API (auth guard, token handling, logout wiring).
+        requested = frontend_dir / path
+        if requested.exists() and requested.is_file() and requested.suffix.lower() == ".html":
+            try:
+                html = requested.read_text(encoding="utf-8")
+            except Exception:
+                # Be permissive for legacy encodings in student-provided HTML.
+                html = requested.read_text(encoding="utf-8", errors="ignore")
+
+            inject = '<script src="/common/csms.js"></script>'
+            lower = html.lower()
+            if "/common/csms.js" not in lower:
+                if "</head>" in lower:
+                    # Case-insensitive insert before </head>.
+                    idx = lower.rfind("</head>")
+                    html = html[:idx] + inject + html[idx:]
+                else:
+                    html = inject + html
+
+            from flask import Response
+
+            return Response(html, mimetype="text/html")
+
+        # Serve files directly from /frontend (css, js, images, etc.)
         from flask import send_from_directory
         return send_from_directory(str(frontend_dir), path)
 

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSMS Student View</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+</head>
+
+   <div class="menu">
+      <input type="checkbox" id="menu"/>
+
+      <div class="logo">
+          CSMS
+        <label for="menu"></label>
+      </div>
+        <div class="items">
+          <a href="home.html" class="item"><img src="ASSETS/home.jpg" alt="Home Icon" class="nav-icon">Home</a>
+          <a href="aboutus.html" class="item"><img src="ASSETS/info.jpg" alt="Home Icon" class="nav-icon">About</a>
+          <a href="homepage.html" class="item">Logout</a>
+        </div>
+        </div>
+    </div>
+
+   <div class="dashboard-layout">
+      <aside class="sidebar">
+        <div class="sidebar-menu">
+          <div class="sidebar-card sidebar-card--outline">
+              <a href="profile2.html">
+                <i class="fa-regular fa-circle-user" style="font-size: 60px; color: #043AA3;"></i>
+              </a>
+            <span>Profile</span>
+          </div>
+
+          <div class="sidebar-card sidebar-card--light">
+                <i class="fa-solid fa-table-cells-large" style="font-size: 40px; color: white;"></i>
+            <span>Dashboard</span>
+          </div>
+        </div>
+        <a href="homepage.html">
+        <button class="logout-btn" type="button">Log out</button>
+        </a>
+      </aside>
+
+      <main class="content">
+        <section class="title-row">
+          <h1>Admin</h1>
+          <div class="title-line" aria-hidden="true"></div>
+        </section>
+
+        <section class="stats-row">
+          <a href="PermissionReq.html"><article class="stat-card stat-card-muted">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+            <p>Request Permission</p>
+              <strong>0</strong>
+            </div>
+          </article>
+          </a>
+          
+          <a href="Reservation.html"><article class="stat-card">
+          <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Reservation</p>
+              <strong>0</strong>
+            </div>
+          </article>
+           </a>
+
+          <article class="stat-card stat-card-bright">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Total Room</p>
+              <strong>41</strong>
+            </div>
+          </article>
+        </section>
+
+        <div class="bottom-row">
+ 
+        <!-- Reservation Requests -->
+        <div class="request-panel">
+          <div class="panel-header">
+            <span class="panel-title">Reservation Request</span>
+            <i class="fa-solid fa-chevron-right panel-arrow"></i>
+          </div>
+          <div class="request-list">
+            <div class="request-card"
+                data-name="Kent Espelita"
+                data-subject="Intermediate Programming"
+                data-room="CAS - ROOM 101"
+                data-date="May 10, 2026"
+                data-time="1:00 PM - 3:00 PM"
+                data-reason="Group study for finals">
+
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                  View Details »»»
+                </a>
+              </div>
+             <div class="request-actions">
+            <button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+            <button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+            </div>
+            </div>
+            <div class="request-card">
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                View Details &raquo;&raquo;&raquo;
+                </a>
+              </div>
+              <div class="request-actions">
+<button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+<button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+              </div>
+            </div>
+ 
+            <div class="request-card">
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                View Details &raquo;&raquo;&raquo;
+                </a>     
+               </div>
+              <div class="request-actions">
+<button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+<button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+              </div>
+            </div>
+            <div class="request-card">
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                View Details &raquo;&raquo;&raquo;
+                </a>
+              </div>
+              <div class="request-actions">
+<button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+<button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+              </div>
+            </div>
+ 
+            <div class="request-card">
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                View Details &raquo;&raquo;&raquo;
+                </a>
+              </div>
+              <div class="request-actions">
+<button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+<button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+              </div>
+            </div>
+
+            <div class="request-card">
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                View Details &raquo;&raquo;&raquo;
+                </a>
+              </div>
+              <div class="request-actions">
+<button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+<button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+              </div>
+            </div>  
+
+            <div class="request-card">
+              <div class="request-info">
+                <div class="request-name">Kent Espelita</div>
+                <div class="request-sub">CAS-ROOM 101 | BSIT 1-10</div>
+                <a class="view-details" onclick="showDetails(this)">
+                View Details &raquo;&raquo;&raquo;
+                </a>
+              </div>
+              <div class="request-actions">
+<button class="btn-approve" onclick="acceptRequest(this)">Accept</button>
+<button class="btn-decline" onclick="declineRequest(this)">Decline</button>
+              </div>
+            </div>
+ 
+          </div>
+        </div>
+ 
+        <!-- Reservation Details -->
+        <div class="details-panel">
+       
+          <div class="details-body">Select a request to view details</div>
+        </div>
+ 
+      </div>
+      <div class="success-overlay" id="successModal">
+    <div class="success-modal">
+
+      <h2>Reservation Details</h2>
+      <p><span>Name:</span> <span id="successStudentName">Joseph Darwin Co</span></p>
+      <p><span>Subject:</span> <span id="successSubject">Intermediate Programming</span></p>
+
+      <hr class="thick">
+
+      <h3>Campus Details</h3>
+      <p class="campus-name">Annex Campus</p>
+      <p class="campus-addr">22 Llenado Compound, Barangay Maysan, Valenzuela City, 1440 Metro Manila</p>
+      <p class="campus-building">CAS Building</p>
+
+      <hr>
+
+      <h3>Schedule Details</h3>
+      <div class="badge-row">
+        <span class="date-badge" id="successDateBadge">—</span>
+        <span class="time-badge" id="successTimeBadge">—</span>
+        <span class="room-badge" id="successRoomBadge">CAS – ROOM 201</span>
+      </div>
+
+      <hr>
+
+      <h3>Reason</h3>
+      <p class="success-reason" id="successReasonBadge">—</p>
+
+      <div class="success-btn-row">
+        <button class="btn-home" onclick="closePanel()">Close</button>
+
+      </div>
+
+    </div>
+  </div>
+
+  
+ 
+<script>
+  (function () {
+    'use strict';
+
+    const reservationsById = new Map();
+    let campusByCodePromise = null;
+
+    async function getCampusByCode(code) {
+      const key = (code || '').trim().toUpperCase();
+      if (!key) return null;
+
+      if (!campusByCodePromise) {
+        campusByCodePromise = (async function () {
+          if (!window.CSMS || !window.CSMS.api || typeof window.CSMS.api.request !== 'function') return {};
+          try {
+            const resp = await window.CSMS.api.request('/api/campuses', { method: 'GET' });
+            const items = resp && Array.isArray(resp.data) ? resp.data : [];
+            const map = {};
+            items.forEach(function (c) {
+              const k = c && c.code ? String(c.code).trim().toUpperCase() : null;
+              if (k) map[k] = c;
+            });
+            return map;
+          } catch {
+            return {};
+          }
+        })();
+      }
+
+      const map = await campusByCodePromise;
+      return map && map[key] ? map[key] : null;
+    }
+
+    function fmt2(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function to12h(hhmm) {
+      if (!hhmm) return '—';
+      const h = parseInt(String(hhmm).slice(0, 2), 10);
+      const m = parseInt(String(hhmm).slice(3, 5), 10) || 0;
+      if (!Number.isFinite(h)) return String(hhmm);
+      const ap = h < 12 ? 'AM' : 'PM';
+      const hr = h % 12 || 12;
+      return `${hr}:${fmt2(m)} ${ap}`;
+    }
+
+    function prettyDate(iso) {
+      if (!iso) return '—';
+      const d = new Date(iso + 'T00:00:00');
+      if (Number.isNaN(d.getTime())) return String(iso);
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function roomLabel(room, roomIdFallback) {
+      const code = room && room.code ? room.code : roomIdFallback || 'Room';
+      const building = room && room.building_code ? room.building_code : room && room.building ? room.building : '';
+      return building ? `${building} - ${code}` : code;
+    }
+
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value || '—';
+    }
+
+    function setTextBySelector(selector, value) {
+      const el = document.querySelector(selector);
+      if (el) el.textContent = value || '—';
+    }
+
+    function showModal() {
+      const overlay = document.getElementById('successModal');
+      if (overlay) overlay.classList.add('active');
+    }
+
+    function hideModal() {
+      const overlay = document.getElementById('successModal');
+      if (overlay) overlay.classList.remove('active');
+    }
+
+    function renderCard(reservation) {
+      const card = document.createElement('div');
+      card.className = 'request-card';
+      card.dataset.reservationId = reservation.id;
+
+      const info = document.createElement('div');
+      info.className = 'request-info';
+
+      const name = document.createElement('div');
+      name.className = 'request-name';
+      name.textContent = reservation.requestor_name || 'Unknown';
+
+      const sub = document.createElement('div');
+      sub.className = 'request-sub';
+      const cs = reservation.course_section ? reservation.course_section : '—';
+      const room = reservation.room ? reservation.room : null;
+      sub.textContent = `${roomLabel(room, reservation.room_id)} | ${cs}`;
+
+      const view = document.createElement('a');
+      view.className = 'view-details';
+      view.href = '#';
+      view.textContent = 'View Details »»»';
+      view.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.showDetails(view);
+      });
+
+      info.appendChild(name);
+      info.appendChild(sub);
+      info.appendChild(view);
+
+      const actions = document.createElement('div');
+      actions.className = 'request-actions';
+
+      const approve = document.createElement('button');
+      approve.className = 'btn-approve';
+      approve.textContent = 'Accept';
+      approve.addEventListener('click', function () {
+        window.acceptRequest(approve);
+      });
+
+      const decline = document.createElement('button');
+      decline.className = 'btn-decline';
+      decline.textContent = 'Decline';
+      decline.addEventListener('click', function () {
+        window.declineRequest(decline);
+      });
+
+      actions.appendChild(approve);
+      actions.appendChild(decline);
+
+      card.appendChild(info);
+      card.appendChild(actions);
+      return card;
+    }
+
+    async function loadPendingReservations() {
+      if (!window.CSMS || !window.CSMS.api || typeof window.CSMS.api.request !== 'function') return;
+
+      const list = document.querySelector('.request-list');
+      if (!list) return;
+
+      list.innerHTML = '';
+      reservationsById.clear();
+
+      try {
+        const resp = await window.CSMS.api.request('/api/reservations?status=pending&per_page=100', {
+          method: 'GET',
+        });
+        const items =
+          resp && resp.data && resp.data.items && Array.isArray(resp.data.items) ? resp.data.items : [];
+
+        items.forEach(function (r) {
+          if (!r || !r.id) return;
+          reservationsById.set(r.id, r);
+          list.appendChild(renderCard(r));
+        });
+      } catch (e) {
+        alert(e && e.message ? e.message : 'Failed to load reservation requests.');
+      }
+    }
+
+    window.showDetails = async function (el) {
+      const card = el && el.closest ? el.closest('.request-card') : null;
+      const id = card ? card.dataset.reservationId : null;
+      const r = id ? reservationsById.get(id) : null;
+      if (!r) return;
+
+      const room = r.room ? r.room : null;
+      const campus = await getCampusByCode(room && room.campus_code ? room.campus_code : null);
+      const dateLabel = prettyDate(r.date);
+      const timeLabel = `${to12h(r.start_time)} - ${to12h(r.end_time)}`;
+      const roomLbl = roomLabel(room, r.room_id);
+      const reason = r.purpose ? r.purpose : '—';
+
+      setText('successStudentName', r.requestor_name || '—');
+      // UI label says "Subject"; best-fit is Course/Section.
+      setText('successSubject', r.course_section || '—');
+      setText('successRoomBadge', roomLbl);
+      setText('successDateBadge', dateLabel);
+      setText('successTimeBadge', timeLabel);
+      setText('successReasonBadge', reason);
+
+      setTextBySelector('.campus-name', (campus && campus.name) ? campus.name : (room && room.campus ? room.campus : '—'));
+      setTextBySelector('.campus-addr', (campus && campus.address) ? campus.address : '—');
+      setTextBySelector('.campus-building', room && room.building ? room.building : '—');
+
+      showModal();
+    };
+
+    window.closePanel = function () {
+      hideModal();
+    };
+
+    window.acceptRequest = async function (btn) {
+      const card = btn && btn.closest ? btn.closest('.request-card') : null;
+      const id = card ? card.dataset.reservationId : null;
+      if (!id) return;
+
+      try {
+        await window.CSMS.api.request(`/api/reservations/${encodeURIComponent(id)}/approve`, { method: 'PATCH' });
+        reservationsById.delete(id);
+        if (card) card.remove();
+        hideModal();
+      } catch (e) {
+        alert(e && e.message ? e.message : 'Failed to approve reservation.');
+      }
+    };
+
+    window.declineRequest = async function (btn) {
+      const card = btn && btn.closest ? btn.closest('.request-card') : null;
+      const id = card ? card.dataset.reservationId : null;
+      if (!id) return;
+
+      try {
+        await window.CSMS.api.request(`/api/reservations/${encodeURIComponent(id)}/reject`, {
+          method: 'PATCH',
+          body: { review_note: '' },
+        });
+        reservationsById.delete(id);
+        if (card) card.remove();
+        hideModal();
+      } catch (e) {
+        alert(e && e.message ? e.message : 'Failed to reject reservation.');
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      loadPendingReservations();
+
+      const overlay = document.getElementById('successModal');
+      if (overlay) {
+        overlay.addEventListener('click', function (e) {
+          if (e.target === overlay) hideModal();
+        });
+      }
+    });
+  })();
+</script>
+</body>
+</html>
+</html>
