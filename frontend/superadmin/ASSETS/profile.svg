@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<!-- saved from url=(0026)https://www.svgviewer.dev/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>.ͼ1.cm-focused {outline: 1px dotted #212121;}
+.ͼ1 {position: relative !important; box-sizing: border-box; display: flex !important; flex-direction: column;}
+.ͼ1 .cm-scroller {display: flex !important; align-items: flex-start !important; font-family: monospace; line-height: 1.4; height: 100%; overflow-x: auto; position: relative; z-index: 0; overflow-anchor: none;}
+.ͼ1 .cm-content[contenteditable=true] {-webkit-user-modify: read-write-plaintext-only;}
+.ͼ1 .cm-content {margin: 0; flex-grow: 2; flex-shrink: 0; display: block; white-space: pre; word-wrap: normal; box-sizing: border-box; min-height: 100%; padding: 4px 0; outline: none;}
+.ͼ1 .cm-lineWrapping {white-space: pre-wrap; white-space: break-spaces; word-break: break-word; overflow-wrap: anywhere; flex-shrink: 1;}
+.ͼ2 .cm-content {caret-color: black;}
+.ͼ3 .cm-content {caret-color: white;}
+.ͼ1 .cm-line {display: block; padding: 0 2px 0 6px;}
+.ͼ1 .cm-layer > * {position: absolute;}
+.ͼ1 .cm-layer {position: absolute; left: 0; top: 0; contain: size style;}
+.ͼ2 .cm-selectionBackground {background: #d9d9d9;}
+.ͼ3 .cm-selectionBackground {background: #222;}
+.ͼ2.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground {background: #d7d4f0;}
+.ͼ3.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground {background: #233;}
+.ͼ1 .cm-cursorLayer {pointer-events: none;}
+.ͼ1.cm-focused > .cm-scroller > .cm-cursorLayer {animation: steps(1) cm-blink 1.2s infinite;}
+@keyframes cm-blink {50% {opacity: 0;}}
+@keyframes cm-blink2 {50% {opacity: 0;}}
+.ͼ1 .cm-cursor, .ͼ1 .cm-dropCursor {border-left: 1.2px solid black; margin-left: -0.6px; pointer-events: none;}
+.ͼ1 .cm-cursor {display: none;}
+.ͼ3 .cm-cursor {border-left-color: #ddd;}
+.ͼ1 .cm-dropCursor {position: absolute;}
+.ͼ1.cm-focused > .cm-scroller > .cm-cursorLayer .cm-cursor {display: block;}
+.ͼ1 .cm-iso {unicode-bidi: isolate;}
+.ͼ1 .cm-announced {position: fixed; top: -10000px;}
+@media print {.ͼ1 .cm-announced {display: none;}}
+.ͼ2 .cm-activeLine {background-color: #cceeff44;}
+.ͼ3 .cm-activeLine {background-color: #99eeff33;}
+.ͼ2 .cm-specialChar {color: red;}
+.ͼ3 .cm-specialChar {color: #f78;}
+.ͼ1 .cm-gutters {flex-shrink: 0; display: flex; height: 100%; box-sizing: border-box; z-index: 200;}
+.ͼ1 .cm-gutters-before {inset-inline-start: 0;}
+.ͼ1 .cm-gutters-after {inset-inline-end: 0;}
+.ͼ2 .cm-gutters.cm-gutters-before {border-right-width: 1px;}
+.ͼ2 .cm-gutters.cm-gutters-after {border-left-width: 1px;}
+.ͼ2 .cm-gutters {background-color: #f5f5f5; color: #6c6c6c; border: 0px solid #ddd;}
+.ͼ3 .cm-gutters {background-color: #333338; color: #ccc;}
+.ͼ1 .cm-gutter {display: flex !important; flex-direction: column; flex-shrink: 0; box-sizing: border-box; min-height: 100%; overflow: hidden;}
+.ͼ1 .cm-gutterElement {box-sizing: border-box;}
+.ͼ1 .cm-lineNumbers .cm-gutterElement {padding: 0 3px 0 5px; min-width: 20px; text-align: right; white-space: nowrap;}
+.ͼ2 .cm-activeLineGutter {background-color: #e2f2ff;}
+.ͼ3 .cm-activeLineGutter {background-color: #222227;}
+.ͼ1 .cm-panels {box-sizing: border-box; position: sticky; left: 0; right: 0; z-index: 300;}
+.ͼ2 .cm-panels {background-color: #f5f5f5; color: black;}
+.ͼ2 .cm-panels-top {border-bottom: 1px solid #ddd;}
+.ͼ2 .cm-panels-bottom {border-top: 1px solid #ddd;}
+.ͼ3 .cm-panels {background-color: #333338; color: white;}
+.ͼ1 .cm-dialog label {font-size: 80%;}
+.ͼ1 .cm-dialog {padding: 2px 19px 4px 6px; position: relative;}
+.ͼ1 .cm-dialog-close {position: absolute; top: 3px; right: 4px; background-color: inherit; border: none; font: inherit; font-size: 14px; padding: 0;}
+.ͼ1 .cm-tab {display: inline-block; overflow: hidden; vertical-align: bottom;}
+.ͼ1 .cm-widgetBuffer {vertical-align: text-top; height: 1em; width: 0; display: inline;}
+.ͼ1 .cm-placeholder {color: #888; display: inline-block; vertical-align: top; user-select: none;}
+.ͼ1 .cm-highlightSpace {background-image: radial-gradient(circle at 50% 55%, #aaa 20%, transparent 5%); background-position: center;}
+.ͼ1 .cm-highlightTab {background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20"><path stroke="%23888" stroke-width="1" fill="none" d="M1 10H196L190 5M190 15L196 10M197 4L197 16"/></svg>'); background-size: auto 100%; background-position: right 90%; background-repeat: no-repeat;}
+.ͼ1 .cm-trailingSpace {background-color: #ff332255;}
+.ͼ1 .cm-button {vertical-align: middle; color: inherit; font-size: 70%; padding: .2em 1em; border-radius: 1px;}
+.ͼ2 .cm-button:active {background-image: linear-gradient(#b4b4b4, #d0d3d6);}
+.ͼ2 .cm-button {background-image: linear-gradient(#eff1f5, #d9d9df); border: 1px solid #888;}
+.ͼ3 .cm-button:active {background-image: linear-gradient(#111, #333);}
+.ͼ3 .cm-button {background-image: linear-gradient(#393939, #111); border: 1px solid #888;}
+.ͼ1 .cm-textfield {vertical-align: middle; color: inherit; font-size: 70%; border: 1px solid silver; padding: .2em .5em;}
+.ͼ2 .cm-textfield {background-color: white;}
+.ͼ3 .cm-textfield {border: 1px solid #555; background-color: inherit;}
+.ͼ1 .cm-diagnostic {padding: 3px 6px 3px 8px; margin-left: -1px; display: block; white-space: pre-wrap;}
+.ͼ1 .cm-diagnostic-error {border-left: 5px solid #d11;}
+.ͼ1 .cm-diagnostic-warning {border-left: 5px solid orange;}
+.ͼ1 .cm-diagnostic-info {border-left: 5px solid #999;}
+.ͼ1 .cm-diagnostic-hint {border-left: 5px solid #66d;}
+.ͼ1 .cm-diagnosticAction {font: inherit; border: none; padding: 2px 4px; background-color: #444; color: white; border-radius: 3px; margin-left: 8px; cursor: pointer;}
+.ͼ1 .cm-diagnosticSource {font-size: 70%; opacity: 0.7;}
+.ͼ1 .cm-lintRange {background-position: left bottom; background-repeat: repeat-x; padding-bottom: 0.7px;}
+.ͼ1 .cm-lintRange-error {background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="3">%3Cpath%20d%3D%22m0%202.5%20l2%20-1.5%20l1%200%20l2%201.5%20l1%200%22%20stroke%3D%22%23d11%22%20fill%3D%22none%22%20stroke-width%3D%22.7%22%2F%3E</svg>');}
+.ͼ1 .cm-lintRange-warning {background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="3">%3Cpath%20d%3D%22m0%202.5%20l2%20-1.5%20l1%200%20l2%201.5%20l1%200%22%20stroke%3D%22orange%22%20fill%3D%22none%22%20stroke-width%3D%22.7%22%2F%3E</svg>');}
+.ͼ1 .cm-lintRange-info {background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="3">%3Cpath%20d%3D%22m0%202.5%20l2%20-1.5%20l1%200%20l2%201.5%20l1%200%22%20stroke%3D%22%23999%22%20fill%3D%22none%22%20stroke-width%3D%22.7%22%2F%3E</svg>');}
+.ͼ1 .cm-lintRange-hint {background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="3">%3Cpath%20d%3D%22m0%202.5%20l2%20-1.5%20l1%200%20l2%201.5%20l1%200%22%20stroke%3D%22%2366d%22%20fill%3D%22none%22%20stroke-width%3D%22.7%22%2F%3E</svg>');}
+.ͼ1 .cm-lintRange-active {background-color: #ffdd9980;}
+.ͼ1 .cm-tooltip-lint {padding: 0; margin: 0;}
+.ͼ1 .cm-lintPoint:after {content: ""; position: absolute; bottom: 0; left: -2px; border-left: 3px solid transparent; border-right: 3px solid transparent; border-bottom: 4px solid #d11;}
+.ͼ1 .cm-lintPoint {position: relative;}
+.ͼ1 .cm-lintPoint-warning:after {border-bottom-color: orange;}
+.ͼ1 .cm-lintPoint-info:after {border-bottom-color: #999;}
+.ͼ1 .cm-lintPoint-hint:after {border-bottom-color: #66d;}
+.ͼ1 .cm-panel.cm-panel-lint ul [aria-selected] u {text-decoration: underline;}
+.ͼ1 .cm-panel.cm-panel-lint ul [aria-selected] {background-color: #ddd;}
+.ͼ1 .cm-panel.cm-panel-lint ul:focus [aria-selected] {background: #bdf; background-color: Highlight; color: white; color: HighlightText;}
+.ͼ1 .cm-panel.cm-panel-lint ul u {text-decoration: none;}
+.ͼ1 .cm-panel.cm-panel-lint ul {max-height: 100px; overflow-y: auto; padding: 0; margin: 0;}
+.ͼ1 .cm-panel.cm-panel-lint [name=close] {position: absolute; top: 0; right: 2px; background: inherit; border: none; font: inherit; padding: 0; margin: 0;}
+.ͼ1 .cm-panel.cm-panel-lint {position: relative;}
+.ͼ1 .cm-tooltip {z-index: 500; box-sizing: border-box;}
+.ͼ2 .cm-tooltip {border: 1px solid #bbb; background-color: #f5f5f5;}
+.ͼ2 .cm-tooltip-section:not(:first-child) {border-top: 1px solid #bbb;}
+.ͼ3 .cm-tooltip {background-color: #333338; color: white;}
+.ͼ1 .cm-tooltip-arrow:before, .ͼ1 .cm-tooltip-arrow:after {content: ''; position: absolute; width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent;}
+.ͼ1 .cm-tooltip-above .cm-tooltip-arrow:before {border-top: 7px solid #bbb;}
+.ͼ1 .cm-tooltip-above .cm-tooltip-arrow:after {border-top: 7px solid #f5f5f5; bottom: 1px;}
+.ͼ1 .cm-tooltip-above .cm-tooltip-arrow {bottom: -7px;}
+.ͼ1 .cm-tooltip-below .cm-tooltip-arrow:before {border-bottom: 7px solid #bbb;}
+.ͼ1 .cm-tooltip-below .cm-tooltip-arrow:after {border-bottom: 7px solid #f5f5f5; top: 1px;}
+.ͼ1 .cm-tooltip-below .cm-tooltip-arrow {top: -7px;}
+.ͼ1 .cm-tooltip-arrow {height: 7px; width: 14px; position: absolute; z-index: -1; overflow: hidden;}
+.ͼ3 .cm-tooltip .cm-tooltip-arrow:before {border-top-color: #333338; border-bottom-color: #333338;}
+.ͼ3 .cm-tooltip .cm-tooltip-arrow:after {border-top-color: transparent; border-bottom-color: transparent;}
+.ͼ1 .cm-foldPlaceholder {background-color: #eee; border: 1px solid #ddd; color: #888; border-radius: .2em; margin: 0 1px; padding: 0 1px; cursor: pointer;}
+.ͼ1 .cm-foldGutter span {padding: 0 1px; cursor: pointer;}
+.ͼ1 .cm-selectionMatch {background-color: #99ff7780;}
+.ͼ1 .cm-searchMatch .cm-selectionMatch {background-color: transparent;}
+.ͼ5 {color: #ABB0BA; width: inherit; background-color: #2E3138; color-scheme: dark;}
+.ͼ5 .cm-activeLine {background-color: #566B76;}
+.ͼ5 .cm-gutters {margin-top: 50px; padding: 0 0 0 8px; background-color: #2E3138; border: none; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;; font-weight: 400; font-size: 0.8125rem;}
+.ͼ5 .cm-activeLineGutter {background-color: #566B76;}
+.ͼ5.cm-focused .cm-selectionBackground, .ͼ5 ::selection {background-color: #C4CFD4;}
+.ͼ5 .cm-cursorLayer {color: #FFFFFF;}
+.ͼ5 .cmt-punctuation {color: #EF4444;}
+.ͼ5 .cmt-typeName {color: #EF4444;}
+.ͼ5 .cmt-propertyName {color: #FB923C;}
+.ͼ5 .cmt-string {color: #0C8;}
+.ͼ5 .cmt-comment {color: #ABB0BA;}
+.ͼ5 .cm-content {font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;; font-weight: 400; font-size: 0.8125rem; line-height: 22px; margin-top: 48px; padding-right: 6px;}
+.ͼ4 {color: #ABB0BA; width: inherit; background-color: #2E3138; color-scheme: dark;}
+.ͼ4 .cm-activeLine {background-color: #566B76;}
+.ͼ4 .cm-gutters {margin-top: 50px; padding: 0 0 0 8px; background-color: #2E3138; border: none; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;; font-weight: 400; font-size: 0.8125rem;}
+.ͼ4 .cm-activeLineGutter {background-color: #566B76;}
+.ͼ4.cm-focused .cm-selectionBackground, .ͼ4 ::selection {background-color: #C4CFD4;}
+.ͼ4 .cm-cursorLayer {color: #FFFFFF;}
+.ͼ4 .cmt-punctuation {color: #EF4444;}
+.ͼ4 .cmt-typeName {color: #EF4444;}
+.ͼ4 .cmt-propertyName {color: #FB923C;}
+.ͼ4 .cmt-string {color: #0C8;}
+.ͼ4 .cmt-comment {color: #ABB0BA;}
+.ͼ4 .cm-content {font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;; font-weight: 400; font-size: 0.8125rem; line-height: 22px; margin-top: 48px; padding-right: 6px;}
+</style><meta http-equiv="X-UA-Compatible" content="IE=edge" data-next-head=""><meta id="viewport" name="viewport" content="width=device-width" data-next-head=""><meta name="keywords" content="svg, svg tool, svg editor, svg viewer, online svg, svg to jsx, svg to react, svg to react native, svg optimize, rotate svg, resize svg" data-next-head=""><meta name="description" content="SVG Viewer is an online tool to view, edit and optimize SVGs." data-next-head=""><meta property="og:type" content="website" data-next-head=""><meta property="og:image:width" content="1200" data-next-head=""><meta property="og:image:height" content="667" data-next-head=""><link rel="SVG Viewer" href="https://www.svgviewer.dev/images/logo.svg" data-next-head=""><script type="text/javascript" async="" src="./profile_files/lib.min.js.download"></script><script data-next-head="">
+                (function(c,u,v,n,p,e,z,A,w){function k(a){if(!x){x=!0;var l=u.getElementsByTagName(v)[0],d=u.createElement(v);d.src=A;d.crossOrigin="anonymous";d.addEventListener("load",function(){try{c[n]=r;c[p]=t;var b=c[e],d=b.init;b.init=function(a){for(var b in a)Object.prototype.hasOwnProperty.call(a,b)&&(w[b]=a[b]);d(w)};B(a,b)}catch(g){console.error(g)}});l.parentNode.insertBefore(d,l)}}function B(a,l){try{for(var d=m.data,b=0;b<a.length;b++)if("function"===typeof a[b])a[b]();var e=!1,g=c.__SENTRY__;"undefined"!==
+                typeof g&&g.hub&&g.hub.getClient()&&(e=!0);g=!1;for(b=0;b<d.length;b++)if(d[b].f){g=!0;var f=d[b];!1===e&&"init"!==f.f&&l.init();e=!0;l[f.f].apply(l,f.a)}!1===e&&!1===g&&l.init();var h=c[n],k=c[p];for(b=0;b<d.length;b++)d[b].e&&h?h.apply(c,d[b].e):d[b].p&&k&&k.apply(c,[d[b].p])}catch(C){console.error(C)}}for(var f=!0,y=!1,q=0;q<document.scripts.length;q++)if(-1<document.scripts[q].src.indexOf(z)){f="no"!==document.scripts[q].getAttribute("data-lazy");break}var x=!1,h=[],m=function(a){(a.e||a.p||a.f&&
+                -1<a.f.indexOf("capture")||a.f&&-1<a.f.indexOf("showReportDialog"))&&f&&k(h);m.data.push(a)};m.data=[];c[e]=c[e]||{};c[e].onLoad=function(a){h.push(a);f&&!y||k(h)};c[e].forceLoad=function(){y=!0;f&&setTimeout(function(){k(h)})};"init addBreadcrumb captureMessage captureException captureEvent configureScope withScope showReportDialog".split(" ").forEach(function(a){c[e][a]=function(){m({f:a,a:arguments})}});var r=c[n];c[n]=function(a,e,d,b,f){m({e:[].slice.call(arguments)});r&&r.apply(c,arguments)};
+                var t=c[p];c[p]=function(a){m({p:a.reason});t&&t.apply(c,arguments)};f||setTimeout(function(){k(h)})})(window,document,"script","onerror","onunhandledrejection","Sentry","df0d0734fba740d69c823219229f3464","https://browser.sentry-cdn.com/7.29.0/bundle.es5.min.js",{"dsn":"https://df0d0734fba740d69c823219229f3464@o137669.ingest.sentry.io/6078300"});
+                Sentry.onLoad(function() {
+                  Sentry.init();
+                });
+                if (typeof window.mixpanel === 'undefined') {
+                  var MIXPANEL_CUSTOM_LIB_URL = 'https://t.svgviewer.dev/__mix/lib.min.js';
+                  (function(f,b){if(!b.__SV){var e,g,i,h;window.mixpanel=b;b._i=[];b.init=function(e,f,c){function g(a,d){var b=d.split(".");2==b.length&&(a=a[b[0]],d=b[1]);a[d]=function(){a.push([d].concat(Array.prototype.slice.call(arguments,0)))}}var a=b;"undefined"!==typeof c?a=b[c]=[]:c="mixpanel";a.people=a.people||[];a.toString=function(a){var d="mixpanel";"mixpanel"!==c&&(d+="."+c);a||(d+=" (stub)");return d};a.people.toString=function(){return a.toString(1)+".people (stub)"};i="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");
+                  for(h=0;h<i.length;h++)g(a,i[h]);var j="set set_once union unset remove delete".split(" ");a.get_group=function(){function b(c){d[c]=function(){call2_args=arguments;call2=[c].concat(Array.prototype.slice.call(call2_args,0));a.push([e,call2])}}for(var d={},e=["get_group"].concat(Array.prototype.slice.call(arguments,0)),c=0;c<j.length;c++)b(j[c]);return d};b._i.push([e,f,c])};b.__SV=1.2;e=f.createElement("script");e.type="text/javascript";e.async=!0;e.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===f.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";g=f.getElementsByTagName("script")[0];g.parentNode.insertBefore(e,g)}})(document,window.mixpanel||[]);
+                  
+                  mixpanel.init('710e9b3aa35fa9973def53bee95c0a7c', {
+                    api_host: 'https://t.svgviewer.dev',
+                    persistence: 'localStorage',
+                    loaded: (mixpanel) => {
+                      if (window.anonymousProperties) {
+                        window.setAnonymousProperties(mixpanel.get_distinct_id(), window.anonymousProperties);
+                      }
+                    }
+                  });
+                }
+                </script><title data-next-head="">SVG Viewer - View, edit, and optimize SVGs</title><meta property="og:title" content="SVG Viewer" data-next-head=""><script>if (window.document.documentMode) {
+                window.location.replace('/outdated.html')
+              }</script><script async="" src="./profile_files/js"></script><script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-1FDJPVDXQB');
+          </script><script type="text/javascript">window.setAnonymousProperties = () => undefined;</script><link rel="preload" href="./profile_files/d782d8d9bd1525b9.css" as="style"><link rel="stylesheet" href="./profile_files/d782d8d9bd1525b9.css" data-n-g=""><link rel="preload" href="./profile_files/112b223d10060269.css" as="style"><link rel="stylesheet" href="./profile_files/112b223d10060269.css" data-n-p=""><link rel="preload" href="./profile_files/04d81d035ebfd49b.css" as="style"><link rel="stylesheet" href="./profile_files/04d81d035ebfd49b.css" data-n-p=""><noscript data-n-css=""></noscript><script defer="" nomodule="" src="./profile_files/polyfills-42372ed130431b0a.js.download"></script><script src="./profile_files/webpack-d8b24a1fbb3d9977.js.download" defer=""></script><script src="./profile_files/framework-0418714ac4f44841.js.download" defer=""></script><script src="./profile_files/main-38fd629d186a9563.js.download" defer=""></script><script src="./profile_files/_app-9058170e50602b3e.js.download" defer=""></script><script src="./profile_files/3949d334-568f9bd8dda49471.js.download" defer=""></script><script src="./profile_files/576-9f92c4f3bd074d36.js.download" defer=""></script><script src="./profile_files/376-a40405631c27a185.js.download" defer=""></script><script src="./profile_files/186-79bed4a138e375d9.js.download" defer=""></script><script src="./profile_files/537-b8fc4da1694e338d.js.download" defer=""></script><script src="./profile_files/index-1cf4cd5b31928106.js.download" defer=""></script><script src="./profile_files/_buildManifest.js.download" defer=""></script><script src="./profile_files/_ssgManifest.js.download" defer=""></script><meta property="og:image" content="/images/svgviewer-og-image.png" data-next-head=""><link as="script" rel="prefetch" href="./profile_files/a7f50d57-5473b94fdd4cff9f.js.download"><link as="script" rel="prefetch" href="./profile_files/868bbdb4-33e1b4bb9b3f3a7d.js.download"><link as="script" rel="prefetch" href="./profile_files/a26566bc-346b412f949d4d15.js.download"><link as="script" rel="prefetch" href="./profile_files/552-68c0abf95ac112c6.js.download"><link as="script" rel="prefetch" href="./profile_files/svg-to-react-jsx-4014b13be44a27e5.js.download"><link as="script" rel="prefetch" href="./profile_files/svg-to-react-native-jsx-6c2d62073c98066c.js.download"><link as="script" rel="prefetch" href="./profile_files/svg-to-png-aba4de7b23baece2.js.download"><link as="script" rel="prefetch" href="./profile_files/svg-to-data-uri-e6e38ebd4846fc45.js.download"><link as="script" rel="prefetch" href="./profile_files/[slug]-229780e09688028e.js.download"><style type="text/css" id="react-draggable-style-el">.react-draggable-transparent-selection *::-moz-selection {all: inherit;}
+.react-draggable-transparent-selection *::selection {all: inherit;}
+</style></head><body class=""><div id="__next"><div class="page_main__zhCUI"><div class="page_contentContainer__aY1r9"><div class="page_content__5BTMW"><main class="main_main__91XYS"><div class="main_resizableContainer__9Tpln"><div class="main_desktopView__2W9V4"><div class="SplitPane vertical " style="display:flex;flex:1;height:100%;position:absolute;outline:none;overflow:hidden;left:0;right:0;flex-direction:row"><div class="DragLayer vertical  " style="position:absolute;top:0;right:0;bottom:0;left:0"></div><div class="Pane vertical " style="position:relative;outline:none;border:0;overflow:hidden;display:flex;flex-basis:auto;flex-grow:1;flex-shrink:1;width:0;height:100%;min-width:20px"><div class="main_svgDirectorySidebar__1ZOwF"><div class="svg-directory-sidebar_svgDirectorySidebar__GJcJc"><div class="svg-directory-sidebar_sidebarHeaderContainer__8idxq"><div class="svg-directory-sidebar_sidebarHeader__MZyxD"><div class="svg-directory-sidebar_logo__7Kv4U"><a href="https://www.svgviewer.dev/"><div class="svg-directory-sidebar_logoSVGContainer__32FaV"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 124 124" fill="none"><rect width="124" height="124" rx="24" fill="#F97316"></rect><path d="M19.375 36.782v63.843a4 4 0 0 0 4 4h63.843c3.564 0 5.348-4.309 2.829-6.828L26.203 33.953c-2.52-2.52-6.828-.735-6.828 2.829Z" fill="#fff"></path><circle cx="63.211" cy="37.539" r="18.164" fill="#000"></circle><rect opacity="0.4" x="81.133" y="80.72" width="17.569" height="17.388" rx="4" transform="rotate(-45 81.133 80.72)" fill="#FDBA74"></rect></svg></div><div class="svg-directory-sidebar_logoText__SpV3A"><span>SVG</span>Viewer</div></a></div></div><div><div class="svg-directory-sidebar_searchComponents__txpVA"><div class="searchbar-mini_searchBarContainer__j6UJF"><label class="searchbar-mini_searchBarLabel__NaZVY"><div class="searchbar-mini_searchIcon__8shuc"><svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.474 9.474 15.2 15.2m-4.32-9.12a4.8 4.8 0 1 1-9.6 0 4.8 4.8 0 0 1 9.6 0Z" stroke="#566B76" stroke-width="1.2"></path></svg></div><input class="searchbar-mini_searchBar__SgF2j" type="text" placeholder="Search SVGs" value=""></label></div></div></div></div><div class="directory-results-main-page_directoryResultsMainPage__9__YG"><div class="directory-results-main-page_directoryContentPlusLoadMore__jTm_a"><div class="directory-results-main-page_directoryContent__UcLWE"><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420447/sort"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>icon/18/icon-sort</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M9.5,3 L13,8 L6,8 L9.5,3 L9.5,3 Z M6,11 L13,11 L9.5,16 L6,11 L6,11 Z" id="path" fill="#000000" sketch:type="MSShapeGroup">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420446/graph"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>icon/24/icon-graph</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M19,3 L5,3 C3.9,3 3,3.9 3,5 L3,19 C3,20.1 3.9,21 5,21 L19,21 C20.1,21 21,20.1 21,19 L21,5 C21,3.9 20.1,3 19,3 L19,3 L19,3 Z M9,17 L7,17 L7,10 L9,10 L9,17 L9,17 L9,17 Z M13,17 L11,17 L11,7 L13,7 L13,17 L13,17 L13,17 Z M17,17 L15,17 L15,13 L17,13 L17,17 L17,17 L17,17 Z" id="path" fill="#000000" sketch:type="MSShapeGroup">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420445/person"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg height="50" width="50" fill="#000000" viewBox="0 0 24 24" id="圖層_1" data-name="圖層 1" xmlns="http://www.w3.org/2000/svg"><title>profile</title><path d="M17.56,14.11a7.48,7.48,0,0,1-1.77-.82,9.46,9.46,0,0,0,1.64-2.68,1.25,1.25,0,0,0,.46-.45c.73-1.29.9-2.32.52-3.14a1.89,1.89,0,0,0-.51-.66,9.75,9.75,0,0,0-.29-2.18A5.5,5.5,0,0,0,12.08.43,5.5,5.5,0,0,0,6.56,4.18a9.64,9.64,0,0,0-.29,2.17A1.9,1.9,0,0,0,5.76,7c-.38.82-.21,1.85.52,3.15a1.24,1.24,0,0,0,.46.44,9.46,9.46,0,0,0,1.64,2.68,7.47,7.47,0,0,1-1.77.82c-2.36.75-5.53,2.33-5.77,7.42a1,1,0,0,0,.79,1,54.3,54.3,0,0,0,10.46.94,54.29,54.29,0,0,0,10.46-.94,1,1,0,0,0,.79-1C23.09,16.43,19.92,14.85,17.56,14.11ZM7.91,9A2.14,2.14,0,0,1,7.57,7.9a1,1,0,0,0,.71-1,8.2,8.2,0,0,1,.21-2.18,3.45,3.45,0,0,1,3.59-2.28,3.45,3.45,0,0,1,3.59,2.26,8.23,8.23,0,0,1,.22,2.19,1,1,0,0,0,.71,1A2.15,2.15,0,0,1,16.25,9a1.26,1.26,0,0,0-.63.72c-.21.72-1.68,3.54-3.54,3.54S8.75,10.42,8.54,9.7A1.25,1.25,0,0,0,7.91,9Zm4.17,12.5a56.68,56.68,0,0,1-9.17-.73c.43-3.09,2.31-4.11,4.3-4.74A9.22,9.22,0,0,0,10,14.63a4,4,0,0,0,4.25,0A9.22,9.22,0,0,0,17,16c2,.63,3.87,1.65,4.3,4.74A56.67,56.67,0,0,1,12.08,21.49Z"></path></svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420444/gear-1"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg height="50" width="50" fill="#000000" viewBox="0 0 24 24" id="圖層_1" data-name="圖層 1" xmlns="http://www.w3.org/2000/svg"><title>setting</title><path d="M22.36,9.37l-.75-.14a9.89,9.89,0,0,0-.86-2.06l.44-.63A2,2,0,0,0,21,4L20,3a2,2,0,0,0-2.55-.23l-.63.44a9.89,9.89,0,0,0-2.06-.86l-.14-.75a2,2,0,0,0-2-1.64H11.33a2,2,0,0,0-2,1.64l-.14.75a9.89,9.89,0,0,0-2.06.86l-.63-.44A2,2,0,0,0,4,3L3,4a2,2,0,0,0-.23,2.55l.44.63a9.89,9.89,0,0,0-.86,2.06l-.75.14a2,2,0,0,0-1.64,2v1.33a2,2,0,0,0,1.64,2l.75.14a9.89,9.89,0,0,0,.86,2.06l-.44.63A2,2,0,0,0,3,20L4,21a2,2,0,0,0,2.55.23l.63-.44a9.89,9.89,0,0,0,2.06.86l.14.75a2,2,0,0,0,2,1.64h1.33a2,2,0,0,0,2-1.64l.14-.75a9.89,9.89,0,0,0,2.06-.86l.63.44A2,2,0,0,0,20,21L21,20a2,2,0,0,0,.23-2.55l-.44-.63a9.89,9.89,0,0,0,.86-2.06l.75-.14a2,2,0,0,0,1.64-2V11.33A2,2,0,0,0,22.36,9.37ZM22,12.67l-1.38.25a1,1,0,0,0-.8.77,7.93,7.93,0,0,1-1.1,2.64,1,1,0,0,0,0,1.11l.8,1.16-.94.94-1.16-.8a1,1,0,0,0-1.11,0,7.93,7.93,0,0,1-2.64,1.1,1,1,0,0,0-.77.8L12.67,22H11.33l-.25-1.38a1,1,0,0,0-.77-.8,7.93,7.93,0,0,1-2.64-1.1,1,1,0,0,0-1.11,0l-1.16.8-.94-.94.8-1.16a1,1,0,0,0,0-1.11,7.93,7.93,0,0,1-1.1-2.64,1,1,0,0,0-.8-.77L2,12.67V11.33l1.38-.25a1,1,0,0,0,.8-.77,7.93,7.93,0,0,1,1.1-2.64,1,1,0,0,0,0-1.11L4.46,5.4l.94-.94,1.16.8a1,1,0,0,0,1.11,0,7.93,7.93,0,0,1,2.64-1.1,1,1,0,0,0,.77-.8L11.33,2h1.33l.25,1.38a1,1,0,0,0,.77.8,7.93,7.93,0,0,1,2.64,1.1,1,1,0,0,0,1.11,0l1.16-.8.94.94-.8,1.16a1,1,0,0,0,0,1.11,7.93,7.93,0,0,1,1.1,2.64,1,1,0,0,0,.8.77l1.38.25Z"></path><path d="M12,7a5,5,0,1,0,5,5A5,5,0,0,0,12,7Zm0,8a3,3,0,1,1,3-3A3,3,0,0,1,12,15Z"></path></svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420443/disk"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/24/icon-disk</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-svg" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="out" transform="translate(-606.000000, -106.000000)" fill="#B8BDBF">
+            <path d="M624.666667,125.363636 L611.333333,125.363636 C610.414167,125.363636 609.666667,124.629727 609.666667,123.727273 C609.666667,123.596364 609.681667,123.467091 609.713333,123.342727 L609.713333,123.341091 C609.893333,122.604727 610.56,122.090909 611.333333,122.090909 L624.666667,122.090909 C625.438333,122.090909 626.103333,122.603091 626.285,123.335364 L626.286667,123.342727 L626.2875,123.342727 C626.3175,123.469545 626.333333,123.598818 626.333333,123.727273 C626.333333,124.629727 625.585,125.363636 624.666667,125.363636 L624.666667,125.363636 Z M612.668333,111.263909 C612.76,110.894091 613.093333,110.636364 613.48,110.636364 L622.52,110.636364 C622.906667,110.636364 623.239167,110.894091 623.329167,111.263909 L625.615,120.597727 C625.311667,120.510182 624.995833,120.454545 624.666667,120.454545 L611.333333,120.454545 C611.004167,120.454545 610.6875,120.510182 610.385,120.597727 L612.668333,111.263909 Z M627.908333,122.960636 L627.908333,122.959818 L624.950833,110.881 C624.68,109.773182 623.68,109 622.52,109 L613.48,109 C612.32,109 611.320833,109.773182 611.048333,110.881 L608.091667,122.959818 L608.0925,122.960636 C608.030833,123.209364 608,123.467091 608,123.727273 C608,125.532182 609.495,127 611.333333,127 L624.666667,127 C626.505,127 628,125.532182 628,123.727273 C628,123.470364 627.969167,123.213455 627.908333,122.960636 Z M611.333333,124.5457 L614.666667,124.5457 L614.666667,122.909336 L611.333333,122.909336 L611.333333,124.5457 Z" id="path">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420442/alarm-1"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg height="50" width="50" fill="#000000" viewBox="0 0 24 24" id="圖層_1" data-name="圖層 1" xmlns="http://www.w3.org/2000/svg"><title>alarm</title><rect x="10.68" y="16.88" width="2.64" height="2.64"></rect><rect x="10.68" y="8.62" width="2.64" height="6.61"></rect><path d="M22.92,21.52l-10-20a1,1,0,0,0-1.79,0l-10,20A1,1,0,0,0,2,23H2L22,23a1,1,0,0,0,.89-1.45ZM3.58,21,12,4.23,20.41,21Z"></path></svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420441/user-group"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>icon/28/icon-userg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M18.6666667,12.8333333 C20.6033333,12.8333333 22.155,11.27 22.155,9.33333333 C22.155,7.39666667 20.6033333,5.83333333 18.6666667,5.83333333 C16.73,5.83333333 15.1666667,7.39666667 15.1666667,9.33333333 C15.1666667,11.27 16.73,12.8333333 18.6666667,12.8333333 L18.6666667,12.8333333 L18.6666667,12.8333333 Z M9.33333333,12.8333333 C11.27,12.8333333 12.8216667,11.27 12.8216667,9.33333333 C12.8216667,7.39666667 11.27,5.83333333 9.33333333,5.83333333 C7.39666667,5.83333333 5.83333333,7.39666667 5.83333333,9.33333333 C5.83333333,11.27 7.39666667,12.8333333 9.33333333,12.8333333 L9.33333333,12.8333333 L9.33333333,12.8333333 Z M9.33333333,15.1666667 C6.615,15.1666667 1.16666667,16.5316667 1.16666667,19.25 L1.16666667,22.1666667 L17.5,22.1666667 L17.5,19.25 C17.5,16.5316667 12.0516667,15.1666667 9.33333333,15.1666667 L9.33333333,15.1666667 L9.33333333,15.1666667 Z M18.6666667,15.1666667 C18.3283333,15.1666667 17.9433333,15.19 17.535,15.225 C18.8883333,16.205 19.8333333,17.5233333 19.8333333,19.25 L19.8333333,22.1666667 L26.8333333,22.1666667 L26.8333333,19.25 C26.8333333,16.5316667 21.385,15.1666667 18.6666667,15.1666667 L18.6666667,15.1666667 L18.6666667,15.1666667 Z" id="path" fill="#000000" sketch:type="MSShapeGroup">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420440/board"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>icon/24/icon-board</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M18.432,5 L4.608,5 C3.6576,5 2.88864,5.80999998 2.88864,6.79999995 L2.88,17.5999997 C2.88,18.5899996 3.6576,19.3999996 4.608,19.3999996 L18.432,19.3999996 C19.3824,19.3999996 20.16,18.5899996 20.16,17.5999997 L20.16,6.79999995 C20.16,5.80999998 19.3824,5 18.432,5 L18.432,5 L18.432,5 Z M14.112,17.5999997 L4.608,17.5999997 L4.608,13.9999998 L14.112,13.9999998 L14.112,17.5999997 L14.112,17.5999997 L14.112,17.5999997 Z M14.112,13.0999998 L4.608,13.0999998 L4.608,9.49999988 L14.112,9.49999988 L14.112,13.0999998 L14.112,13.0999998 L14.112,13.0999998 Z M18.432,17.5999997 L14.976,17.5999997 L14.976,9.49999988 L18.432,9.49999988 L18.432,17.5999997 L18.432,17.5999997 L18.432,17.5999997 Z" id="path" fill="#000000" sketch:type="MSShapeGroup" transform="translate(11.520000, 12.200000) scale(-1, 1) translate(-11.520000, -12.200000) ">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420439/circle-open-new"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/18/circle-open-new</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-svg" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="out" transform="translate(-326.000000, -179.000000)" fill="#B8BDBF">
+            <path d="M335.999588,181 C331.581647,181 328,184.582286 328,189 C328,193.418538 331.581647,197 335.999588,197 C340.418353,197 344,193.418538 344,189 C344,184.582286 340.418353,181 335.999588,181 Z M337,184 L337,185.5 L338.5,185.5 L333.5,190.5 L334.5,191.5 L339.5,186.5 L339.5,188 L341.013672,188 L341.013672,184 L337,184 Z M339.5,192.5 L332.5,192.5 L332.5,185.473572 L336,185.473572 L336,184 L332.111111,184 C331.494444,184 331,184.5 331,185.111111 L331,192.888889 C331,193.5 331.494444,194 332.111111,194 L339.888889,194 C340.5,194 341,193.5 341,192.888889 L341,189 L339.5,189 L339.5,192.5 Z" id="path">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420438/circle-prompt"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/20/circle-prompt</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-temp" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="_archive" transform="translate(-1822.000000, -212.000000)" fill="#B8BDBF">
+            <path d="M1831.7796,214 C1827.48315,214 1824,217.483774 1824,221.78 C1824,226.077028 1827.48315,229.56 1831.7796,229.56 C1836.07685,229.56 1839.56,226.077028 1839.56,221.78 C1839.56,217.483774 1836.07685,214 1831.7796,214 L1831.7796,214 Z M1834.34477,218.196418 C1834.10819,217.801945 1833.77494,217.490109 1833.34322,217.261689 C1832.91151,217.033269 1832.41358,216.9175 1831.84906,216.9175 C1831.24311,216.9175 1830.71188,217.054708 1830.25679,217.328734 C1829.80171,217.60276 1829.45606,217.948119 1829.21807,218.367148 C1828.98008,218.784229 1828.8625,219.197022 1828.8625,219.603579 C1828.8625,219.799646 1828.93723,219.98246 1829.08668,220.151631 C1829.23578,220.320412 1829.41993,220.405777 1829.63845,220.405777 C1830.00641,220.405777 1830.25821,220.163714 1830.39102,219.679589 C1830.53091,219.216512 1830.70232,218.866476 1830.90418,218.629091 C1831.1064,218.391316 1831.4216,218.272818 1831.84906,218.272818 C1832.21561,218.272818 1832.51451,218.391316 1832.74577,218.625972 C1832.97668,218.861798 1833.09284,219.151027 1833.09284,219.493657 C1833.09284,219.669064 1833.05565,219.831999 1832.97951,219.9809 C1832.90337,220.131751 1832.81058,220.2674 1832.69867,220.389016 C1832.58782,220.511022 1832.40791,220.692277 1832.15894,220.931221 C1831.87562,221.205247 1831.65003,221.442632 1831.48251,221.642208 C1831.31535,221.840224 1831.18113,222.071762 1831.07984,222.334874 C1830.97891,222.598375 1830.92791,222.910601 1830.92791,223.269992 C1830.92791,223.556102 1830.99697,223.772438 1831.13544,223.918612 C1831.27356,224.064785 1831.44391,224.136117 1831.64578,224.136117 C1832.03464,224.136117 1832.26554,223.913934 1832.34027,223.469567 C1832.38312,223.259078 1832.41499,223.111735 1832.43589,223.029489 C1832.45785,222.945683 1832.48689,222.861877 1832.52691,222.778071 C1832.56586,222.694265 1832.62536,222.603053 1832.70398,222.502486 C1832.78437,222.401918 1832.89097,222.28459 1833.02236,222.15245 C1833.50082,221.681967 1833.83302,221.346743 1834.01682,221.147558 C1834.2024,220.947982 1834.36141,220.711766 1834.49705,220.43774 C1834.63127,220.163714 1834.6975,219.844082 1834.6975,219.481573 C1834.6975,219.018886 1834.57992,218.590891 1834.34477,218.196418 M1832.32929,224.997954 C1832.49539,225.180768 1832.57967,225.409188 1832.57967,225.678927 C1832.57967,225.978679 1832.49255,226.213336 1832.31689,226.385236 C1832.1423,226.555966 1831.93901,226.6425 1831.70952,226.6425 C1831.47295,226.6425 1831.26542,226.557135 1831.08834,226.388354 C1830.91127,226.219183 1830.82273,225.981797 1830.82273,225.678927 C1830.82273,225.409188 1830.90843,225.180768 1831.07984,224.997954 C1831.25161,224.813971 1831.46056,224.72081 1831.70952,224.72081 C1831.95424,224.72081 1832.16178,224.813971 1832.32929,224.997954" id="icom/circle-prompt">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420437/fold"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>icon/28/icon-fold</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M17.9783333,8.645 L16.3333333,7 L9.33333333,14 L16.3333333,21 L17.9783333,19.355 L12.635,14 L17.9783333,8.645 L17.9783333,8.645 Z" id="path" fill="#000000" sketch:type="MSShapeGroup">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420436/zoom-out"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>icon/18/icon-minimize</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M11.6569196,10.5226102 L11.0595166,10.5226102 L10.8477789,10.3184345 C11.588861,9.45635933 12.0350227,8.33717406 12.0350227,7.11968198 C12.0350227,4.40490149 9.83446247,2.20434126 7.11968198,2.20434126 C4.40490149,2.20434126 2.20434126,4.40490149 2.20434126,7.11968198 C2.20434126,9.83446247 4.40490149,12.0350227 7.11968198,12.0350227 C8.33717406,12.0350227 9.45635933,11.588861 10.3184345,10.8477789 L10.5226102,11.0595166 L10.5226102,11.6569196 L14.3036415,15.4303888 L15.4303888,14.3036415 L11.6569196,10.5226102 L11.6569196,10.5226102 L11.6569196,10.5226102 Z M7.11968198,10.5226102 C5.23672838,10.5226102 3.71675379,9.00263558 3.71675379,7.11968198 C3.71675379,5.23672838 5.23672838,3.71675379 7.11968198,3.71675379 C9.00263558,3.71675379 10.5226102,5.23672838 10.5226102,7.11968198 C10.5226102,9.00263558 9.00263558,10.5226102 7.11968198,10.5226102 L7.11968198,10.5226102 L7.11968198,10.5226102 Z M4.95976784,6.61302378 L9.36845036,6.61302378 L9.36845036,7.74733318 L4.95976784,7.74733318 L4.95976784,6.61302378 L4.95976784,6.61302378 Z" id="path" fill="#000000" sketch:type="MSShapeGroup">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420435/time"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/18/time</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-temp" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="temp" transform="translate(-856.000000, -94.000000)" fill="#B8BDBF">
+            <path d="M864.9925,95.5 C860.8525,95.5 857.5,98.86 857.5,103 C857.5,107.14 860.8525,110.5 864.9925,110.5 C869.14,110.5 872.5,107.14 872.5,103 C872.5,98.86 869.14,95.5 864.9925,95.5 L864.9925,95.5 Z M865,109 C861.685,109 859,106.315 859,103 C859,99.685 861.685,97 865,97 C868.315,97 871,99.685 871,103 C871,106.315 868.315,109 865,109 Z M865.375,99.25 L864.25,99.25 L864.25,103.75 L868.1875,106.1125 L868.75,105.19 L865.375,103.1875 L865.375,99.25 Z" id="icon/18/time">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420434/open-new"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/20/icon-open-in-new</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-svg" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="out" transform="translate(-838.000000, -29.000000)" fill="#B8BDBF">
+            <path d="M855,46 L841,46 L841,32 L848,32 L848,30 L841,30 C839.89,30 839,30.9 839,32 L839,46 C839,47.1 839.89,48 841,48 L855,48 C856.1,48 857,47.1 857,46 L857,39 L855,39 L855,46 L855,46 Z M850,30 L850,32 L853.59,32 L843.76,41.83 L845.17,43.24 L855,33.41 L855,37 L857,37 L857,30 L850,30 L850,30 Z" id="path">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420433/2ticks"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>icon/24/icon-check</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M18,7 L16.59,5.59 L10.25,11.93 L11.66,13.34 L18,7 L18,7 L18,7 Z M22.24,5.59 L11.66,16.17 L7.48,12 L6.07,13.41 L11.66,19 L23.66,7 L22.24,5.59 L22.24,5.59 L22.24,5.59 Z M0.41,13.41 L6,19 L7.41,17.59 L1.83,12 L0.41,13.41 L0.41,13.41 L0.41,13.41 Z" id="path" fill="#000000" sketch:type="MSShapeGroup">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420432/arrow-down"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>icon/24/icon-down</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M11.4056321,16.5943679 L12,17.1887359 L12.5943679,16.5943679 L21,8.18873589 L19.8112641,7 L11.4056321,15.4056321 L12.5943679,15.4056321 L4.18873589,7 L3,8.18873589 L11.4056321,16.5943679 L11.4056321,16.5943679 Z" id="path" fill="#000000" sketch:type="MSShapeGroup">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420431/clone"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>icon/18/icon-duplicate</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M13.6666667,4 L6.33333333,4 C5.6,4 5,4.6 5,5.33333333 L5,14.6666667 C5,15.4 5.6,16 6.33333333,16 L13.6666667,16 C14.4,16 15,15.4 15,14.6666667 L15,5.33333333 C15,4.6 14.4,4 13.6666667,4 L13.6666667,4 Z M6,5 L14,5 L14,15 L6,15 L6,5 L6,5 Z M4.03408486,13.9659151 C3.4435752,13.8291651 3,13.297202 3,12.6666667 L3,3.33333333 C3,2.6 3.6,2 4.33333333,2 L11.6666667,2 C12.297202,2 12.8291651,2.4435752 12.9659151,3.03408486 C12.8696426,3.01179011 12.7694647,3 12.6666667,3 L8.66666667,3 L4,3 L4,8.66666667 L4,13.6666667 C4,13.7694647 4.01179011,13.8696426 4.03408486,13.9659151 L4.03408486,13.9659151 Z" id="path" fill="#000000" sketch:type="MSShapeGroup">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420430/sun"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/24/icon-sunny</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-temp" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="temp" transform="translate(-607.000000, -105.000000)" fill="#B8BDBF">
+            <path d="M613.76,110.309589 L611.96,108.511416 L610.55,109.927854 L612.34,111.726027 L613.76,110.309589 L613.76,110.309589 Z M611,115.995434 L608,115.995434 L608,118.004566 L611,118.004566 L611,115.995434 L611,115.995434 Z M620,106 L618,106 L618,108.96347 L620,108.96347 L620,106 L620,106 Z M627.45,109.927854 L626.04,108.511416 L624.25,110.309589 L625.66,111.726027 L627.45,109.927854 L627.45,109.927854 Z M624.24,123.690411 L626.03,125.49863 L627.44,124.082192 L625.64,122.284018 L624.24,123.690411 L624.24,123.690411 Z M627,115.995434 L627,118.004566 L630,118.004566 L630,115.995434 L627,115.995434 L627,115.995434 Z M619,111 C615.69,111 613,113.69 613,117 C613,120.31 615.69,123 619,123 C622.31,123 625,120.31 625,117 C625,113.69 622.31,111 619,111 L619,111 Z M618,128 L620,128 L620,125 L618,125 L618,128 L618,128 Z M610.55,124.058319 L611.96,125.463927 L613.75,123.669534 L612.34,122.263927 L610.55,124.058319 L610.55,124.058319 Z" id="path">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420429/radio"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/18/icon-radio</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-svg" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="out" transform="translate(-214.000000, -377.000000)" fill="#B8BDBF">
+            <path d="M230,386 C230,382.134007 226.865993,379 223,379 C219.134007,379 216,382.134007 216,386 C216,389.865993 219.134007,393 223,393 C226.865993,393 230,389.865993 230,386 Z M218.333333,386 C218.333333,383.422671 220.422671,381.333333 223,381.333333 C225.577329,381.333333 227.666667,383.422671 227.666667,386 C227.666667,388.577329 225.577329,390.666667 223,390.666667 C220.422671,390.666667 218.333333,388.577329 218.333333,386 Z" id="path">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420428/clipboard"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/20/icon-copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-svg" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="out" transform="translate(-717.000000, -29.000000)" fill="#B8BDBF">
+            <path d="M729.356427,33.4854478 C728.794597,33.3407124 728.403351,32.8718957 728.403351,32.2882346 L728.403351,31.801326 C728.403351,30.8062704 727.600513,30 726.611443,30 L726.575448,30 C725.585595,30 724.784322,30.8062704 724.784322,31.801326 L724.784322,32.2929543 C724.784322,32.8726823 724.395423,33.3407124 723.837506,33.4878076 C723.110571,33.6773795 722.574563,34.3821778 722.574563,35.172716 L722.574563,35.194741 C722.574563,35.4889313 722.811658,35.7272727 723.104311,35.7272727 L730.097447,35.7272727 C730.390099,35.7272727 730.627195,35.4889313 730.627195,35.194741 L730.627195,35.172716 C730.627195,34.379818 730.087275,33.6734465 729.356427,33.4854478 Z M728.663158,43.0914214 C728.663158,43.5432914 728.32771,43.9090909 727.912393,43.9090909 L723.776141,43.9090909 C723.362703,43.9090909 723.026316,43.5432914 723.026316,43.0914214 C723.026316,42.6395514 723.362703,42.2727273 723.776141,42.2727273 L727.912393,42.2727273 C728.32771,42.2727273 728.663158,42.6395514 728.663158,43.0914214 Z M730.273684,38.1823305 C730.273684,38.6342005 729.987278,39 729.634469,39 L723.664731,39 C723.312722,39 723.026316,38.6342005 723.026316,38.1823305 C723.026316,37.7304605 723.312722,37.3636364 723.664731,37.3636364 L729.634469,37.3636364 C729.987278,37.3636364 730.273684,37.7304605 730.273684,38.1823305 Z M730.273684,40.6363636 C730.273684,41.0879508 729.987278,41.4545455 729.634469,41.4545455 L723.664731,41.4545455 C723.312722,41.4545455 723.026316,41.0879508 723.026316,40.6363636 C723.026316,40.1847764 723.312722,39.8181818 723.664731,39.8181818 L729.634469,39.8181818 C729.987278,39.8181818 730.273684,40.1847764 730.273684,40.6363636 Z M729.935455,30.8181818 L729.935455,31.6583705 C729.935455,32.064176 730.276131,32.3932294 730.695425,32.3932294 L732.156191,32.3932294 C732.436847,32.3932294 732.665092,32.6128706 732.665092,32.8847684 L732.665092,45.9350464 C732.665092,46.2069442 732.436847,46.4265854 732.156191,46.4265854 L721.144654,46.4265854 C720.863998,46.4265854 720.636599,46.2069442 720.636599,45.9350464 L720.636599,32.8847684 C720.636599,32.6128706 720.863998,32.3932294 721.144654,32.3932294 L722.60542,32.3932294 C723.025559,32.3932294 723.366236,32.064176 723.366236,31.6583705 L723.366236,30.8181818 L720.16912,30.8181818 C719.523272,30.8181818 719,31.3236015 719,31.947415 L719,46.8707668 C719,47.4945804 719.523272,48 720.16912,48 L733.13088,48 C733.776728,48 734.3,47.4945804 734.3,46.8707668 L734.3,31.947415 C734.3,31.3236015 733.776728,30.8181818 733.13088,30.8181818 L729.935455,30.8181818 Z" id="path">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420427/cpu"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/24/icon-cpu</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-svg" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="out" transform="translate(-702.000000, -106.000000)" fill="#B8BDBF">
+            <path d="M719.833333,123 C719.833333,123.459167 719.46,123.833333 719,123.833333 L709,123.833333 C708.54,123.833333 708.166667,123.459167 708.166667,123 L708.166667,113 C708.166667,112.540833 708.54,112.166667 709,112.166667 L719,112.166667 C719.46,112.166667 719.833333,112.540833 719.833333,113 L719.833333,123 Z M724,114.666667 L724,113 L721.5,113 C721.5,111.621667 720.378333,110.5 719,110.5 L719,108 L717.333333,108 L717.333333,110.5 L714.833333,110.5 L714.833333,108 L713.166667,108 L713.166667,110.5 L710.666667,110.5 L710.666667,108 L709,108 L709,110.5 C707.621667,110.5 706.5,111.621667 706.5,113 L704,113 L704,114.666667 L706.5,114.666667 L706.5,117.166667 L704,117.166667 L704,118.833333 L706.5,118.833333 L706.5,121.333333 L704,121.333333 L704,123 L706.5,123 C706.5,124.378333 707.621667,125.5 709,125.5 L709,128 L710.666667,128 L710.666667,125.5 L713.166667,125.5 L713.166667,128 L714.833333,128 L714.833333,125.5 L717.333333,125.5 L717.333333,128 L719,128 L719,125.5 C720.378333,125.5 721.5,124.378333 721.5,123 L724,123 L724,121.333333 L721.5,121.333333 L721.5,118.833333 L724,118.833333 L724,117.166667 L721.5,117.166667 L721.5,114.666667 L724,114.666667 Z" id="path">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420426/alarm"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/24/icon-alarm</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-svg" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="out" transform="translate(-597.000000, -105.000000)" fill="#B8BDBF">
+            <path d="M618.12928,126 L599.87072,126 C599.11302,126 598.788053,125.485645 599.144881,124.851175 L608.353902,108.475853 C608.710729,107.841382 609.289271,107.841382 609.646054,108.475853 L618.855119,124.851175 C619.211947,125.485645 618.88698,126 618.12928,126 Z M608,114 L610,114 L610,116.46516 L609.482428,121 L608.530351,121 L608,116.46516 L608,114 Z M608,122 L610,122 L610,124 L608,124 L608,122 Z" id="path">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420425/double-left"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/20/double-left</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-temp" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="_archive" transform="translate(-1718.000000, -212.000000)" fill="#B8BDBF">
+            <path d="M1736,226.59 L1731.05533,222 L1736,217.41 L1734.47773,216 L1728,222 L1734.47773,228 L1736,226.59 Z M1728,226.59 L1723.05533,222 L1728,217.41 L1726.47773,216 L1720,222 L1726.47773,228 L1728,226.59 Z" id="icon/double-left">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420424/plus"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>Icon/18/icon-plus</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M14.7589286,10.1517857 L10.1517857,10.1517857 L10.1517857,14.7589286 L7.84821429,14.7589286 L7.84821429,10.1517857 L3.24107143,10.1517857 L3.24107143,7.84821429 L7.84821429,7.84821429 L7.84821429,3.24107143 L10.1517857,3.24107143 L10.1517857,7.84821429 L14.7589286,7.84821429 L14.7589286,10.1517857 L14.7589286,10.1517857 L14.7589286,10.1517857 Z" id="path" fill="#000000" sketch:type="MSShapeGroup">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420423/arrow-up"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>icon/24/icon-up</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M11.4056321,16.405632 L12,17 L12.5943679,16.405632 L21,7.99999999 L19.8112641,6.8112641 L11.4056321,15.2168962 L12.5943679,15.2168962 L4.18873589,6.8112641 L3,7.99999999 L11.4056321,16.405632 L11.4056321,16.405632 Z" id="path" fill="#000000" sketch:type="MSShapeGroup" transform="translate(12.000000, 11.905632) scale(1, -1) translate(-12.000000, -11.905632) ">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420422/check-circle"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/20/icon-check-circle</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-svg" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="out" transform="translate(-797.000000, -29.000000)" fill="#B8BDBF">
+            <path d="M806.999588,31 C802.581647,31 799,34.5822863 799,39 C799,43.4185376 802.581647,47 806.999588,47 C811.418353,47 815,43.4185376 815,39 C815,34.5822863 811.418353,31 806.999588,31 L806.999588,31 Z M806.542504,41.4981723 C806.265748,41.7672759 805.816641,41.7672759 805.539885,41.4981723 L803.664741,39.6748741 C803.311753,39.3316461 803.311753,38.7757134 803.664741,38.4332911 L803.677999,38.4203999 C804.030158,38.0779775 804.601899,38.0779775 804.954058,38.4212056 L806.041195,39.4790891 L809.046563,36.5568167 C809.399551,36.2143944 809.970464,36.2143944 810.322623,36.5568167 L810.335881,36.5697079 C810.68804,36.9121303 810.68804,37.4672573 810.335881,37.8096796 L806.542504,41.4981723 Z" id="path">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420421/fn"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>icon/18/icon-sum</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M13.2260475,3.3065119 L4.40868252,3.3065119 L4.40868252,4.77607273 L9.18475525,9.18475525 L4.40868252,13.5934378 L4.40868252,15.0629987 L13.2260475,15.0629987 L13.2260475,12.8586574 L8.08258462,12.8586574 L11.7564868,9.18475525 L8.08258462,5.51085315 L13.2260475,5.51085315 L13.2260475,3.3065119 L13.2260475,3.3065119 Z" id="path" fill="#000000" sketch:type="MSShapeGroup">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420420/clock"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg height="50" width="50" fill="#000000" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-time</title>
+    <g id="icon-time">
+        <path d="M8.9925,1.5 C4.8525,1.5 1.5,4.86 1.5,9 C1.5,13.14 4.8525,16.5 8.9925,16.5 C13.14,16.5 16.5,13.14 16.5,9 C16.5,4.86 13.14,1.5 8.9925,1.5 L8.9925,1.5 Z M9,15 C5.685,15 3,12.315 3,9 C3,5.685 5.685,3 9,3 C12.315,3 15,5.685 15,9 C15,12.315 12.315,15 9,15 Z M9.375,5.25 L8.25,5.25 L8.25,9.75 L12.1875,12.1125 L12.75,11.19 L9.375,9.1875 L9.375,5.25 Z" fill="">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420419/zoom-in"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>icon/18/icon-enlarge</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="out" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <path d="M11.6569197,9.96878873 L11.0595168,9.96878873 L10.847779,9.77535912 C11.5888611,8.95865635 12.0350229,7.89837557 12.0350229,6.74496201 C12.0350229,4.17306471 9.83446261,2.08832344 7.11968213,2.08832344 C4.40490164,2.08832344 2.20434141,4.17306471 2.20434141,6.74496201 C2.20434141,9.31685932 4.40490164,11.4016006 7.11968213,11.4016006 C8.33717422,11.4016006 9.45635948,10.9789211 10.3184346,10.2768433 L10.5226103,10.4774369 L10.5226103,11.0433976 L14.3036417,14.6182632 L15.4303889,13.5508184 L11.6569197,9.96878873 L11.6569197,9.96878873 L11.6569197,9.96878873 Z M7.11968213,9.96878873 C5.23672853,9.96878873 3.71675394,8.5288128 3.71675394,6.74496201 C3.71675394,4.96111124 5.23672853,3.52113531 7.11968213,3.52113531 C9.00263573,3.52113531 10.5226103,4.96111124 10.5226103,6.74496201 C10.5226103,8.5288128 9.00263573,9.96878873 7.11968213,9.96878873 Z M6.47123526,6.26497004 L4.40868268,6.26497004 L4.40868268,7.33957894 L6.47123526,7.33957894 L6.47123526,8.87537416 L7.88912201,8.87537416 L7.88912201,7.33957894 L9.91953582,7.33957894 L9.91953582,6.26497004 L7.88912201,6.26497004 L7.88912201,4.69872757 L6.47123526,4.69872757 L6.47123526,6.26497004 Z" id="path" fill="#000000" sketch:type="MSShapeGroup">
+
+</path>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420418/radio-on"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/18/icon-radio-active</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-svg" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="out" transform="translate(-232.000000, -377.000000)" fill="#6C7173">
+            <path d="M248,386 C248,382.134007 244.865993,379 241,379 C237.134007,379 234,382.134007 234,386 C234,389.865993 237.134007,393 241,393 C244.865993,393 248,389.865993 248,386 Z M236.333333,386 C236.333333,383.422671 238.422671,381.333333 241,381.333333 C243.577329,381.333333 245.666667,383.422671 245.666667,386 C245.666667,388.577329 243.577329,390.666667 241,390.666667 C238.422671,390.666667 236.333333,388.577329 236.333333,386 Z M241,388.870614 C242.585396,388.870614 243.870614,387.585396 243.870614,386 C243.870614,384.414604 242.585396,383.129386 241,383.129386 C239.414604,383.129386 238.129386,384.414604 238.129386,386 C238.129386,387.585396 239.414604,388.870614 241,388.870614 Z" id="path">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420417/circle-minus"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="UTF-8"?-->
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <title>icon/20/circle-minus</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+
+</defs>
+    <g id="Output-temp" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="_archive" transform="translate(-1770.000000, -212.000000)" fill="#B8BDBF">
+            <path d="M1779.7796,214 C1775.48315,214 1772,217.483774 1772,221.78 C1772,226.077028 1775.48315,229.56 1779.7796,229.56 C1784.07685,229.56 1787.56,226.077028 1787.56,221.78 C1787.56,217.483774 1784.07685,214 1779.7796,214 Z M1782.70039,220.8075 C1783.23589,220.8075 1783.67,221.239159 1783.67,221.78 C1783.67,222.317097 1783.22942,222.7525 1782.70039,222.7525 L1776.85961,222.7525 C1776.32411,222.7525 1775.89,222.320842 1775.89,221.78 C1775.89,221.242903 1776.33058,220.8075 1776.85961,220.8075 L1782.70039,220.8075 Z" id="icom/circle-minus">
+
+</path>
+        </g>
+    </g>
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420416/unlock-so"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m24 1v5.17448548h-2v-3.17448548h-12v7h20v22h-28v-22h6v-9zm4 11h-24v18h24zm-9.1715729 4.7573593 1.4142136 1.4142136-7.0710678 7.0710678-1.4142136-1.4142136z" fill="#000000" fill-rule="nonzero"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420415/uploadfile-o"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m19.120106 0c1.8257724 0 3.5522076.83131873 4.6906771 2.25867017l4.8798939 6.11814718c.847677 1.06277155 1.309323 2.38190365 1.309323 3.74132985v13.8818528c0 3.3137085-2.6862915 6-6 6h-16c-3.3137085 0-6-2.6862915-6-6v-20c0-3.3137085 2.6862915-6 6-6zm0 2h-11.120106c-2.14219539 0-3.89107888 1.68396847-3.99510469 3.80035966l-.00489531.19964034v20c0 2.1421954 1.68396847 3.8910789 3.80035966 3.9951047l.19964034.0048953h16c2.1421954 0 3.8910789-1.6839685 3.9951047-3.8003597l.0048953-.1996403v-13.8818528c0-.8238947-.2543504-1.6255887-.7251774-2.29685957l-.1477046-.19736034-4.8798939-6.11814718c-.7115434-.89209465-1.767598-1.43495138-2.8997521-1.49932373zm-3.0359483 8c.2359046.0138648.4678334.1109181.6480753.2911601l4.2426407 4.2426407c.3905243.3905243.3905243 1.0236893 0 1.4142136s-1.0236892.3905243-1.4142135 0l-2.5598932-2.5598738-.000767 9.085c0 .5522848-.4477153 1-1 1s-1-.4477152-1-1l.000767-9.085-2.5614272 2.5598738c-.3905243.3905243-1.0236892.3905243-1.4142135 0s-.3905243-1.0236893 0-1.4142136l4.2426407-4.2426407c.1802419-.180242.4121707-.2772953.6480753-.2911601z" fill="#000000" fill-rule="nonzero"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420414/umbrella-sf"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m16 2c7.6275002 0 13.8303269 6.09975237 13.996578 13.687355l.003422.312645v1h-13v10c0 1.6568542-1.3431458 3-3 3-1.5976809 0-2.9036609-1.24892-2.9949073-2.8237272l-.0050927-.1762728v-1.0199386h2v1.0199386c0 .5522847.4477153 1 1 1 .5128358 0 .9355072-.3860402.9932723-.8833789l.0067277-.1166211v-10h-13v-1c0-7.7319865 6.2680135-14 14-14z" fill="#202327" fill-rule="nonzero"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420413/ux-so"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m32 0v32h-32v-20h12v-12zm-15 2h-3v28h16v-28h-3v1h-10zm-14.99909048 11.9990905v16l9.99909048-.0000905v-15.999zm24.99909048 1.0009095v2h-10v-2zm-3-5v2h-7v-2z" fill="#000000" fill-rule="nonzero"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420412/unlockfile-f"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m19.120106 0c1.8257724 0 3.5522076.83131873 4.6906771 2.25867017l4.8798939 6.11814718c.847677 1.06277155 1.309323 2.38190365 1.309323 3.74132985v13.8818528c0 3.3137085-2.6862915 6-6 6h-16c-3.3137085 0-6-2.6862915-6-6v-20c0-3.3137085 2.6862915-6 6-6zm-3.120106 10c-2.209139 0-4 1.790861-4 4l.0000889.1706743c-1.1652388.4118113-2.0000889 1.5230736-2.0000889 2.8293257v4c0 1.6568542 1.3431458 3 3 3h6c1.6568542 0 3-1.3431458 3-3v-4c0-1.5976809-1.24892-2.9036609-2.8237272-2.9949073l-.1452728-.0040927-.031-.001h-5l.0054857-.1492623c.0763492-1.0348599.9401525-1.8507377 1.9945143-1.8507377.5037775 0 .9759841.1856637 1.3416804.5167649l.0982166.0784147c.4069341.2851968.9720923.2293736 1.3142572-.1485425.3706786-.4094091.3392813-1.0417951-.0701278-1.4124737-.7299934-.6609354-1.6792401-1.0341634-2.6840264-1.0341634zm3 6 .1166211.0067277c.4973387.0577651.8833789.4804365.8833789.9932723v4l-.0067277.1166211c-.0577651.4973387-.4804365.8833789-.9932723.8833789h-6l-.1166211-.0067277c-.4973387-.0577651-.8833789-.4804365-.8833789-.9932723v-4l.0067277-.1166211c.0577651-.4973387.4804365-.8833789.9932723-.8833789z" fill="#202327"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420411/unlock-o"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m15.9997281 0c3.2102362 0 6.0778717 1.83022104 7.3397138 4.6120861.0754233.1662785.1446865.33519295.2076311.50646262.1905154.51838434-.0752749 1.09306113-.5936593 1.28357652-.5183843.19051539-1.0930611-.07527491-1.2835765-.59365926-.0459782-.1251047-.0966062-.24857285-.1517793-.37020782-.9361907-2.06393194-3.089519-3.43825816-5.5183298-3.43825816-3.2487737 0-5.8780434 2.43374663-5.9958776 5.45495477l-.00412237.2117119-.00072813 2.33333333h14.001c3.3137085 0 6 2.6862915 6 6v10c0 3.3137085-2.6862915 6-6 6h-16c-3.3137085 0-6-2.6862915-6-6v-10c0-3.3133738 2.68574884-5.9994573 5.99899587-5.9999999l.00073226-2.33333343c0-4.2453904 3.59234007-7.66666667 7.99999997-7.66666667zm8.0002719 12h-16c-2.14219539 0-3.89107888 1.6839685-3.99510469 3.8003597l-.00489531.1996403v10c0 2.1421954 1.68396847 3.8910789 3.80035966 3.9951047l.19964034.0048953h16c2.1421954 0 3.8910789-1.6839685 3.9951047-3.8003597l.0048953-.1996403v-10c0-2.1421954-1.6839685-3.8910789-3.8003597-3.9951047zm-4.4644661 5.4644661c.3905243.3905243.3905243 1.0236893 0 1.4142136l-5.6568542 5.6568542c-.3905243.3905243-1.0236893.3905243-1.4142136 0s-.3905243-1.0236893 0-1.4142136l5.6568542-5.6568542c.3905243-.3905243 1.0236893-.3905243 1.4142136 0z" fill="#000000" fill-rule="nonzero"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420410/updatefile-sf"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m22.0092457 0 7.9907543 10.0183757v21.9816243h-28v-32zm.4921062 11h-6v6h2l.0005594-2.6657154c.931885.7663701 1.4980887 1.9323563 1.4980887 3.2022671 0 2.2708036-1.7954965 4.1034483-4 4.1034483s-4-1.8326447-4-4.1034483c0-1.8372626 1.1867205-3.4321237 2.8737853-3.9388148l-.5752913-1.9154738-.235153.0759952c-2.4060746.8333049-4.063341 3.1428995-4.063341 5.7782934 0 3.3663097 2.681656 6.1034483 6 6.1034483s6-2.7371386 6-6.1034483c0-1.7639426-.7425833-3.3984784-1.9848233-4.5361625l2.4861752-.0003892z" fill="#202327"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420409/uploadfile-sf"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m22.0092457 0 7.9907543 10.0183757v21.9816243h-28v-32zm-5.9841194 10-.0251458.0250873-.0251068-.0250873-5.6568542 5.6568542 1.4142135 1.4142136 3.2687475-3.2669805-.0009805 10.085h2l.0009805-10.084 3.2667865 3.2659805 1.4142135-1.4142136z" fill="#202327"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420408/unlockfile-o"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m19.120106 0c1.8257724 0 3.5522076.83131873 4.6906771 2.25867017l4.8798939 6.11814718c.847677 1.06277155 1.309323 2.38190365 1.309323 3.74132985v13.8818528c0 3.3137085-2.6862915 6-6 6h-16c-3.3137085 0-6-2.6862915-6-6v-20c0-3.3137085 2.6862915-6 6-6zm0 2h-11.120106c-2.14219539 0-3.89107888 1.68396847-3.99510469 3.80035966l-.00489531.19964034v20c0 2.1421954 1.68396847 3.8910789 3.80035966 3.9951047l.19964034.0048953h16c2.1421954 0 3.8910789-1.6839685 3.9951047-3.8003597l.0048953-.1996403v-13.8818528c0-.8238947-.2543504-1.6255887-.7251774-2.29685957l-.1477046-.19736034-4.8798939-6.11814718c-.7115434-.89209465-1.767598-1.43495138-2.8997521-1.49932373zm-3.120106 8c1.0047863 0 1.954033.373228 2.6840264 1.0341634.4094091.3706786.4408064 1.0030646.0701278 1.4124737-.3421649.3779161-.9073231.4337393-1.3142572.1485425l-.0982166-.0784147c-.3656963-.3311012-.8379029-.5167649-1.3416804-.5167649-1.0543618 0-1.9181651.8158778-1.9945143 1.8507377l-.0054857.1492623h5l.031.001.1452728.0040927c1.5748072.0912464 2.8237272 1.3972264 2.8237272 2.9949073v4c0 1.6568542-1.3431458 3-3 3h-6c-1.6568542 0-3-1.3431458-3-3v-4c0-1.3062521.8348501-2.4175144 2.0000889-2.8293257l-.0000889-.1706743c0-2.209139 1.790861-4 4-4zm3 6h-6c-.5128358 0-.9355072.3860402-.9932723.8833789l-.0067277.1166211v4c0 .5128358.3860402.9355072.8833789.9932723l.1166211.0067277h6c.5128358 0 .9355072-.3860402.9932723-.8833789l.0067277-.1166211v-4c0-.5128358-.3860402-.9355072-.8833789-.9932723z" fill="#000000" fill-rule="nonzero"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420407/umbrella-f"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m16 2c7.6275002 0 13.8303269 6.09975237 13.996578 13.687355l.003422.312645c0 .5128358-.3860402.9355072-.8833789.9932723l-.1166211.0067277h-12v10c0 1.6568542-1.3431458 3-3 3-1.5976809 0-2.9036609-1.24892-2.9949073-2.8237272l-.0050927-.1962114c0-.5522847.4477153-1 1-1 .5128358 0 .9355072.3860402.9932723.8833789l.0067277.1365597c0 .5522847.4477153 1 1 1 .5128358 0 .9355072-.3860402.9932723-.8833789l.0067277-.1166211v-10h-12c-.55228475 0-1-.4477153-1-1 0-7.7319865 6.2680135-14 14-14z" fill="#202327" fill-rule="nonzero"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420406/updatefile-so"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m22.0092457 0 7.9907543 10.0183757v21.9816243h-28v-32zm-.9632457 2h-17.046v28h24v-19.282zm1.4553519 9v2l-2.4861752.0003892c1.24224 1.1376841 1.9848233 2.7722199 1.9848233 4.5361625 0 3.3663097-2.681656 6.1034483-6 6.1034483s-6-2.7371386-6-6.1034483c0-2.6353939 1.6572664-4.9449885 4.063341-5.7782934l.235153-.0759952.5752913 1.9154738c-1.6870648.5066911-2.8737853 2.1015522-2.8737853 3.9388148 0 2.2708036 1.7954965 4.1034483 4 4.1034483s4-1.8326447 4-4.1034483c0-1.2699108-.5662037-2.435897-1.4980887-3.2022671l-.0005594 2.6657154h-2v-6z" fill="#000000" fill-rule="nonzero"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420405/unlockfile-sf"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m22.0092457 0 7.9907543 10.0183757v21.9816243h-28v-32zm-2.0092457 10h-8v4h-2v10h12v-10h-8v-2h4v1.0156761h2zm0 6v6h-8v-6z" fill="#202327"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420404/updatefile-o"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m19.120106 0c1.8257724 0 3.5522076.83131873 4.6906771 2.25867017l4.8798939 6.11814718c.847677 1.06277155 1.309323 2.38190365 1.309323 3.74132985v13.8818528c0 3.3137085-2.6862915 6-6 6h-16c-3.3137085 0-6-2.6862915-6-6v-20c0-3.3137085 2.6862915-6 6-6zm0 2h-11.120106c-2.14219539 0-3.89107888 1.68396847-3.99510469 3.80035966l-.00489531.19964034v20c0 2.1421954 1.68396847 3.8910789 3.80035966 3.9951047l.19964034.0048953h16c2.1421954 0 3.8910789-1.6839685 3.9951047-3.8003597l.0048953-.1996403v-13.8818528c0-.8238947-.2543504-1.6255887-.7251774-2.29685957l-.1477046-.19736034-4.8798939-6.11814718c-.7115434-.89209465-1.767598-1.43495138-2.8997521-1.49932373zm2.3812459 9c.5522848 0 1 .4477153 1 1s-.4477152 1-1 1l-1.4861752.0003892c1.24224 1.1376841 1.9848233 2.7722199 1.9848233 4.5361625 0 3.3663097-2.681656 6.1034483-6 6.1034483s-6-2.7371386-6-6.1034483c0-2.7204066 1.7659114-5.0936556 4.298494-5.8542886.5289435-.1588623 1.0865202.1411478 1.2453825.6700913s-.1411478 1.0865202-.6700912 1.2453825c-1.6870648.5066911-2.8737853 2.1015522-2.8737853 3.9388148 0 2.2708036 1.7954965 4.1034483 4 4.1034483s4-1.8326447 4-4.1034483c0-1.2699108-.5662037-2.435897-1.4980887-3.2022671l-.0005594 1.6657154c0 .5522847-.4477152 1-1 1-.5522847 0-1-.4477153-1-1v-4c0-.5522847.4477153-1 1-1z" fill="#000000" fill-rule="nonzero"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420403/unlockfile-so"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m22.0092457 0 7.9907543 10.0183757v21.9816243h-28v-32zm-.9632457 2h-17.046v28h24v-19.282zm-1.046 8v3.0156761h-2v-1.0156761h-4v2h8v10h-12v-10h2v-4zm0 6h-8v6h8z" fill="#000000" fill-rule="nonzero"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420402/unlock-sf"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m24 1v5.17448548h-2v-3.17448548h-12v7h20v22h-28v-22h6v-9zm-5.1715729 15.7573593-7.0710678 7.0710678 1.4142136 1.4142136 7.0710678-7.0710678z" fill="#202327"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420401/uploadfile2-so"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m22.0092457 0 7.9907543 10.0183757v21.9816243h-28v-32zm-.9632457 2h-17.046v28h24v-19.282zm-.046 19.8890873v2h-10v-2zm-4.9748737-12.8890873 5.6568542 5.6568542-1.4142135 1.4142136-3.2667865-3.2659805-.0009805 7.084h-2l.0009805-7.085-3.2687475 3.2669805-1.4142135-1.4142136 5.6568542-5.6568542.0251068.0250873z" fill="#000000" fill-rule="nonzero"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420400/unlock-f"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m15.9997281 0c3.2102362 0 6.0778717 1.83022104 7.3397138 4.6120861.0754233.1662785.1446865.33519295.2076311.50646262.1905154.51838434-.0752749 1.09306113-.5936593 1.28357652-.5183843.19051539-1.0930611-.07527491-1.2835765-.59365926-.0459782-.1251047-.0966062-.24857285-.1517793-.37020782-.9361907-2.06393194-3.089519-3.43825816-5.5183298-3.43825816-3.2487737 0-5.8780434 2.43374663-5.9958776 5.45495477l-.00412237.2117119-.00072813 2.33333333h14.001c3.3137085 0 6 2.6862915 6 6v10c0 3.3137085-2.6862915 6-6 6h-16c-3.3137085 0-6-2.6862915-6-6v-10c0-3.3133738 2.68574884-5.9994573 5.99899587-5.9999999l.00073226-2.33333343c0-4.2453904 3.59234007-7.66666667 7.99999997-7.66666667zm3.5358058 17.4644661c-.3905243-.3905243-1.0236893-.3905243-1.4142136 0l-5.6568542 5.6568542c-.3905243.3905243-.3905243 1.0236893 0 1.4142136s1.0236893.3905243 1.4142136 0l5.6568542-5.6568542c.3905243-.3905243.3905243-1.0236893 0-1.4142136z" fill="#202327"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420399/uploadfile2-sf"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m22.0092457 0 7.9907543 10.0183757v21.9816243h-28v-32zm-1.0092457 21.8890873h-10v2h10zm-4.9748737-12.8890873-.0251458.0250873-.0251068-.0250873-5.6568542 5.6568542 1.4142135 1.4142136 3.2687475-3.2669805-.0009805 7.085h2l.0009805-7.084 3.2667865 3.2659805 1.4142135-1.4142136z" fill="#202327"></path>
+
+</g>
+
+</svg></span></span></a></div></div><div class="directory-results-main-page_directoryItem__jXd4_"><div class="svg-item_svgItem__Myf8H svg-item_svgItemSmall__9ADCG"><a class="svg-item_svgLink__fZC7d" href="https://www.svgviewer.dev/s/420398/uploadfile2-o"><span class="svg-item_svgContents__7LXXd svg-item_svgContentsSmall__OCBX0"><span class="svg-item_svg__FWYfC svg-item_svgSmall__CAqKq"><!--?xml version="1.0" encoding="utf-8"?--><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+
+<g fill="none" fill-rule="evenodd">
+
+<path d="m0 0h32v32h-32z"></path>
+
+<path d="m19.120106 0c1.8257724 0 3.5522076.83131873 4.6906771 2.25867017l4.8798939 6.11814718c.847677 1.06277155 1.309323 2.38190365 1.309323 3.74132985v13.8818528c0 3.3137085-2.6862915 6-6 6h-16c-3.3137085 0-6-2.6862915-6-6v-20c0-3.3137085 2.6862915-6 6-6zm0 2h-11.120106c-2.14219539 0-3.89107888 1.68396847-3.99510469 3.80035966l-.00489531.19964034v20c0 2.1421954 1.68396847 3.8910789 3.80035966 3.9951047l.19964034.0048953h16c2.1421954 0 3.8910789-1.6839685 3.9951047-3.8003597l.0048953-.1996403v-13.8818528c0-.8238947-.2543504-1.6255887-.7251774-2.29685957l-.1477046-.19736034-4.8798939-6.11814718c-.7115434-.89209465-1.767598-1.43495138-2.8997521-1.49932373zm.879894 19.4731406c.5522847 0 1 .4477153 1 1 0 .5522848-.4477153 1-1 1h-8c-.5522847 0-1-.4477152-1-1 0-.5522847.4477153-1 1-1zm-3.9158423-12.4731406c.2359046.01386477.4678334.11091814.6480753.29116012l4.2426407 4.24264068c.3905243.3905243.3905243 1.0236893 0 1.4142136s-1.0236892.3905243-1.4142135 0l-2.5598932-2.5598738-.000767 6.085c0 .5522848-.4477153 1-1 1s-1-.4477152-1-1l.000767-6.085-2.5614272 2.5598738c-.3905243.3905243-1.0236892.3905243-1.4142135 0s-.3905243-1.0236893 0-1.4142136l4.2426407-4.24264068c.1802419-.18024198.4121707-.27729535.6480753-.29116012z" fill="#000000" fill-rule="nonzero"></path>
+
+</g>
+
+</svg></span></span></a></div></div></div><div class="directory-results-main-page_loadMoreButton__EDEZB"><button type="submit" name="[object Object]" class="button_button__vzz15 button_white__RXqdx button" style="width: 100%; border: 1px solid rgb(217, 224, 227); color: rgb(86, 107, 118); background: rgb(241, 242, 244);"><span class="directory-results-main-page_centerMessage__8D4lv"><span class="directory-results-main-page_loadMoreEllipsis__Z9M8N"></span>Load More SVGs</span></button></div></div></div><div class="svg-directory-sidebar_sidebarFooter__j_vxe" id="container"><span class="svg-directory-sidebar_footerText__zL_Xz"><a href="https://www.svgviewer.dev/contact"><button class="svg-directory-sidebar_sendFeedback__0dl8_"><svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.4" d="M2 6h8v5H7l-3 2v-2H2V6Z" fill="#6E7687" stroke="#6E7687" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14 3H6v5h3l3 2V8h2V3Z" fill="#6E7687" stroke="#6E7687" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="svg-directory-sidebar_sendFeedbackText__hq3vx">Send feedback</span></button></a><div><button class="more-button_moreButton__qP0Yq"><svg width="4" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="burger_svg__a" fill="#fff"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.44 2.24a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Zm0 5.76A1.44 1.44 0 1 1 .56 8a1.44 1.44 0 0 1 2.88 0ZM2 15.2a1.44 1.44 0 1 0 0-2.88 1.44 1.44 0 0 0 0 2.88Z"></path></mask><path fill-rule="evenodd" clip-rule="evenodd" d="M3.44 2.24a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Zm0 5.76A1.44 1.44 0 1 1 .56 8a1.44 1.44 0 0 1 2.88 0ZM2 15.2a1.44 1.44 0 1 0 0-2.88 1.44 1.44 0 0 0 0 2.88Z" fill="currentColor"></path><path d="M2 4.68a2.44 2.44 0 0 0 2.44-2.44h-2a.44.44 0 0 1-.44.44v2ZM-.44 2.24A2.44 2.44 0 0 0 2 4.68v-2a.44.44 0 0 1-.44-.44h-2ZM2-.2A2.44 2.44 0 0 0-.44 2.24h2A.44.44 0 0 1 2 1.8v-2Zm2.44 2.44A2.44 2.44 0 0 0 2-.2v2a.44.44 0 0 1 .44.44h2ZM2 10.44A2.44 2.44 0 0 0 4.44 8h-2a.44.44 0 0 1-.44.44v2ZM-.44 8A2.44 2.44 0 0 0 2 10.44v-2A.44.44 0 0 1 1.56 8h-2ZM2 5.56A2.44 2.44 0 0 0-.44 8h2A.44.44 0 0 1 2 7.56v-2ZM4.44 8A2.44 2.44 0 0 0 2 5.56v2a.44.44 0 0 1 .44.44h2Zm-2 5.76a.44.44 0 0 1-.44.44v2a2.44 2.44 0 0 0 2.44-2.44h-2ZM2 13.32a.44.44 0 0 1 .44.44h2A2.44 2.44 0 0 0 2 11.32v2Zm-.44.44a.44.44 0 0 1 .44-.44v-2a2.44 2.44 0 0 0-2.44 2.44h2Zm.44.44a.44.44 0 0 1-.44-.44h-2A2.44 2.44 0 0 0 2 16.2v-2Z" fill="currentColor" mask="url(#burger_svg__a)"></path></svg><ul class="more-button_moreButtonMenu__h_Fj9"><li><a class="more-button_terms__MKUqp" href="https://www.svgviewer.dev/terms"><span>Terms &amp; Conditions</span></a></li><li><a href="https://www.svgviewer.dev/privacy-policy"><span>Privacy Policy</span></a></li></ul></button></div></span></div></div></div></div><span role="presentation" class="Resizer vertical " style="flex:none"></span><div class="Pane vertical " style="position:relative;outline:none;border:0;overflow:hidden;display:flex;flex-basis:auto;flex-grow:3;flex-shrink:3;width:0;height:100%;min-width:20px"><div class="main_vertical__rRfeQ"><div class="main_editor__be8vT"><div class="main_darkMode__9Nwj2"><div class="input-nav_editorNav__OMFFV"><div class="input-nav_above__CbKjm"><div class="input-nav_optionsButtonsContainer__8xuew"><div class="rotate_reactOptions__hFLyj"><div class="rotate_optionsButtonContainer__PlwMz"><button class="rotate_button__3BbUI"><span class="rotate_optionsWord__lzo6Z"><svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg" transform="scale(-1 1)"><path d="M17 21a5 5 0 1 0-5-5v2m0 0 2-2m-2 2-2-2" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><div class="rotate_popover__WFuNZ"><span>Rotate</span></div></div><div class="rotate_optionsButtonContainer__PlwMz"><button class="rotate_button__3BbUI"><span class="rotate_optionsWord__lzo6Z"><svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.4" d="M21 22V10l-10 6 10 6Z" fill="#C7CAD1" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 16h14" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><div class="rotate_popover__WFuNZ">Flip Y</div></div><div class="rotate_optionsButtonContainer__PlwMz"><button class="rotate_button__3BbUI"><span class="rotate_optionsWord__lzo6Z"><svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.4" d="M2 13h12L8 3 2 13Z" fill="#C7CAD1" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8 1v14" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><div class="rotate_popover__WFuNZ"><span>Flip X</span></div></div></div><div class="input-nav_resizeOptionsContainer__Y1PNv"><div class="resize-options_resizeContainer__XEku1" tabindex="0"><div class="resize-options_resizeContainer__supportingInfo__6VP3B"><div class="resize-options_resizeContainer__content__Q0Mdp"><svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#resize_svg__a)" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path opacity="0.4" d="M4 4h8v8H4V4Z" fill="#C7CAD1"></path><path d="M4 4h8v8M4 4v8h8M4 4V1m0 3H1m11 8h3m-3 0v3"></path></g><defs><clippath id="resize_svg__a"><path fill="#fff" d="M0 0h16v16H0z"></path></clippath></defs></svg><span class="resize-options_resizeContainer__text__WgZ01">50px x 50px</span></div><div class="resize-options_popover___UZqr"><span>Change dimensions</span></div></div></div></div></div><div class="input-nav_right__ubAvw"><div><div class="input-nav_buttonContainer__szrVq"><div class="input-nav_optimizeButtonContainer__6R84r"><button class="input-nav_optimizeButton___FSye">Optimize</button></div><div class="input-nav_buttonContainer__supportingInfo__4bwJH"><span class="input-nav_buttonContainer__fileSize__pCHee">1.18 KB<div class="input-nav_buttonContainer__icon__apKWa"><svg width="17" height="13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.118 1.5 14 6.5l-4.882 5M14 6.5H1" stroke="#00B277" stroke-width="2"></path></svg></div>380 bytes</span><span class="input-nav_buttonContainer__saving___3Bck">-69%</span></div></div></div><div class="input-nav_prettifyButtonContainer__4Prhn"><button class="input-nav_prettifyButton__yYHaa">Prettify </button></div><div class="svgo-options_reactOptions__8R4Om"><div class="svgo-options_optionsButtonContainer__k81b2"><button type="submit" name="[object Object]" class="button_button__vzz15 button_medium__7JChw button" style="width: 32px; height: 32px; display: flex; align-items: center; padding: 0px; background: inherit;"><span class="svgo-options_optionsWord___OyAz"><svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#options_svg__a)"><path d="M3.29 9.91a1.05 1.05 0 0 1-.21 1.157l-.037.038a1.272 1.272 0 1 0 1.8 1.801l.039-.038a1.05 1.05 0 0 1 1.158-.21 1.05 1.05 0 0 1 .636.961v.108a1.273 1.273 0 0 0 2.546 0v-.057a1.05 1.05 0 0 1 .687-.96 1.05 1.05 0 0 1 1.158.21l.038.037a1.272 1.272 0 0 0 2.175-.9 1.272 1.272 0 0 0-.374-.9l-.038-.039a1.05 1.05 0 0 1-.21-1.158 1.05 1.05 0 0 1 .961-.636h.108a1.273 1.273 0 0 0 0-2.546h-.057a1.05 1.05 0 0 1-.96-.687 1.05 1.05 0 0 1 .21-1.158l.037-.038a1.272 1.272 0 1 0-1.8-1.801l-.039.038a1.05 1.05 0 0 1-1.158.21h-.05a1.05 1.05 0 0 1-.637-.961v-.108a1.273 1.273 0 0 0-2.546 0v.057a1.05 1.05 0 0 1-.636.96 1.05 1.05 0 0 1-1.158-.21l-.038-.037a1.273 1.273 0 1 0-1.801 1.8l.038.039a1.05 1.05 0 0 1 .21 1.158v.05a1.05 1.05 0 0 1-.961.637h-.108a1.273 1.273 0 0 0 0 2.546h.057a1.05 1.05 0 0 1 .96.636Z"></path><path d="M8 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"></path></g><defs><clippath id="options_svg__a"><path fill="currentColor" d="M0 0h16v16H0z"></path></clippath></defs></svg></span></button><div class="svgo-options_popover__zkKY4"><span>Preferences</span></div></div></div></div></div><div class="input-nav_under__wmc7Q"><span data-position="true" class="input-nav_position__8SI_n">Line 1:0</span><div class="clear-input_reactOptions__Mr01N"><div class="clear-input_optionsButtonContainer__ajXf3"><button type="submit" name="[object Object]" class="button_button__vzz15 button_medium__7JChw button" style="width:auto;height:23px;display:flex;align-items:center;padding:4px 7px;border-radius:4px"><span class="clear-input_optionsWord__XAoBx">Clear</span></button></div></div></div></div><div class="input_input__e33zK"><div class="input_resizeIndicator__GtDQ4"></div><div class="codemirror_codemirror__a_9Qe"><div class="cm-editor ͼ1 ͼ3 ͼ4"><div class="cm-announced" aria-live="polite"></div><div tabindex="-1" class="cm-scroller"><div class="cm-gutters cm-gutters-before" aria-hidden="true" style="min-height: 426px; position: sticky;"><div class="cm-gutter cm-icongutter"><div class="cm-gutterElement" style="height: 0px; visibility: hidden; pointer-events: none;"><div class="undefined">
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+      <circle cx="6" cy="6" r="5.25" fill="#EF4444" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+      <path d="M6 3V6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M6.75 8.25C6.75 8.66421 6.41421 9 6 9C5.58579 9 5.25 8.66421 5.25 8.25C5.25 7.83579 5.58579 7.5 6 7.5C6.41421 7.5 6.75 7.83579 6.75 8.25Z" fill="white"></path>
+    </svg>
+    </div></div></div><div class="cm-gutter cm-lineNumbers"><div class="cm-gutterElement" style="height: 0px; visibility: hidden; pointer-events: none;">9</div><div class="cm-gutterElement" style="height: 44px; margin-top: 4px;">1</div><div class="cm-gutterElement" style="height: 330px;">2</div><div class="cm-gutterElement" style="height: 22px;">3</div><div class="cm-gutterElement" style="height: 22px;">4</div></div><div class="cm-gutter cm-foldGutter"><div class="cm-gutterElement" style="height: 0px; visibility: hidden; pointer-events: none;"><span title="Unfold line">›</span></div><div class="cm-gutterElement" style="height: 44px; margin-top: 4px;"><span title="Fold line">⌄</span></div></div></div><div spellcheck="false" autocorrect="off" autocapitalize="off" writingsuggestions="false" translate="no" contenteditable="true" class="cm-content cm-lineWrapping" role="textbox" aria-multiline="true" data-language="xml" data-gramm="false" style="tab-size: 4;"><div class="cm-line"><span class="cmt-punctuation">&lt;</span><span class="cmt-typeName">svg</span> <span class="cmt-propertyName">width</span><span class="cmt-operator">=</span><span class="cmt-string">"50"</span> <span class="cmt-propertyName">height</span><span class="cmt-operator">=</span><span class="cmt-string">"50"</span> <span class="cmt-propertyName">viewBox</span><span class="cmt-operator">=</span><span class="cmt-string">"0 0 50 50"</span> <span class="cmt-propertyName">fill</span><span class="cmt-operator">=</span><span class="cmt-string">"none"</span> <span class="cmt-propertyName">xmlns</span><span class="cmt-operator">=</span><span class="cmt-string">"http://www.w3.org/2000/svg"</span><span class="cmt-punctuation">&gt;</span></div><div class="cm-line"><span class="cmt-punctuation">&lt;</span><span class="cmt-typeName">path</span> <span class="cmt-propertyName">d</span><span class="cmt-operator">=</span><span class="cmt-string">"M10.6687 37.0917C15.0405 34.6207 19.9783 33.3257 25 33.3333C30.2083 33.3333 35.0979 34.6979 39.3312 37.0917M31.25 20.8333C31.25 22.4909 30.5915 24.0806 29.4194 25.2528C28.2473 26.4249 26.6576 27.0833 25 27.0833C23.3424 27.0833 21.7527 26.4249 20.5806 25.2528C19.4085 24.0806 18.75 22.4909 18.75 20.8333C18.75 19.1757 19.4085 17.586 20.5806 16.4139C21.7527 15.2418 23.3424 14.5833 25 14.5833C26.6576 14.5833 28.2473 15.2418 29.4194 16.4139C30.5915 17.586 31.25 19.1757 31.25 20.8333ZM43.75 25C43.75 27.4623 43.265 29.9005 42.3227 32.1753C41.3805 34.4502 39.9993 36.5172 38.2582 38.2582C36.5172 39.9993 34.4502 41.3805 32.1753 42.3227C29.9005 43.265 27.4623 43.75 25 43.75C22.5377 43.75 20.0995 43.265 17.8247 42.3227C15.5498 41.3805 13.4828 39.9993 11.7417 38.2582C10.0006 36.5172 8.61953 34.4502 7.67726 32.1753C6.73498 29.9005 6.25 27.4623 6.25 25C6.25 20.0272 8.22544 15.2581 11.7417 11.7417C15.2581 8.22544 20.0272 6.25 25 6.25C29.9728 6.25 34.7419 8.22544 38.2582 11.7417C41.7746 15.2581 43.75 20.0272 43.75 25Z"</span> <span class="cmt-propertyName">stroke</span><span class="cmt-operator">=</span><span class="cmt-string">"white"</span> <span class="cmt-propertyName">stroke-width</span><span class="cmt-operator">=</span><span class="cmt-string">"2"</span> <span class="cmt-propertyName">stroke-linecap</span><span class="cmt-operator">=</span><span class="cmt-string">"round"</span> <span class="cmt-propertyName">stroke-linejoin</span><span class="cmt-operator">=</span><span class="cmt-string">"round"</span><span class="cmt-punctuation">/&gt;</span></div><div class="cm-line"><span class="cmt-punctuation">&lt;/</span><span class="cmt-typeName">svg</span><span class="cmt-punctuation">&gt;</span></div><div class="cm-line"><br></div></div></div></div><textarea class="codemirror_textarea__YrnrA" style="display: none;">&lt;svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
+&lt;path d="M10.6687 37.0917C15.0405 34.6207 19.9783 33.3257 25 33.3333C30.2083 33.3333 35.0979 34.6979 39.3312 37.0917M31.25 20.8333C31.25 22.4909 30.5915 24.0806 29.4194 25.2528C28.2473 26.4249 26.6576 27.0833 25 27.0833C23.3424 27.0833 21.7527 26.4249 20.5806 25.2528C19.4085 24.0806 18.75 22.4909 18.75 20.8333C18.75 19.1757 19.4085 17.586 20.5806 16.4139C21.7527 15.2418 23.3424 14.5833 25 14.5833C26.6576 14.5833 28.2473 15.2418 29.4194 16.4139C30.5915 17.586 31.25 19.1757 31.25 20.8333ZM43.75 25C43.75 27.4623 43.265 29.9005 42.3227 32.1753C41.3805 34.4502 39.9993 36.5172 38.2582 38.2582C36.5172 39.9993 34.4502 41.3805 32.1753 42.3227C29.9005 43.265 27.4623 43.75 25 43.75C22.5377 43.75 20.0995 43.265 17.8247 42.3227C15.5498 41.3805 13.4828 39.9993 11.7417 38.2582C10.0006 36.5172 8.61953 34.4502 7.67726 32.1753C6.73498 29.9005 6.25 27.4623 6.25 25C6.25 20.0272 8.22544 15.2581 11.7417 11.7417C15.2581 8.22544 20.0272 6.25 25 6.25C29.9728 6.25 34.7419 8.22544 38.2582 11.7417C41.7746 15.2581 43.75 20.0272 43.75 25Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/&gt;
+&lt;/svg&gt;
+</textarea></div><div class="input_resizeIndicator__GtDQ4 input_right__FPiVz"></div></div><div class="input_optionsButtonsContainer___zUFH"><div class="input-header_inputHeader__rmRm_"><input type="file" class="input-header_fileInput__ie40q" id="fileUpload"><label for="fileUpload" class="input-header_label__vzjmw"><div class="input-header_iconButton__gAa0O"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M8 2v10M8 2 3 7m5-5 5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path opacity="0.4" d="M14 15H2v-3h12v3Z" fill="#fff" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><div class="input-header_labelContent__3QqpF">Upload</div></div></label></div><div class="input_exportButtons__RP2va"><button class="copy-button_copyButton__kMxBC"><span class="copy-button_copyTextWrapper__wO74D"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M6 1h8v10H6V1Z" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path opacity="0.4" d="M2 15h8v-4H6V5H2v10Z" fill="#C7CAD1" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>Copy</span></button><button class="input_download___a_Vk"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M8 12V2m0 10 5-5m-5 5L3 7" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path opacity="0.4" d="M2 15h12v-3H2v3Z" fill="#C7CAD1" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>Download</button><button class="input_save__bI22v"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path opacity="0.4" d="M13 15H3V9h10v6Z" fill="#6E7687"></path><path d="M5 10a5 5 0 0 1 5-5h2m0 0-2 2m2-2-2-2" stroke="#6E7687" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>Share</button></div></div></div></div></div></div><span role="presentation" class="Resizer vertical " style="flex:none"></span><div class="Pane vertical " style="position:relative;outline:none;border:0;overflow:hidden;display:flex;flex-basis:auto;flex-grow:3;flex-shrink:3;width:0;height:100%;min-width:20px"><div class="main_vertical__rRfeQ"><div class="main_ourOutput__LaezH"><div id="svgContainerSizing" style="position:absolute;left:10000px"><svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.6687 37.0917C15.0405 34.6207 19.9783 33.3257 25 33.3333C30.2083 33.3333 35.0979 34.6979 39.3312 37.0917M31.25 20.8333C31.25 22.4909 30.5915 24.0806 29.4194 25.2528C28.2473 26.4249 26.6576 27.0833 25 27.0833C23.3424 27.0833 21.7527 26.4249 20.5806 25.2528C19.4085 24.0806 18.75 22.4909 18.75 20.8333C18.75 19.1757 19.4085 17.586 20.5806 16.4139C21.7527 15.2418 23.3424 14.5833 25 14.5833C26.6576 14.5833 28.2473 15.2418 29.4194 16.4139C30.5915 17.586 31.25 19.1757 31.25 20.8333ZM43.75 25C43.75 27.4623 43.265 29.9005 42.3227 32.1753C41.3805 34.4502 39.9993 36.5172 38.2582 38.2582C36.5172 39.9993 34.4502 41.3805 32.1753 42.3227C29.9005 43.265 27.4623 43.75 25 43.75C22.5377 43.75 20.0995 43.265 17.8247 42.3227C15.5498 41.3805 13.4828 39.9993 11.7417 38.2582C10.0006 36.5172 8.61953 34.4502 7.67726 32.1753C6.73498 29.9005 6.25 27.4623 6.25 25C6.25 20.0272 8.22544 15.2581 11.7417 11.7417C15.2581 8.22544 20.0272 6.25 25 6.25C29.9728 6.25 34.7419 8.22544 38.2582 11.7417C41.7746 15.2581 43.75 20.0272 43.75 25Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div><div class="output_innerOutput__dxYCR"><div class="output-nav_outputNav__K2Vse"><div class="output-nav_top__30S38"><div class="output-nav_outputNavMenu__cmVUz"><a class="nav-item_navItem__zLOfT nav-item_selected__Ps_eQ" href="https://www.svgviewer.dev/"><button type="button">Preview</button></a><a class="nav-item_navItem__zLOfT" href="https://www.svgviewer.dev/svg-to-react-jsx"><button type="button">React</button></a><a class="nav-item_navItem__zLOfT" href="https://www.svgviewer.dev/svg-to-react-native-jsx"><button type="button">React Native</button></a><a class="nav-item_navItem__zLOfT" href="https://www.svgviewer.dev/svg-to-png"><button type="button">PNG</button></a><a class="nav-item_navItem__zLOfT" href="https://www.svgviewer.dev/svg-to-data-uri"><button type="button">Data URI</button></a></div><div class="output-nav_outputNavSettings__MEPdE"></div></div></div><div class="output-type-svg_outputContainer__aQaC0" style="--props-viewBackground:#F7F8F9"><div class="output-type-svg_svgOuterContainer__ndR9V" style="--props-zoom:1"><div id="svgContainer" class="output-type-svg_svgContainer__iUli7 react-draggable react-draggable-dragged" style="--props-zoom:1;transform:translate(0px,0px)"><svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.6687 37.0917C15.0405 34.6207 19.9783 33.3257 25 33.3333C30.2083 33.3333 35.0979 34.6979 39.3312 37.0917M31.25 20.8333C31.25 22.4909 30.5915 24.0806 29.4194 25.2528C28.2473 26.4249 26.6576 27.0833 25 27.0833C23.3424 27.0833 21.7527 26.4249 20.5806 25.2528C19.4085 24.0806 18.75 22.4909 18.75 20.8333C18.75 19.1757 19.4085 17.586 20.5806 16.4139C21.7527 15.2418 23.3424 14.5833 25 14.5833C26.6576 14.5833 28.2473 15.2418 29.4194 16.4139C30.5915 17.586 31.25 19.1757 31.25 20.8333ZM43.75 25C43.75 27.4623 43.265 29.9005 42.3227 32.1753C41.3805 34.4502 39.9993 36.5172 38.2582 38.2582C36.5172 39.9993 34.4502 41.3805 32.1753 42.3227C29.9005 43.265 27.4623 43.75 25 43.75C22.5377 43.75 20.0995 43.265 17.8247 42.3227C15.5498 41.3805 13.4828 39.9993 11.7417 38.2582C10.0006 36.5172 8.61953 34.4502 7.67726 32.1753C6.73498 29.9005 6.25 27.4623 6.25 25C6.25 20.0272 8.22544 15.2581 11.7417 11.7417C15.2581 8.22544 20.0272 6.25 25 6.25C29.9728 6.25 34.7419 8.22544 38.2582 11.7417C41.7746 15.2581 43.75 20.0272 43.75 25Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div></div></div><div class="svg-options_svgOptions__H7xMc"><span class="svg-options_options__cw_Dr"><div class="svg-options_left__Qdgty"><span class="svg-options_viewScale__ufObB"><button type="submit" name="[object Object]" class="button_button__vzz15 button_grey__3wAcM button" style="width:32px;padding:8px;display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M13 8H3" stroke="#2E3138" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><span class="svg-options_scaleSelection__BN_po">100<!-- -->%</span><button type="submit" name="[object Object]" class="button_button__vzz15 button_grey__3wAcM button" style="width:32px;padding:8px;display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M8 3v5m0 5V8m0 0h5M8 8H3" stroke="#2E3138" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="svg-options_viewBackgroundColor__LCb_H"><span class="svg-options_squareOptionSelected__c_L_e" style="background-color:#F7F8F9"></span><span class="svg-options_squareOption__wDTv8" style="background-color:#FFFFFF"></span><span class="svg-options_squareOption__wDTv8" style="background-color:#161B1D"></span><span class="svg-options_squareOption__wDTv8"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26" fill="none"><g clip-path="url(#checkerboard_svg__a)"><rect width="24" height="24" rx="4" fill="#fff"></rect><path fill="#C7CAD1" d="M0 0h11v11H0zM11 11h10v10H11zM21 21h11v11H21zM21 0h11v11H21zM0 21h11v11H0z"></path></g><defs><clippath id="checkerboard_svg__a"><rect x="1" y="1" width="24" height="24" rx="4" fill="#fff"></rect></clippath></defs></svg></span></span></div><div class="download-button_buttonWrapper__V9uHe"><button type="submit" name="[object Object],Download ," class="button_button__vzz15 button_brand__Zykbx button_small__tuYUt button" style="width:auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M8 12V2m0 10 5-5m-5 5L3 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path opacity="0.4" d="M2 15h12v-3H2v3Z" fill="#fff" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>Download </button></div></span></div></div></div></div></div></div></div><div class="main_mobileView__CvpDI"><div class="main_mobileContainer__9NqqU"><div class="mobile-nav_mobileNav__2MHYo"><div class="mobile-nav_logo__nKV2w"><a href="https://www.svgviewer.dev/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 124 124" fill="none"><rect width="124" height="124" rx="24" fill="#F97316"></rect><path d="M19.375 36.782v63.843a4 4 0 0 0 4 4h63.843c3.564 0 5.348-4.309 2.829-6.828L26.203 33.953c-2.52-2.52-6.828-.735-6.828 2.829Z" fill="#fff"></path><circle cx="63.211" cy="37.539" r="18.164" fill="#000"></circle><rect opacity="0.4" x="81.133" y="80.72" width="17.569" height="17.388" rx="4" transform="rotate(-45 81.133 80.72)" fill="#FDBA74"></rect></svg><div class="mobile-nav_logoText__Z6QGJ"><span>SVG</span>Viewer</div></a></div><div class="mobile-nav_navigationButtons__mcNr1"><button class="mobile-nav_button__HBbU_ mobile-nav_toggled__F23aI">Edit</button><button class="mobile-nav_button__HBbU_">Export</button></div></div><div class=""><div class="main_vertical__rRfeQ"><div class="main_editor__be8vT"><div class="main_darkMode__9Nwj2"><div class="input-nav_editorNav__OMFFV"><div class="input-nav_above__CbKjm"><div class="input-nav_optionsButtonsContainer__8xuew"><div class="rotate_reactOptions__hFLyj"><div class="rotate_optionsButtonContainer__PlwMz"><button class="rotate_button__3BbUI"><span class="rotate_optionsWord__lzo6Z"><svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg" transform="scale(-1 1)"><path d="M17 21a5 5 0 1 0-5-5v2m0 0 2-2m-2 2-2-2" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><div class="rotate_popover__WFuNZ"><span>Rotate</span></div></div><div class="rotate_optionsButtonContainer__PlwMz"><button class="rotate_button__3BbUI"><span class="rotate_optionsWord__lzo6Z"><svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.4" d="M21 22V10l-10 6 10 6Z" fill="#C7CAD1" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 16h14" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><div class="rotate_popover__WFuNZ">Flip Y</div></div><div class="rotate_optionsButtonContainer__PlwMz"><button class="rotate_button__3BbUI"><span class="rotate_optionsWord__lzo6Z"><svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.4" d="M2 13h12L8 3 2 13Z" fill="#C7CAD1" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8 1v14" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><div class="rotate_popover__WFuNZ"><span>Flip X</span></div></div></div><div class="input-nav_resizeOptionsContainer__Y1PNv"><div class="resize-options_resizeContainer__XEku1" tabindex="0"><div class="resize-options_resizeContainer__supportingInfo__6VP3B"><div class="resize-options_resizeContainer__content__Q0Mdp"><svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#resize_svg__a)" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path opacity="0.4" d="M4 4h8v8H4V4Z" fill="#C7CAD1"></path><path d="M4 4h8v8M4 4v8h8M4 4V1m0 3H1m11 8h3m-3 0v3"></path></g><defs><clippath id="resize_svg__a"><path fill="#fff" d="M0 0h16v16H0z"></path></clippath></defs></svg><span class="resize-options_resizeContainer__text__WgZ01">50px x 50px</span></div><div class="resize-options_popover___UZqr"><span>Change dimensions</span></div></div></div></div></div><div class="input-nav_right__ubAvw"><div><div class="input-nav_buttonContainer__szrVq"><div class="input-nav_optimizeButtonContainer__6R84r"><button class="input-nav_optimizeButton___FSye">Optimize</button></div><div class="input-nav_buttonContainer__supportingInfo__4bwJH"><span class="input-nav_buttonContainer__fileSize__pCHee">1.18 KB<div class="input-nav_buttonContainer__icon__apKWa"><svg width="17" height="13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.118 1.5 14 6.5l-4.882 5M14 6.5H1" stroke="#00B277" stroke-width="2"></path></svg></div>380 bytes</span><span class="input-nav_buttonContainer__saving___3Bck">-69%</span></div></div></div><div class="input-nav_prettifyButtonContainer__4Prhn"><button class="input-nav_prettifyButton__yYHaa">Prettify </button></div><div class="svgo-options_reactOptions__8R4Om"><div class="svgo-options_optionsButtonContainer__k81b2"><button type="submit" name="[object Object]" class="button_button__vzz15 button_medium__7JChw button" style="width: 32px; height: 32px; display: flex; align-items: center; padding: 0px; background: inherit;"><span class="svgo-options_optionsWord___OyAz"><svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#options_svg__a)"><path d="M3.29 9.91a1.05 1.05 0 0 1-.21 1.157l-.037.038a1.272 1.272 0 1 0 1.8 1.801l.039-.038a1.05 1.05 0 0 1 1.158-.21 1.05 1.05 0 0 1 .636.961v.108a1.273 1.273 0 0 0 2.546 0v-.057a1.05 1.05 0 0 1 .687-.96 1.05 1.05 0 0 1 1.158.21l.038.037a1.272 1.272 0 0 0 2.175-.9 1.272 1.272 0 0 0-.374-.9l-.038-.039a1.05 1.05 0 0 1-.21-1.158 1.05 1.05 0 0 1 .961-.636h.108a1.273 1.273 0 0 0 0-2.546h-.057a1.05 1.05 0 0 1-.96-.687 1.05 1.05 0 0 1 .21-1.158l.037-.038a1.272 1.272 0 1 0-1.8-1.801l-.039.038a1.05 1.05 0 0 1-1.158.21h-.05a1.05 1.05 0 0 1-.637-.961v-.108a1.273 1.273 0 0 0-2.546 0v.057a1.05 1.05 0 0 1-.636.96 1.05 1.05 0 0 1-1.158-.21l-.038-.037a1.273 1.273 0 1 0-1.801 1.8l.038.039a1.05 1.05 0 0 1 .21 1.158v.05a1.05 1.05 0 0 1-.961.637h-.108a1.273 1.273 0 0 0 0 2.546h.057a1.05 1.05 0 0 1 .96.636Z"></path><path d="M8 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"></path></g><defs><clippath id="options_svg__a"><path fill="currentColor" d="M0 0h16v16H0z"></path></clippath></defs></svg></span></button><div class="svgo-options_popover__zkKY4"><span>Preferences</span></div></div></div></div></div><div class="input-nav_under__wmc7Q"><span data-position="true" class="input-nav_position__8SI_n"></span><div class="clear-input_reactOptions__Mr01N"><div class="clear-input_optionsButtonContainer__ajXf3"><button type="submit" name="[object Object]" class="button_button__vzz15 button_medium__7JChw button" style="width:auto;height:23px;display:flex;align-items:center;padding:4px 7px;border-radius:4px"><span class="clear-input_optionsWord__XAoBx">Clear</span></button></div></div></div></div><div class="input_input__e33zK"><div class="input_resizeIndicator__GtDQ4"></div><div class="codemirror_codemirror__a_9Qe"><div class="cm-editor ͼ1 ͼ3 ͼ5"><div class="cm-announced" aria-live="polite"></div><div tabindex="-1" class="cm-scroller"><div class="cm-gutters cm-gutters-before" aria-hidden="true" style="min-height: 8px; position: sticky;"><div class="cm-gutter cm-icongutter"><div class="cm-gutterElement" style="height: 0px; visibility: hidden; pointer-events: none;"><div class="undefined">
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+      <circle cx="6" cy="6" r="5.25" fill="#EF4444" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+      <path d="M6 3V6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M6.75 8.25C6.75 8.66421 6.41421 9 6 9C5.58579 9 5.25 8.66421 5.25 8.25C5.25 7.83579 5.58579 7.5 6 7.5C6.41421 7.5 6.75 7.83579 6.75 8.25Z" fill="white"></path>
+    </svg>
+    </div></div></div><div class="cm-gutter cm-lineNumbers"><div class="cm-gutterElement" style="height: 0px; visibility: hidden; pointer-events: none;">9</div><div class="cm-gutterElement" style="height: 0px; margin-top: 4px;">1</div><div class="cm-gutterElement" style="height: 0px;">2</div><div class="cm-gutterElement" style="height: 0px;">3</div><div class="cm-gutterElement" style="height: 0px;">4</div></div><div class="cm-gutter cm-foldGutter"><div class="cm-gutterElement" style="height: 0px; visibility: hidden; pointer-events: none;"><span title="Unfold line">›</span></div><div class="cm-gutterElement" style="height: 0px; margin-top: 4px;"><span title="Fold line">⌄</span></div></div></div><div spellcheck="false" autocorrect="off" autocapitalize="off" writingsuggestions="false" translate="no" contenteditable="true" class="cm-content cm-lineWrapping" role="textbox" aria-multiline="true" data-language="xml" data-gramm="false" style="tab-size: 4;"><div class="cm-line"><span class="cmt-punctuation">&lt;</span><span class="cmt-typeName">svg</span> <span class="cmt-propertyName">width</span><span class="cmt-operator">=</span><span class="cmt-string">"50"</span> <span class="cmt-propertyName">height</span><span class="cmt-operator">=</span><span class="cmt-string">"50"</span> <span class="cmt-propertyName">viewBox</span><span class="cmt-operator">=</span><span class="cmt-string">"0 0 50 50"</span> <span class="cmt-propertyName">fill</span><span class="cmt-operator">=</span><span class="cmt-string">"none"</span> <span class="cmt-propertyName">xmlns</span><span class="cmt-operator">=</span><span class="cmt-string">"http://www.w3.org/2000/svg"</span><span class="cmt-punctuation">&gt;</span></div><div class="cm-line"><span class="cmt-punctuation">&lt;</span><span class="cmt-typeName">path</span> <span class="cmt-propertyName">d</span><span class="cmt-operator">=</span><span class="cmt-string">"M10.6687 37.0917C15.0405 34.6207 19.9783 33.3257 25 33.3333C30.2083 33.3333 35.0979 34.6979 39.3312 37.0917M31.25 20.8333C31.25 22.4909 30.5915 24.0806 29.4194 25.2528C28.2473 26.4249 26.6576 27.0833 25 27.0833C23.3424 27.0833 21.7527 26.4249 20.5806 25.2528C19.4085 24.0806 18.75 22.4909 18.75 20.8333C18.75 19.1757 19.4085 17.586 20.5806 16.4139C21.7527 15.2418 23.3424 14.5833 25 14.5833C26.6576 14.5833 28.2473 15.2418 29.4194 16.4139C30.5915 17.586 31.25 19.1757 31.25 20.8333ZM43.75 25C43.75 27.4623 43.265 29.9005 42.3227 32.1753C41.3805 34.4502 39.9993 36.5172 38.2582 38.2582C36.5172 39.9993 34.4502 41.3805 32.1753 42.3227C29.9005 43.265 27.4623 43.75 25 43.75C22.5377 43.75 20.0995 43.265 17.8247 42.3227C15.5498 41.3805 13.4828 39.9993 11.7417 38.2582C10.0006 36.5172 8.61953 34.4502 7.67726 32.1753C6.73498 29.9005 6.25 27.4623 6.25 25C6.25 20.0272 8.22544 15.2581 11.7417 11.7417C15.2581 8.22544 20.0272 6.25 25 6.25C29.9728 6.25 34.7419 8.22544 38.2582 11.7417C41.7746 15.2581 43.75 20.0272 43.75 25Z"</span> <span class="cmt-propertyName">stroke</span><span class="cmt-operator">=</span><span class="cmt-string">"white"</span> <span class="cmt-propertyName">stroke-width</span><span class="cmt-operator">=</span><span class="cmt-string">"2"</span> <span class="cmt-propertyName">stroke-linecap</span><span class="cmt-operator">=</span><span class="cmt-string">"round"</span> <span class="cmt-propertyName">stroke-linejoin</span><span class="cmt-operator">=</span><span class="cmt-string">"round"</span><span class="cmt-punctuation">/&gt;</span></div><div class="cm-line"><span class="cmt-punctuation">&lt;/</span><span class="cmt-typeName">svg</span><span class="cmt-punctuation">&gt;</span></div><div class="cm-line"><br></div></div></div></div><textarea class="codemirror_textarea__YrnrA" style="display: none;">&lt;svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
+&lt;path d="M10.6687 37.0917C15.0405 34.6207 19.9783 33.3257 25 33.3333C30.2083 33.3333 35.0979 34.6979 39.3312 37.0917M31.25 20.8333C31.25 22.4909 30.5915 24.0806 29.4194 25.2528C28.2473 26.4249 26.6576 27.0833 25 27.0833C23.3424 27.0833 21.7527 26.4249 20.5806 25.2528C19.4085 24.0806 18.75 22.4909 18.75 20.8333C18.75 19.1757 19.4085 17.586 20.5806 16.4139C21.7527 15.2418 23.3424 14.5833 25 14.5833C26.6576 14.5833 28.2473 15.2418 29.4194 16.4139C30.5915 17.586 31.25 19.1757 31.25 20.8333ZM43.75 25C43.75 27.4623 43.265 29.9005 42.3227 32.1753C41.3805 34.4502 39.9993 36.5172 38.2582 38.2582C36.5172 39.9993 34.4502 41.3805 32.1753 42.3227C29.9005 43.265 27.4623 43.75 25 43.75C22.5377 43.75 20.0995 43.265 17.8247 42.3227C15.5498 41.3805 13.4828 39.9993 11.7417 38.2582C10.0006 36.5172 8.61953 34.4502 7.67726 32.1753C6.73498 29.9005 6.25 27.4623 6.25 25C6.25 20.0272 8.22544 15.2581 11.7417 11.7417C15.2581 8.22544 20.0272 6.25 25 6.25C29.9728 6.25 34.7419 8.22544 38.2582 11.7417C41.7746 15.2581 43.75 20.0272 43.75 25Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/&gt;
+&lt;/svg&gt;
+</textarea></div><div class="input_resizeIndicator__GtDQ4 input_right__FPiVz"></div></div><div class="input_optionsButtonsContainer___zUFH"><div class="input-header_inputHeader__rmRm_"><input type="file" class="input-header_fileInput__ie40q" id="fileUpload"><label for="fileUpload" class="input-header_label__vzjmw"><div class="input-header_iconButton__gAa0O"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M8 2v10M8 2 3 7m5-5 5 5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path opacity="0.4" d="M14 15H2v-3h12v3Z" fill="#fff" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><div class="input-header_labelContent__3QqpF">Upload</div></div></label></div><div class="input_exportButtons__RP2va"><button class="copy-button_copyButton__kMxBC"><span class="copy-button_copyTextWrapper__wO74D"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M6 1h8v10H6V1Z" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path opacity="0.4" d="M2 15h8v-4H6V5H2v10Z" fill="#C7CAD1" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>Copy</span></button><button class="input_download___a_Vk"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M8 12V2m0 10 5-5m-5 5L3 7" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path opacity="0.4" d="M2 15h12v-3H2v3Z" fill="#C7CAD1" stroke="#C7CAD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>Download</button><button class="input_save__bI22v"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path opacity="0.4" d="M13 15H3V9h10v6Z" fill="#6E7687"></path><path d="M5 10a5 5 0 0 1 5-5h2m0 0-2 2m2-2-2-2" stroke="#6E7687" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>Share</button></div></div></div></div></div></div><div class="main_outputContainer__3qSXW main_hidden__UOd3j"><div class="main_vertical__rRfeQ"><div class="main_ourOutput__LaezH"><div id="svgContainerSizing" style="position:absolute;left:10000px"><svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.6687 37.0917C15.0405 34.6207 19.9783 33.3257 25 33.3333C30.2083 33.3333 35.0979 34.6979 39.3312 37.0917M31.25 20.8333C31.25 22.4909 30.5915 24.0806 29.4194 25.2528C28.2473 26.4249 26.6576 27.0833 25 27.0833C23.3424 27.0833 21.7527 26.4249 20.5806 25.2528C19.4085 24.0806 18.75 22.4909 18.75 20.8333C18.75 19.1757 19.4085 17.586 20.5806 16.4139C21.7527 15.2418 23.3424 14.5833 25 14.5833C26.6576 14.5833 28.2473 15.2418 29.4194 16.4139C30.5915 17.586 31.25 19.1757 31.25 20.8333ZM43.75 25C43.75 27.4623 43.265 29.9005 42.3227 32.1753C41.3805 34.4502 39.9993 36.5172 38.2582 38.2582C36.5172 39.9993 34.4502 41.3805 32.1753 42.3227C29.9005 43.265 27.4623 43.75 25 43.75C22.5377 43.75 20.0995 43.265 17.8247 42.3227C15.5498 41.3805 13.4828 39.9993 11.7417 38.2582C10.0006 36.5172 8.61953 34.4502 7.67726 32.1753C6.73498 29.9005 6.25 27.4623 6.25 25C6.25 20.0272 8.22544 15.2581 11.7417 11.7417C15.2581 8.22544 20.0272 6.25 25 6.25C29.9728 6.25 34.7419 8.22544 38.2582 11.7417C41.7746 15.2581 43.75 20.0272 43.75 25Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div><div class="output_innerOutput__dxYCR"><div class="output-nav_outputNav__K2Vse"><div class="output-nav_top__30S38"><div class="output-nav_outputNavMenu__cmVUz"><a class="nav-item_navItem__zLOfT nav-item_selected__Ps_eQ" href="https://www.svgviewer.dev/"><button type="button">Preview</button></a><a class="nav-item_navItem__zLOfT" href="https://www.svgviewer.dev/svg-to-react-jsx"><button type="button">React</button></a><a class="nav-item_navItem__zLOfT" href="https://www.svgviewer.dev/svg-to-react-native-jsx"><button type="button">React Native</button></a><a class="nav-item_navItem__zLOfT" href="https://www.svgviewer.dev/svg-to-png"><button type="button">PNG</button></a><a class="nav-item_navItem__zLOfT" href="https://www.svgviewer.dev/svg-to-data-uri"><button type="button">Data URI</button></a></div><div class="output-nav_outputNavSettings__MEPdE"></div></div></div><div class="output-type-svg_outputContainer__aQaC0" style="--props-viewBackground:#F7F8F9"><div class="output-type-svg_svgOuterContainer__ndR9V" style="--props-zoom:1"><div id="svgContainer" class="output-type-svg_svgContainer__iUli7 react-draggable" style="--props-zoom:1;transform:translate(0px,0px)"><svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.6687 37.0917C15.0405 34.6207 19.9783 33.3257 25 33.3333C30.2083 33.3333 35.0979 34.6979 39.3312 37.0917M31.25 20.8333C31.25 22.4909 30.5915 24.0806 29.4194 25.2528C28.2473 26.4249 26.6576 27.0833 25 27.0833C23.3424 27.0833 21.7527 26.4249 20.5806 25.2528C19.4085 24.0806 18.75 22.4909 18.75 20.8333C18.75 19.1757 19.4085 17.586 20.5806 16.4139C21.7527 15.2418 23.3424 14.5833 25 14.5833C26.6576 14.5833 28.2473 15.2418 29.4194 16.4139C30.5915 17.586 31.25 19.1757 31.25 20.8333ZM43.75 25C43.75 27.4623 43.265 29.9005 42.3227 32.1753C41.3805 34.4502 39.9993 36.5172 38.2582 38.2582C36.5172 39.9993 34.4502 41.3805 32.1753 42.3227C29.9005 43.265 27.4623 43.75 25 43.75C22.5377 43.75 20.0995 43.265 17.8247 42.3227C15.5498 41.3805 13.4828 39.9993 11.7417 38.2582C10.0006 36.5172 8.61953 34.4502 7.67726 32.1753C6.73498 29.9005 6.25 27.4623 6.25 25C6.25 20.0272 8.22544 15.2581 11.7417 11.7417C15.2581 8.22544 20.0272 6.25 25 6.25C29.9728 6.25 34.7419 8.22544 38.2582 11.7417C41.7746 15.2581 43.75 20.0272 43.75 25Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div></div></div><div class="svg-options_svgOptions__H7xMc"><span class="svg-options_options__cw_Dr"><div class="svg-options_left__Qdgty"><span class="svg-options_viewScale__ufObB"><button type="submit" name="[object Object]" class="button_button__vzz15 button_grey__3wAcM button" style="width:32px;padding:8px;display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M13 8H3" stroke="#2E3138" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><span class="svg-options_scaleSelection__BN_po">100<!-- -->%</span><button type="submit" name="[object Object]" class="button_button__vzz15 button_grey__3wAcM button" style="width:32px;padding:8px;display:flex;align-items:center;justify-content:center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M8 3v5m0 5V8m0 0h5M8 8H3" stroke="#2E3138" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span><span class="svg-options_viewBackgroundColor__LCb_H"><span class="svg-options_squareOptionSelected__c_L_e" style="background-color:#F7F8F9"></span><span class="svg-options_squareOption__wDTv8" style="background-color:#FFFFFF"></span><span class="svg-options_squareOption__wDTv8" style="background-color:#161B1D"></span><span class="svg-options_squareOption__wDTv8"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26" fill="none"><g clip-path="url(#checkerboard_svg__a)"><rect width="24" height="24" rx="4" fill="#fff"></rect><path fill="#C7CAD1" d="M0 0h11v11H0zM11 11h10v10H11zM21 21h11v11H21zM21 0h11v11H21zM0 21h11v11H0z"></path></g><defs><clippath id="checkerboard_svg__a"><rect x="1" y="1" width="24" height="24" rx="4" fill="#fff"></rect></clippath></defs></svg></span></span></div><div class="download-button_buttonWrapper__V9uHe"><button type="submit" name="[object Object],Download ," class="button_button__vzz15 button_brand__Zykbx button_small__tuYUt button" style="width:auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path d="M8 12V2m0 10 5-5m-5 5L3 7" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path opacity="0.4" d="M2 15h12v-3H2v3Z" fill="#fff" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>Download </button></div></span></div></div></div></div></div></div></div></div></main></div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{},"svg":{"text":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"400\" viewBox=\"0 0 124 124\" fill=\"none\"\u003e\n\u003crect width=\"124\" height=\"124\" rx=\"24\" fill=\"#F97316\"/\u003e\n\u003cpath d=\"M19.375 36.7818V100.625C19.375 102.834 21.1659 104.625 23.375 104.625H87.2181C90.7818 104.625 92.5664 100.316 90.0466 97.7966L26.2034 33.9534C23.6836 31.4336 19.375 33.2182 19.375 36.7818Z\" fill=\"white\"/\u003e\n\u003ccircle cx=\"63.2109\" cy=\"37.5391\" r=\"18.1641\" fill=\"black\"/\u003e\n\u003crect opacity=\"0.4\" x=\"81.1328\" y=\"80.7198\" width=\"17.5687\" height=\"17.3876\" rx=\"4\" transform=\"rotate(-45 81.1328 80.7198)\" fill=\"#FDBA74\"/\u003e\n\u003c/svg\u003e"},"optimizedSvg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"400\" fill=\"none\" viewBox=\"0 0 124 124\"\u003e\u003crect width=\"124\" height=\"124\" fill=\"#f97316\" rx=\"24\"/\u003e\u003cpath fill=\"#fff\" d=\"M19.375 36.782v63.843a4 4 0 0 0 4 4h63.843c3.564 0 5.348-4.309 2.829-6.828L26.203 33.953c-2.52-2.52-6.828-.735-6.828 2.829\"/\u003e\u003ccircle cx=\"63.211\" cy=\"37.539\" r=\"18.164\" fill=\"#000\"/\u003e\u003crect width=\"17.569\" height=\"17.388\" x=\"81.133\" y=\"80.72\" fill=\"#fdba74\" opacity=\".4\" rx=\"4\" transform=\"rotate(-45 81.133 80.72)\"/\u003e\u003c/svg\u003e","prettifiedSvg":"\u003csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"400\" viewBox=\"0 0 124 124\" fill=\"none\"\u003e\n  \u003crect width=\"124\" height=\"124\" rx=\"24\" fill=\"#F97316\"/\u003e\n  \u003cpath d=\"M19.375 36.7818V100.625C19.375 102.834 21.1659 104.625 23.375 104.625H87.2181C90.7818 104.625 92.5664 100.316 90.0466 97.7966L26.2034 33.9534C23.6836 31.4336 19.375 33.2182 19.375 36.7818Z\" fill=\"white\"/\u003e\n  \u003ccircle cx=\"63.2109\" cy=\"37.5391\" r=\"18.1641\" fill=\"black\"/\u003e\n  \u003crect opacity=\"0.4\" x=\"81.1328\" y=\"80.7198\" width=\"17.5687\" height=\"17.3876\" rx=\"4\" transform=\"rotate(-45 81.1328 80.7198)\" fill=\"#FDBA74\"/\u003e\n\u003c/svg\u003e\n"},"page":"/","query":{},"buildId":"dlld_4IQ2gfCvTGdpnClY","isFallback":false,"isExperimentalCompile":false,"appGip":true,"scriptLoader":[]}</script><next-route-announcer><p aria-live="assertive" id="__next-route-announcer__" role="alert" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; top: 0px; width: 1px; white-space: nowrap; overflow-wrap: normal;"></p></next-route-announcer><script src="./profile_files/svg-to-data-uri-e6e38ebd4846fc45.js.download"></script><script src="./profile_files/a7f50d57-5473b94fdd4cff9f.js.download"></script><script src="./profile_files/868bbdb4-33e1b4bb9b3f3a7d.js.download"></script><script src="./profile_files/a26566bc-346b412f949d4d15.js.download"></script><script src="./profile_files/552-68c0abf95ac112c6.js.download"></script><script src="./profile_files/svg-to-react-native-jsx-6c2d62073c98066c.js.download"></script><script src="./profile_files/svg-to-png-aba4de7b23baece2.js.download"></script><script src="./profile_files/svg-to-react-jsx-4014b13be44a27e5.js.download"></script><script src="./profile_files/[slug]-229780e09688028e.js.download"></script></body></html>

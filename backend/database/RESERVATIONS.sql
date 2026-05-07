@@ -1,0 +1,21 @@
+CREATE TABLE Reservations (
+  id TEXT PRIMARY KEY,
+  user_id TEXT,
+  room_id TEXT,
+  requestor_name TEXT,
+  course TEXT,
+  section TEXT,
+  role TEXT NOT NULL CHECK(role IN ('Super_Admin', 'Admin', 'Authorized_User', 'Student')),
+  purpose TEXT,
+  req_dat DATE,
+  start_time TEXT,
+  end_time TEXT,
+  status TEXT CHECK(status IN ('Pending', 'Approved', 'Rejected', 'Cancelled')),
+  reviewed_by TEXT,
+  review_note TEXT,
+  reviewed_at DATETIME,
+  created_at DATETIME,
+  updated_at DATETIME,
+  FOREIGN KEY (user_id) REFERENCES User(id),
+  FOREIGN KEY (room_id) REFERENCES Room(id)
+);

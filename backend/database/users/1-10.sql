@@ -1,0 +1,25 @@
+INSERT INTO Users
+(id, name, email, student_number, password, role, course, section, created_by, created_at)
+VALUES
+('USER3106', 'Rain Shia Ito Acosta', 'rainshia0724@gmail.com', '25-3106', '$2b$12$tnD7laOelDAaZyUTwG.T6.eIs4QyDYbLKszs4fK/gqbmc9o.gqQ.C', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3215', 'Carl Deiniel Yu Arconada', 'carlarcomada@gmail.com', '25-3215', '$2b$12$E4vlIJPT8saPXnXI9ERsiu8jIU4zTbv16QAi7SeUP5ijamKuU6fTC', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER2983', 'Christian Joseph Estrella Azuela', 'christianjosephazuela@gmail.com', '25-2983', '$2b$12$nbyBQlTS5ScbQj0vjRKfLOiNW9VD3pH4ihyczQ2r0Me.AsmYZ5NGe', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER2883', 'R-jay Olavario Barbero', 'rjaybarbero6@gmail.com', '25-2883', '$2b$12$jMlQi25We6wU7S/8MwF99uHPXwxWxNu.Hpvp2cslV7XLxUjaS7Cli', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER2969', 'Rolando Lopez Consolacion Jr', 'rolandoconsolacion194@gmail.com', '25-2969', '$2b$12$sxASnoUfARHfxKcmQ.WJXu1/p2m8MA/GCFlshITQbv9VDxPVr6/Hu', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3060', 'John Darius Palma Costales', 'dariuscostales@gmail.com', '25-3060', '$2b$12$SEIxLs1d4lCGGAhSJX2uleQ60rB9oNBn6PvkSe8FfXrKs4B4Icfxu', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER2912', 'Rhanz Raiver Raquiza De Leon', 'rhanzraiverdeleon@gmail.com', '25-2912', '$2b$12$Jv8koNxDpmgmfYq75x4cW.8bjiOImi98BRAnoExsxV28TWZhxWAim', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER2914', 'Carl Andy Tarog Fatal', 'andyfatal20@gmail.com', '25-2914', '$2b$12$ZS5.iqpDqAKj/P939ZkAFu5p..iTj1ZPPLs2vpnJEcwZ.TqENDh0i', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3200', 'Kurt Euwan Espinar Galban', 'kurteuwangalban@gmail.com', '25-3200', '$2b$12$zkXLT2.Tb6BcW/.JnSINiOTDdhekLjquFGlgfkQR7UaMJh3ybpE0G', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER2943', 'Luciana Manaloto Gutierrez', 'luciana.gutierrez913@gmail.com', '25-2943', '$2b$12$.k2Q6lDqfs0JQ1SafcmMB./hXF5A/4sd8vXd.OlipZvQ2hlspbTlq', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3144', 'Joseph Zarie Yabut Isaga', 'josephisaga12345@gmail.com', '25-3144', '$2b$12$d3v5/tmV1hSiI2k32dqrFu/w5EeipAx/AXsUFvlZwPchcyHLlIRCu', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3156', 'Rodel Jr Bernabe Laguna', 'bernaberodel04@gmail.com', '25-3156', '$2b$12$nLn4jOC1WJzRaHhy5l4/ze3HNtFywmVrOL3yPCu43.xSnKWOA8lEa', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3240', 'John Lincon Bacao Longalong', 'johnlinconlongalong08@gmail.com', '25-3240', '$2b$12$iWTUXFNq25HJlRnPQu9wuuE/yq82lEZ6njOzfISgmL105HiDUIK7W', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3079', 'Vincent Paul Guazon Macachor', 'macachorvincentpaul@gmail.com', '25-3079', '$2b$12$p.S4yBcGuZDhcrh8ZWi9ouNS.AkCYai1Ne9dw8ceLz5ChhMOARtJG', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER2920', 'Jairus Reccel Tabada Mercado', 'jairusreccelmercado@gmail.com', '25-2920', '$2b$12$qNgDNNS7HMz.56rMZdBpaeLIoxe8l6vVpsm.0lZ/xRMFJse3NUBri', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER2995', 'James Brian Estolas Nuñez', 'jbnuñez187@gmail.com', '25-2995', '$2b$12$Wh5uI55loPWzrCYbnNH64OIaqBBHSpfcKVvaP6B6hOy2gGJ.GkHK.', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3146', 'Xavier Villanueva Oso', 'osoxavier146@gmail.com', '25-3146', '$2b$12$XUP2M2Uxn6wUDx1AbusHAOE8ujI0wAQzfiZfxwFBoxNx1HpUajEky', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3151', 'Jyron Castillo Pajulas', 'jyronpajulas@gmail.com', '25-3151', '$2b$12$VUcFCI4K/o5sCiQ8MpC.C.8CFfT4zwS12dDG8m34exaF0438RvuK6', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3137', 'Christian Patrick Fugio Pascual', 'christianclass10@gmail.com', '25-3137', '$2b$12$vd9.swIelti20sSgaalr6eMtbbi2zkBWYkcjS/QpP4iOAk3PfKBrS', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3109', 'Laurence Brent Mallari Rabago', 'brentm.rabago@gmail.com', '25-3109', '$2b$12$oHpwhowUELZr6flSih.lUOBoBdgDdBzDfSzr6FWfBM9KLoc8FkmUS', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3257', 'Karl Samuel Olitoquit Salcedo', 'karlsalcedo147@gmail.com', '25-3257', '$2b$12$dvtk5WyNr3iu6FeR2YYM6emSCm2tZEQ8zskIiMcAU9dx8yqo.j2FO', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now')),
+('USER3083', 'Dian Kenneth Carunucan Santos', 'diankenneth223@gmail.com', '25-3083', '$2b$12$HXQZ7evfkVFunG8B65Sey.7Fw8djlsuIyaCu2uGOIyM6wfUdjZXz.', 'Student', 'BSIT', '1-10', 'Database Dev', DATETIME('now'));

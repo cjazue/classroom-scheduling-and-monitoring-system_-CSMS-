@@ -14,7 +14,7 @@ def _guard(*roles):
             user = _get_current_user()
             if not user or not user.is_active:
                 return jsonify({"error": "Account is inactive or does not exist."}), 403
-            if user.role not in roles:
+            if user.role_key not in roles:
                 return jsonify({"error": "Insufficient permissions."}), 403
             return fn(*args, **kwargs)
         return wrapper

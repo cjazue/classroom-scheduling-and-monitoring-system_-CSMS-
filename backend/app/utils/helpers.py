@@ -34,8 +34,14 @@ def paginate_query(query, schema_fn):
 
 
 def validate_email(email: str) -> bool:
-    pattern = r"^[a-zA-Z0-9_.+-]+@plv\.edu\.ph$"
+    """Basic email validation.
+
+    Login must accept personal emails (NOT restricted to @plv.edu.ph). This helper
+    is intentionally permissive.
+    """
+    pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
     return bool(re.match(pattern, email))
+
 
 
 def validate_student_id(student_id: str) -> bool:

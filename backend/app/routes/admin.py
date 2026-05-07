@@ -1,3 +1,6 @@
+from datetime import datetime
+from uuid import uuid4
+
 from flask import Blueprint, request
 from flask_jwt_extended import get_jwt_identity
 from app.extensions import db
@@ -13,6 +16,9 @@ from app.utils import (
 )
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/api/admin")
+
+def _gen_user_id(prefix: str = "AUTH") -> str:
+    return f"{prefix}{uuid4().hex[:8].upper()}"
 
 @admin_bp.route("/authorized-users", methods=["POST"])
 @admin_required
@@ -31,7 +37,7 @@ def create_authorized_user():
     if not email:
         errors["email"] = "Email is required."
     elif not validate_email(email):
-        errors["email"] = "Must be a valid PLV email (@plv.edu.ph)."
+        errors["email"] = "Must be a valid email address."
     if not password:
         errors["password"] = "Password is required."
     else:
@@ -50,12 +56,15 @@ def create_authorized_user():
         return error_response("Email is already registered.", 409)
 
     user = User(
+        id=_gen_user_id("AUTH"),
         name=name,
         email=email,
-        role="authorized_user",
         course_section=course_section or None,
         created_by=creator_id,
+        created_at=datetime.utcnow(),
+        updated_at=datetime.utcnow(),
     )
+    user.set_role("authorized_user")
     user.set_password(password)
     db.session.add(user)
     db.session.commit()
@@ -69,7 +78,7 @@ def create_authorized_user():
 @admin_bp.route("/authorized-users", methods=["GET"])
 @admin_required
 def list_authorized_users():
-    query = User.query.filter_by(role="authorized_user").order_by(User.created_at.desc())
+    query = User.query.filter(User.role == User.db_role("authorized_user")).order_by(User.created_at.desc())
 
     is_active = request.args.get("is_active")
     if is_active is not None:
@@ -85,17 +94,17 @@ def list_authorized_users():
     return success_response(data)
 
 
-@admin_bp.route("/authorized-users/<int:user_id>", methods=["GET"])
+@admin_bp.route("/authorized-users/<user_id>", methods=["GET"])
 @admin_required
 def get_authorized_user(user_id):
-    user = User.query.filter_by(id=user_id, role="authorized_user").first_or_404()
+    user = User.query.filter(User.id == user_id, User.role == User.db_role("authorized_user")).first_or_404()
     return success_response(user.to_dict(include_sensitive=True))
 
 
-@admin_bp.route("/authorized-users/<int:user_id>", methods=["PATCH"])
+@admin_bp.route("/authorized-users/<user_id>", methods=["PATCH"])
 @admin_required
 def update_authorized_user(user_id):
-    user = User.query.filter_by(id=user_id, role="authorized_user").first_or_404()
+    user = User.query.filter(User.id == user_id, User.role == User.db_role("authorized_user")).first_or_404()
     data = request.get_json(silent=True) or {}
 
     if "name" in data and data["name"].strip():
@@ -119,10 +128,10 @@ def update_authorized_user(user_id):
     return success_response(user.to_dict(include_sensitive=True), "Authorized user updated.")
 
 
-@admin_bp.route("/authorized-users/<int:user_id>", methods=["DELETE"])
+@admin_bp.route("/authorized-users/<user_id>", methods=["DELETE"])
 @admin_required
 def deactivate_authorized_user(user_id):
-    user = User.query.filter_by(id=user_id, role="authorized_user").first_or_404()
+    user = User.query.filter(User.id == user_id, User.role == User.db_role("authorized_user")).first_or_404()
     user.is_active = False
     db.session.commit()
     return success_response(message="Authorized user account deactivated.")
@@ -134,7 +143,7 @@ def list_all_users():
     role  = request.args.get("role")
     query = User.query.order_by(User.created_at.desc())
     if role:
-        query = query.filter_by(role=role)
+        query = query.filter(User.role == User.db_role(role))
 
     search = request.args.get("search", "").strip()
     if search:
@@ -146,23 +155,47 @@ def list_all_users():
     return success_response(data)
 
 
-@admin_bp.route("/users/<int:user_id>/activate", methods=["PATCH"])
+@admin_bp.route("/users/<user_id>/activate", methods=["PATCH"])
 @admin_required
 def activate_user(user_id):
     user = User.query.get_or_404(user_id)
-    if user.role in ("admin", "superadmin"):
+    if user.role_key in ("admin", "superadmin"):
         return error_response("Admins and superadmins cannot be managed here.", 403)
     user.is_active = True
     db.session.commit()
     return success_response(message=f"User '{user.name}' activated.")
 
 
-@admin_bp.route("/users/<int:user_id>/deactivate", methods=["PATCH"])
+@admin_bp.route("/users/<user_id>/deactivate", methods=["PATCH"])
 @admin_required
 def deactivate_user(user_id):
     user = User.query.get_or_404(user_id)
-    if user.role in ("admin", "superadmin"):
+    if user.role_key in ("admin", "superadmin"):
         return error_response("Admins and superadmins cannot be managed here.", 403)
     user.is_active = False
     db.session.commit()
     return success_response(message=f"User '{user.name}' deactivated.")
+
+
+@admin_bp.route("/users/<user_id>/role", methods=["PATCH"])
+@admin_required
+def update_user_role(user_id):
+    """
+    Promote/demote a user between 'student' and 'authorized_user'.
+
+    Notes:
+    - Admin/superadmin roles are managed by superadmin routes only.
+    """
+    data = request.get_json(silent=True) or {}
+    role = (data.get("role") or "").strip()
+
+    if role not in ("student", "authorized_user"):
+        return error_response("Invalid role. Allowed: student, authorized_user.", 422)
+
+    user = User.query.get_or_404(user_id)
+    if user.role_key in ("admin", "superadmin"):
+        return error_response("Admins and superadmins cannot be managed here.", 403)
+
+    user.set_role(role)
+    db.session.commit()
+    return success_response(user.to_dict(include_sensitive=True), "User role updated.")
