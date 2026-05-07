@@ -42,13 +42,25 @@ def create_app(config_name: str = None) -> Flask:
     def check_if_token_revoked(jwt_header, jwt_payload):
         return is_token_revoked(jwt_header, jwt_payload)
 
-    from app.routes import auth_bp, admin_bp, superadmin_bp, rooms_bp, reservations_bp
+    from app.routes import (
+        auth_bp,
+        admin_bp,
+        superadmin_bp,
+        rooms_bp,
+        reservations_bp,
+        requests_bp,
+        schedules_bp,
+        profile_bp,
+    )
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(superadmin_bp)
     app.register_blueprint(rooms_bp)
     app.register_blueprint(reservations_bp)
+    app.register_blueprint(requests_bp)
+    app.register_blueprint(schedules_bp)
+    app.register_blueprint(profile_bp)
 
     @app.errorhandler(404)
     def not_found(e):

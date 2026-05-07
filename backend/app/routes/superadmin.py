@@ -4,6 +4,7 @@ from uuid import uuid4
 from flask import Blueprint, request
 from flask_jwt_extended import get_jwt_identity
 from app.extensions import db
+from app.models.reservation import Reservation, ReservationStatus
 from app.models.user import User
 from app.utils import (
     superadmin_required,
@@ -99,9 +100,21 @@ def get_admin(admin_id):
 def update_admin(admin_id):
     admin = User.query.filter(User.id == admin_id, User.role == User.db_role("admin")).first_or_404()
     data  = request.get_json(silent=True) or {}
+    updater_id = get_jwt_identity()
 
     if "name" in data and data["name"].strip():
         admin.name = data["name"].strip()
+
+    if "email" in data:
+        new_email = (data.get("email") or "").strip().lower()
+        if not new_email:
+            return error_response("Email is required.", 422)
+        if not validate_email(new_email):
+            return error_response("Must be a valid email address.", 422)
+        if User.query.filter(User.email == new_email, User.id != admin.id).first():
+            return error_response("Email is already registered.", 409)
+        admin.email = new_email
+
     if "course_section" in data:
         admin.course_section = data["course_section"].strip() or None
     if "is_active" in data:
@@ -112,6 +125,8 @@ def update_admin(admin_id):
             return error_response(msg, 422)
         admin.set_password(data["password"])
 
+    admin.updated_by = updater_id
+    admin.updated_at = datetime.utcnow()
     db.session.commit()
     return success_response(admin.to_dict(include_sensitive=True), "Admin updated.")
 
@@ -121,5 +136,45 @@ def update_admin(admin_id):
 def delete_admin(admin_id):
     admin = User.query.filter(User.id == admin_id, User.role == User.db_role("admin")).first_or_404()
     admin.is_active = False
+    admin.updated_at = datetime.utcnow()
     db.session.commit()
     return success_response(message="Admin account deactivated.")
+
+
+@superadmin_bp.route("/metrics", methods=["GET"])
+@superadmin_required
+def metrics():
+    """Lightweight system activity summary for dashboards."""
+    users_total = User.query.count()
+
+    by_role = {
+        "superadmin": User.query.filter(User.role == User.db_role("superadmin")).count(),
+        "admin": User.query.filter(User.role == User.db_role("admin")).count(),
+        "authorized_user": User.query.filter(User.role == User.db_role("authorized_user")).count(),
+        "student": User.query.filter(User.role == User.db_role("student")).count(),
+    }
+
+    reservations_total = Reservation.query.count()
+    reservations_by_status = {
+        "pending": Reservation.query.filter(
+            Reservation.status == Reservation.db_status(ReservationStatus.PENDING)
+        ).count(),
+        "approved": Reservation.query.filter(
+            Reservation.status == Reservation.db_status(ReservationStatus.APPROVED)
+        ).count(),
+        "rejected": Reservation.query.filter(
+            Reservation.status == Reservation.db_status(ReservationStatus.REJECTED)
+        ).count(),
+        "cancelled": Reservation.query.filter(
+            Reservation.status == Reservation.db_status(ReservationStatus.CANCELLED)
+        ).count(),
+    }
+
+    return success_response(
+        {
+            "users_total": users_total,
+            "users_by_role": by_role,
+            "reservations_total": reservations_total,
+            "reservations_by_status": reservations_by_status,
+        }
+    )

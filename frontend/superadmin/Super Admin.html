@@ -349,65 +349,6 @@
   </div>
   <!-- end .page-shell -->
  
-  <script>
-    let selectedCard = null;
-
-    // Looping for each panel(Edit Details, Saved Changes, Delete panel)
-  function showPanel(id) {
-    ['right-panel-placeholder', 'details-panel', 'delete-panel', 'success-panel']
-      .forEach(p => document.getElementById(p).style.display = p === id ? 'flex' : 'none');
-
-  }
-
-  function showDetails(fname, lname, mi, email, contact, idNum, address, adminLabel) {
-    selectedCard = event.target.closest('.request-card');
-    document.getElementById('input-fname').value       = fname;
-    document.getElementById('input-lname').value       = lname;
-    document.getElementById('input-mi').value          = mi;
-    document.getElementById('input-email').value       = email;
-    document.getElementById('input-contact').value     = contact;
-    document.getElementById('input-id').value          = idNum;
-    document.getElementById('input-address').value     = address;
-    document.getElementById('admin-label').textContent = adminLabel;
-    showPanel('details-panel');
-  }
-
-  function saveDetails() {
-    const fname = document.getElementById('input-fname').value;
-    const lname = document.getElementById('input-lname').value;
-    const mi      = document.getElementById('input-mi').value;
-    const email   = document.getElementById('input-email').value;
-    const contact = document.getElementById('input-contact').value;
-    const idNum   = document.getElementById('input-id').value;
-    const address = document.getElementById('input-address').value;
-    const role  = document.getElementById('admin-label').textContent;
-
-    document.querySelector('.success-info').textContent = `Name: ${fname} ${lname} | Role: ${role}`;
-
-    if (selectedCard) {
-      selectedCard.querySelector('.request-name').textContent = `${fname} ${lname}`;
-      const newCall = `showDetails('${fname}','${lname}','${mi}','${email}','${contact}','${idNum}','${address}','${role}')`;
-      selectedCard.querySelector('.btn-edit').setAttribute('onclick', newCall);
-      selectedCard.querySelector('.view-details').setAttribute('onclick', newCall);
-    }
-    showPanel('success-panel');
-  }
-
-  function showDelete(name, adminLabel) {
-    selectedCard = event.target.closest('.request-card');
-    document.getElementById('delete-name').textContent        = name;
-    document.getElementById('delete-admin-label').textContent = adminLabel;
-    showPanel('delete-panel');
-  }
-
-  function confirmDelete() {
-    if (selectedCard) selectedCard.remove();
-    showPanel('right-panel-placeholder');
-  }
-
-  function hideDetails()  { showPanel('right-panel-placeholder'); }
-  function hideDelete()   { showPanel('right-panel-placeholder'); }
-  function closeSuccess()  { showPanel('right-panel-placeholder'); }
-  </script>
+  <script src="/common/superadmin_admins.js"></script>
 </body>
 </html>
