@@ -3,6 +3,9 @@ from app.routes.admin import admin_bp
 from app.routes.superadmin import superadmin_bp
 from app.routes.rooms import rooms_bp
 from app.routes.reservations import reservations_bp
+from app.routes.requests import requests_bp
+from app.routes.schedules import schedules_bp
+from app.routes.profile import profile_bp
 
 __all__ = [
     "auth_bp",
@@ -10,4 +13,7 @@ __all__ = [
     "superadmin_bp",
     "rooms_bp",
     "reservations_bp",
+    "requests_bp",
+    "schedules_bp",
+    "profile_bp",
 ]
