@@ -20,6 +20,7 @@ from app.utils import (
     paginate_query,
     parse_date,
     parse_time,
+    validate_course_section,
 )
 
 reservations_bp = Blueprint("reservations", __name__, url_prefix="/api/reservations")
@@ -141,6 +142,8 @@ def list_reservations():
 
     status = (request.args.get("status") or "").strip().lower()
     if status:
+        aliases = {"accepted": "approved", "declined": "rejected", "canceled": "cancelled"}
+        status = aliases.get(status, status)
         if status in STATUS_API_TO_DB:
             query = query.filter(Reservation.status == Reservation.db_status(status))
         else:
@@ -290,26 +293,81 @@ def update_reservation(reservation_id: str):
 
     reservation = Reservation.query.get_or_404(reservation_id)
 
-    if user.role_key == "authorized_user" and reservation.user_id != user_id:
+    is_admin = user.role_key in ("admin", "superadmin")
+
+    if not is_admin and reservation.user_id != user_id:
         return error_response("You can only edit your own reservations.", 403)
-    if reservation.status_key != ReservationStatus.PENDING:
-        return error_response("Only pending reservations can be edited.", 409)
+
+    if not is_admin and reservation.status_key not in (ReservationStatus.PENDING, ReservationStatus.APPROVED):
+        return error_response("Only pending/approved reservations can be edited.", 409)
 
     data = request.get_json(silent=True) or {}
-    if "requestor_name" in data and str(data["requestor_name"]).strip():
-        reservation.requestor_name = str(data["requestor_name"]).strip()
-    if "course_section" in data and str(data["course_section"]).strip():
-        reservation.course_section = str(data["course_section"]).strip().upper()
+
+    # -------------------------
+    # Admin-only updates
+    # -------------------------
+    new_status_key = None
+    review_note = None
+    if "status" in data:
+        if not is_admin:
+            return error_response("Only admins can change reservation status.", 403)
+        new_status_key = str(data.get("status") or "").strip().lower()
+        # Accept common UI wording.
+        aliases = {
+            "accepted": ReservationStatus.APPROVED,
+            "declined": ReservationStatus.REJECTED,
+            "canceled": ReservationStatus.CANCELLED,
+        }
+        new_status_key = aliases.get(new_status_key, new_status_key)
+        if new_status_key not in (
+            ReservationStatus.PENDING,
+            ReservationStatus.APPROVED,
+            ReservationStatus.REJECTED,
+            ReservationStatus.CANCELLED,
+        ):
+            return error_response("Invalid status. Allowed: pending, approved, rejected, cancelled.", 422)
+
+    if "review_note" in data:
+        if not is_admin:
+            return error_response("Only admins can set review_note.", 403)
+        review_note = str(data.get("review_note") or "").strip() or None
+
+    # -------------------------
+    # Shared field updates
+    # -------------------------
+    if "requestor_name" in data:
+        next_name = str(data.get("requestor_name") or "").strip()
+        if not next_name:
+            return error_response("requestor_name is required.", 422)
+        reservation.requestor_name = next_name
+
+    if "course_section" in data:
+        next_cs = str(data.get("course_section") or "").strip().upper()
+        if next_cs and not validate_course_section(next_cs):
+            return error_response("course_section must follow the format AAAA X-X (e.g. BSIT 1-1).", 422)
+        reservation.course_section = next_cs or None
+
     if "purpose" in data:
-        reservation.purpose = str(data["purpose"]).strip() or None
+        reservation.purpose = str(data.get("purpose") or "").strip() or None
+
+    # Room change is admin-only (authorized users can only adjust schedule details).
+    new_room_id = reservation.room_id
+    if "room_id" in data:
+        if not is_admin:
+            return error_response("Only admins can change room_id.", 403)
+        next_room = str(data.get("room_id") or "").strip()
+        if not next_room:
+            return error_response("room_id is required.", 422)
+        room = Room.query.get(next_room)
+        if not room or not room.is_active:
+            return error_response("Room not found or inactive.", 404)
+        new_room_id = next_room
 
     new_date = reservation.date
     if "date" in data:
         parsed_date = parse_date(data.get("date"))
         if not parsed_date:
             return error_response("Invalid date format. Use YYYY-MM-DD.", 422)
-        if parsed_date < datetime.utcnow().date():
-            return error_response("Cannot make a reservation for a past date.", 422)
         new_date = parsed_date
 
     new_start = reservation.start_time
@@ -329,38 +387,143 @@ def update_reservation(reservation_id: str):
     if new_start >= new_end:
         return error_response("start_time must be before end_time.", 422)
 
-    if (new_date, new_start, new_end) != (reservation.date, reservation.start_time, reservation.end_time):
-        if Reservation.has_conflict(reservation.room_id, new_date, new_start, new_end, exclude_id=reservation.id):
-            return error_response("Updated time slot conflicts with an existing reservation.", 409)
+    slot_changed = (new_room_id, new_date, new_start, new_end) != (
+        reservation.room_id,
+        reservation.date,
+        reservation.start_time,
+        reservation.end_time,
+    )
 
-        # Also avoid overlapping class schedules.
-        room = Room.query.get(reservation.room_id)
-        if room and new_date and new_start and new_end:
-            day_name = new_date.strftime("%A")
-            room_tokens = {normalize_room_token(room.id), normalize_room_token(room.code)}
+    # If an authorized user edits an approved reservation's schedule, re-queue it for approval.
+    if not is_admin and reservation.status_key == ReservationStatus.APPROVED and slot_changed:
+        new_status_key = ReservationStatus.PENDING
 
-            start_t = parse_time(new_start)
-            end_t = parse_time(new_end)
-            if start_t and end_t:
-                start_min = start_t.hour * 60 + start_t.minute
-                end_min = end_t.hour * 60 + end_t.minute
-            else:
-                start_min = None
-                end_min = None
+    # Validate "past" rule for active statuses.
+    effective_status = new_status_key or reservation.status_key
+    if effective_status in (ReservationStatus.PENDING, ReservationStatus.APPROVED):
+        if new_date and new_date < datetime.utcnow().date():
+            return error_response("Cannot set a reservation to a past date.", 422)
 
-            if start_min is not None and end_min is not None and start_min < end_min:
-                class_schedules = Schedule.query.filter(db.func.lower(Schedule.day) == day_name.lower()).all()
-                for s in class_schedules:
-                    if not s or not s.room_token or s.room_token not in room_tokens:
-                        continue
-                    if s.overlaps(start_min, end_min):
-                        label = s.subject_code or s.subject or "scheduled class"
-                        return error_response(f"Updated time slot overlaps a {label} schedule.", 409)
+    if slot_changed:
+        # Only check conflicts / schedule overlap when the reservation can affect availability.
+        if effective_status in (ReservationStatus.PENDING, ReservationStatus.APPROVED):
+            if Reservation.has_conflict(new_room_id, new_date, new_start, new_end, exclude_id=reservation.id):
+                return error_response("Updated time slot conflicts with an existing reservation.", 409)
 
+            # Also avoid overlapping class schedules.
+            room = Room.query.get(new_room_id)
+            if room and new_date and new_start and new_end:
+                day_name = new_date.strftime("%A")
+                room_tokens = {normalize_room_token(room.id), normalize_room_token(room.code)}
+
+                start_t = parse_time(new_start)
+                end_t = parse_time(new_end)
+                if start_t and end_t:
+                    start_min = start_t.hour * 60 + start_t.minute
+                    end_min = end_t.hour * 60 + end_t.minute
+                else:
+                    start_min = None
+                    end_min = None
+
+                if start_min is not None and end_min is not None and start_min < end_min:
+                    class_schedules = Schedule.query.filter(db.func.lower(Schedule.day) == day_name.lower()).all()
+                    for s in class_schedules:
+                        if not s or not s.room_token or s.room_token not in room_tokens:
+                            continue
+                        if s.overlaps(start_min, end_min):
+                            label = s.subject_code or s.subject or "scheduled class"
+                            return error_response(f"Updated time slot overlaps a {label} schedule.", 409)
+
+        reservation.room_id = new_room_id
         reservation.date = new_date
         reservation.start_time = new_start
         reservation.end_time = new_end
 
+    # Apply status changes last, so validations see the final slot.
+    if new_status_key:
+        if new_status_key == ReservationStatus.APPROVED:
+            # Approving a reservation makes it active -> verify again.
+            if Reservation.has_conflict(new_room_id, new_date, new_start, new_end, exclude_id=reservation.id):
+                return error_response("Cannot approve: another reservation already occupies this slot.", 409)
+
+            room = Room.query.get(new_room_id)
+            if room and new_date and new_start and new_end:
+                day_name = new_date.strftime("%A")
+                room_tokens = {normalize_room_token(room.id), normalize_room_token(room.code)}
+
+                start_t = parse_time(new_start)
+                end_t = parse_time(new_end)
+                if start_t and end_t:
+                    start_min = start_t.hour * 60 + start_t.minute
+                    end_min = end_t.hour * 60 + end_t.minute
+                else:
+                    start_min = None
+                    end_min = None
+
+                if start_min is not None and end_min is not None and start_min < end_min:
+                    class_schedules = Schedule.query.filter(db.func.lower(Schedule.day) == day_name.lower()).all()
+                    for s in class_schedules:
+                        if not s or not s.room_token or s.room_token not in room_tokens:
+                            continue
+                        if s.overlaps(start_min, end_min):
+                            label = s.subject_code or s.subject or "scheduled class"
+                            return error_response(f"Cannot approve: room is occupied by a {label} schedule.", 409)
+
+            reservation.status = Reservation.db_status(ReservationStatus.APPROVED)
+            reservation.reviewed_by = user_id
+            reservation.reviewed_at = datetime.utcnow()
+            reservation.review_note = review_note
+
+        elif new_status_key == ReservationStatus.REJECTED:
+            reservation.status = Reservation.db_status(ReservationStatus.REJECTED)
+            reservation.reviewed_by = user_id
+            reservation.reviewed_at = datetime.utcnow()
+            reservation.review_note = review_note
+
+        elif new_status_key == ReservationStatus.CANCELLED:
+            reservation.status = Reservation.db_status(ReservationStatus.CANCELLED)
+            reservation.reviewed_by = None
+            reservation.reviewed_at = None
+            reservation.review_note = None
+
+        elif new_status_key == ReservationStatus.PENDING:
+            reservation.status = Reservation.db_status(ReservationStatus.PENDING)
+            reservation.reviewed_by = None
+            reservation.reviewed_at = None
+            reservation.review_note = None
+
     reservation.updated_at = datetime.utcnow()
     db.session.commit()
     return success_response(reservation.to_dict(), "Reservation updated.")
+
+
+@reservations_bp.route("/<reservation_id>", methods=["DELETE"])
+@authorized_user_required
+def delete_reservation(reservation_id: str):
+    """Delete a reservation.
+
+    - Authorized users: soft-delete (cancel) their own reservation.
+    - Admin/superadmin: hard-delete any reservation record.
+    """
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+    if not user or not user.is_active:
+        return error_response("Account inactive.", 403)
+
+    reservation = Reservation.query.get_or_404(reservation_id)
+
+    if user.role_key == "authorized_user" and reservation.user_id != user_id:
+        return error_response("You can only delete your own reservations.", 403)
+
+    if user.role_key == "authorized_user":
+        if reservation.status_key == ReservationStatus.CANCELLED:
+            return error_response("Reservation is already cancelled.", 409)
+        reservation.status = Reservation.db_status(ReservationStatus.CANCELLED)
+        reservation.updated_at = datetime.utcnow()
+        db.session.commit()
+        return success_response(reservation.to_dict(), "Reservation cancelled.")
+
+    # Admin / superadmin: remove from history entirely.
+    db.session.delete(reservation)
+    db.session.commit()
+    return success_response(message="Reservation deleted.")

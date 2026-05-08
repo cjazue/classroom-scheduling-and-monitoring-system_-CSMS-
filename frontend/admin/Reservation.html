@@ -86,7 +86,7 @@
         <!-- Reservation Requests -->
         <div class="request-panel">
           <div class="panel-header">
-            <span class="panel-title">Reservation Request</span>
+            <span class="panel-title">Reservation Management</span>
             <i class="fa-solid fa-chevron-right panel-arrow"></i>
           </div>
           <div class="request-list">
@@ -318,6 +318,18 @@
       return String(full || '').trim();
     }
 
+    function setReservationCount(n) {
+      const cards = document.querySelectorAll('.stats-row .stat-card');
+      for (const card of cards) {
+        const text = (card.textContent || '').toLowerCase();
+        if (text.includes('reservation') && !text.includes('total room') && !text.includes('users')) {
+          const strong = card.querySelector('strong');
+          if (strong) strong.textContent = String(n);
+          break;
+        }
+      }
+    }
+
     function showModal() {
       const overlay = document.getElementById('successModal');
       if (overlay) overlay.classList.add('active');
@@ -326,6 +338,42 @@
     function hideModal() {
       const overlay = document.getElementById('successModal');
       if (overlay) overlay.classList.remove('active');
+    }
+
+    function statusKey(reservation) {
+      return String((reservation && reservation.status) ? reservation.status : 'pending').toLowerCase();
+    }
+
+    function sectionTitle(text) {
+      const t = document.createElement('div');
+      t.style.padding = '14px 6px 6px';
+      t.style.fontWeight = '900';
+      t.style.color = '#ffffff';
+      t.style.opacity = '0.95';
+      t.style.letterSpacing = '0.03em';
+      t.textContent = text;
+      return t;
+    }
+
+    async function fetchAllReservations(queryString) {
+      const all = [];
+      let page = 1;
+      const qs = queryString ? String(queryString) : '';
+      const base = '/api/reservations?per_page=100';
+
+      for (let i = 0; i < 200; i++) {
+        const url = `${base}&page=${page}${qs ? '&' + qs : ''}`;
+        const resp = await window.CSMS.api.request(url, { method: 'GET' });
+        const payload = resp && resp.data ? resp.data : null;
+        const items = payload && Array.isArray(payload.items) ? payload.items : [];
+        all.push.apply(all, items);
+
+        const hasNext = !!(payload && payload.pagination && payload.pagination.has_next);
+        if (!hasNext) break;
+        page += 1;
+      }
+
+      return all;
     }
 
     function renderCard(reservation) {
@@ -344,7 +392,9 @@
       sub.className = 'request-sub';
       const cs = reservation.course_section ? reservation.course_section : '—';
       const room = reservation.room ? reservation.room : null;
-      sub.textContent = `${roomLabel(room, reservation.room_id)} | ${cs}`;
+      const rawSt = statusKey(reservation);
+      const st = rawSt === 'approved' ? 'ACCEPTED' : rawSt.toUpperCase();
+      sub.textContent = `${st} | ${roomLabel(room, reservation.room_id)} | ${cs}`;
 
       const view = document.createElement('a');
       view.className = 'view-details';
@@ -362,29 +412,47 @@
       const actions = document.createElement('div');
       actions.className = 'request-actions';
 
-      const approve = document.createElement('button');
-      approve.className = 'btn-approve';
-      approve.textContent = 'Accept';
-      approve.addEventListener('click', function () {
-        window.acceptRequest(approve);
-      });
+      if (statusKey(reservation) === 'pending') {
+        const approve = document.createElement('button');
+        approve.className = 'btn-approve';
+        approve.textContent = 'Accept';
+        approve.addEventListener('click', function () {
+          window.acceptRequest(approve);
+        });
 
-      const decline = document.createElement('button');
-      decline.className = 'btn-decline';
-      decline.textContent = 'Decline';
-      decline.addEventListener('click', function () {
-        window.declineRequest(decline);
-      });
+        const decline = document.createElement('button');
+        decline.className = 'btn-decline';
+        decline.textContent = 'Decline';
+        decline.addEventListener('click', function () {
+          window.declineRequest(decline);
+        });
 
-      actions.appendChild(approve);
-      actions.appendChild(decline);
+        actions.appendChild(approve);
+        actions.appendChild(decline);
+      }
+
+      const editBtn = document.createElement('button');
+      editBtn.className = 'btn-decline';
+      editBtn.textContent = 'Edit';
+      editBtn.addEventListener('click', function () {
+        window.editReservation(editBtn);
+      });
+      actions.appendChild(editBtn);
+
+      const delBtn = document.createElement('button');
+      delBtn.className = 'btn-decline';
+      delBtn.textContent = 'Delete';
+      delBtn.addEventListener('click', function () {
+        window.deleteReservation(delBtn);
+      });
+      actions.appendChild(delBtn);
 
       card.appendChild(info);
       card.appendChild(actions);
       return card;
     }
 
-    async function loadPendingReservations() {
+    async function loadReservations() {
       if (!window.CSMS || !window.CSMS.api || typeof window.CSMS.api.request !== 'function') return;
 
       const list = document.querySelector('.request-list');
@@ -394,17 +462,44 @@
       reservationsById.clear();
 
       try {
-        const resp = await window.CSMS.api.request('/api/reservations?status=pending&per_page=100', {
-          method: 'GET',
-        });
-        const items =
-          resp && resp.data && resp.data.items && Array.isArray(resp.data.items) ? resp.data.items : [];
+        const items = await fetchAllReservations('');
+        setReservationCount(items.length);
 
         items.forEach(function (r) {
           if (!r || !r.id) return;
           reservationsById.set(r.id, r);
-          list.appendChild(renderCard(r));
         });
+
+        const pending = items.filter((r) => statusKey(r) === 'pending');
+        const history = items.filter((r) => statusKey(r) !== 'pending');
+
+        list.appendChild(sectionTitle('Pending Requests'));
+        if (!pending.length) {
+          const empty = document.createElement('div');
+          empty.style.padding = '10px 6px';
+          empty.style.color = 'rgba(255,255,255,0.85)';
+          empty.style.fontWeight = '700';
+          empty.textContent = 'No pending requests.';
+          list.appendChild(empty);
+        } else {
+          pending.forEach(function (r) {
+            list.appendChild(renderCard(r));
+          });
+        }
+
+        list.appendChild(sectionTitle('Reservation History'));
+        if (!history.length) {
+          const empty2 = document.createElement('div');
+          empty2.style.padding = '10px 6px 14px';
+          empty2.style.color = 'rgba(255,255,255,0.85)';
+          empty2.style.fontWeight = '700';
+          empty2.textContent = 'No processed reservations yet.';
+          list.appendChild(empty2);
+        } else {
+          history.forEach(function (r) {
+            list.appendChild(renderCard(r));
+          });
+        }
       } catch (e) {
         alert(e && e.message ? e.message : 'Failed to load reservation requests.');
       }
@@ -449,9 +544,8 @@
 
       try {
         await window.CSMS.api.request(`/api/reservations/${encodeURIComponent(id)}/approve`, { method: 'PATCH' });
-        reservationsById.delete(id);
-        if (card) card.remove();
         hideModal();
+        await loadReservations();
       } catch (e) {
         alert(e && e.message ? e.message : 'Failed to approve reservation.');
       }
@@ -467,16 +561,88 @@
           method: 'PATCH',
           body: { review_note: '' },
         });
-        reservationsById.delete(id);
-        if (card) card.remove();
         hideModal();
+        await loadReservations();
       } catch (e) {
         alert(e && e.message ? e.message : 'Failed to reject reservation.');
       }
     };
 
+    window.editReservation = async function (btn) {
+      const card = btn && btn.closest ? btn.closest('.request-card') : null;
+      const id = card ? card.dataset.reservationId : null;
+      const r = id ? reservationsById.get(id) : null;
+      if (!r) return;
+
+      const nextStatus = window.prompt('Update status (pending/approved/rejected/cancelled):', statusKey(r));
+      if (nextStatus === null) return;
+
+      const st = String(nextStatus || '').trim().toLowerCase();
+      let nextNote = null;
+      if (st === 'rejected') {
+        nextNote = window.prompt('Review note (optional):', r.review_note || '');
+        if (nextNote === null) return;
+      }
+
+      const nextRoom = window.prompt('Update room_id (e.g. RM201):', r.room_id || '');
+      if (nextRoom === null) return;
+
+      const nextDate = window.prompt('Update date (YYYY-MM-DD):', r.date || '');
+      if (nextDate === null) return;
+
+      const nextStart = window.prompt('Update start time (HH:MM):', r.start_time || '');
+      if (nextStart === null) return;
+
+      const nextEnd = window.prompt('Update end time (HH:MM):', r.end_time || '');
+      if (nextEnd === null) return;
+
+      const nextPurpose = window.prompt('Update purpose (optional):', r.purpose || '');
+      if (nextPurpose === null) return;
+
+      const patch = {};
+      const roomId = String(nextRoom || '').trim();
+      const dateVal = String(nextDate || '').trim();
+      const startVal = String(nextStart || '').trim();
+      const endVal = String(nextEnd || '').trim();
+
+      if (st) patch.status = st;
+      if (roomId) patch.room_id = roomId;
+      if (dateVal) patch.date = dateVal;
+      if (startVal) patch.start_time = startVal;
+      if (endVal) patch.end_time = endVal;
+      patch.purpose = String(nextPurpose || '').trim();
+      if (st === 'rejected') patch.review_note = String(nextNote || '').trim();
+
+      try {
+        await window.CSMS.api.request(`/api/reservations/${encodeURIComponent(id)}`, {
+          method: 'PATCH',
+          body: patch,
+        });
+        hideModal();
+        await loadReservations();
+      } catch (e) {
+        alert(e && e.message ? e.message : 'Failed to update reservation.');
+      }
+    };
+
+    window.deleteReservation = async function (btn) {
+      const card = btn && btn.closest ? btn.closest('.request-card') : null;
+      const id = card ? card.dataset.reservationId : null;
+      if (!id) return;
+      if (!window.confirm('Delete this reservation record?')) return;
+
+      try {
+        await window.CSMS.api.request(`/api/reservations/${encodeURIComponent(id)}`, { method: 'DELETE' });
+        hideModal();
+        await loadReservations();
+      } catch (e) {
+        alert(e && e.message ? e.message : 'Failed to delete reservation.');
+      }
+    };
+
     document.addEventListener('DOMContentLoaded', function () {
-      loadPendingReservations();
+      loadReservations();
+      setInterval(loadReservations, 15000);
 
       const overlay = document.getElementById('successModal');
       if (overlay) {

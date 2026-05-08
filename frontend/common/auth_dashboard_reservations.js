@@ -50,6 +50,16 @@
     return 'res-status';
   }
 
+  function canEdit(status) {
+    const s = String(status || '').toLowerCase();
+    return s === 'pending' || s === 'approved';
+  }
+
+  function canCancel(status) {
+    const s = String(status || '').toLowerCase();
+    return s === 'pending' || s === 'approved';
+  }
+
   function parseLocalDateTime(dateIso, hhmm) {
     if (!dateIso || !hhmm) return null;
     const dt = new Date(String(dateIso) + 'T' + String(hhmm) + ':00');
@@ -109,7 +119,8 @@
       }
 
       const r = list[0];
-      const st = String(r.status || '—').toUpperCase();
+      const rawSt = String(r.status || '—').toLowerCase();
+      const st = rawSt === 'approved' ? 'ACCEPTED' : String(r.status || '—').toUpperCase();
       const dateLabel = prettyDate(r.date);
       statusEl.textContent = `${st} • ${dateLabel}`;
     });
@@ -130,7 +141,8 @@
 
     const st = document.createElement('div');
     st.className = statusClass(r.status);
-    st.textContent = (r.status || '—').toUpperCase();
+    const rawStatus = String(r.status || '—').toLowerCase();
+    st.textContent = rawStatus === 'approved' ? 'ACCEPTED' : String(r.status || '—').toUpperCase();
 
     top.appendChild(title);
     top.appendChild(st);
@@ -158,7 +170,82 @@
     card.appendChild(top);
     card.appendChild(meta);
 
+    const actions = document.createElement('div');
+    actions.className = 'res-actions';
+
+    if (canEdit(r.status)) {
+      const editBtn = document.createElement('button');
+      editBtn.type = 'button';
+      editBtn.className = 'res-action-btn res-action-btn--secondary';
+      editBtn.textContent = 'Edit';
+      editBtn.addEventListener('click', function () {
+        editReservation(r);
+      });
+      actions.appendChild(editBtn);
+    }
+
+    if (canCancel(r.status)) {
+      const cancelBtn = document.createElement('button');
+      cancelBtn.type = 'button';
+      cancelBtn.className = 'res-action-btn res-action-btn--danger';
+      cancelBtn.textContent = 'Cancel';
+      cancelBtn.addEventListener('click', function () {
+        cancelReservation(r);
+      });
+      actions.appendChild(cancelBtn);
+    }
+
+    if (actions.childNodes.length) card.appendChild(actions);
+
     return card;
+  }
+
+  async function editReservation(r) {
+    if (!r || !r.id) return;
+    if (!window.CSMS || !window.CSMS.api || typeof window.CSMS.api.request !== 'function') return;
+
+    const nextDate = window.prompt('Update date (YYYY-MM-DD):', r.date || '');
+    if (nextDate === null) return;
+
+    const nextStart = window.prompt('Update start time (HH:MM):', r.start_time || '');
+    if (nextStart === null) return;
+
+    const nextEnd = window.prompt('Update end time (HH:MM):', r.end_time || '');
+    if (nextEnd === null) return;
+
+    const nextPurpose = window.prompt('Update purpose (optional):', r.purpose || '');
+    if (nextPurpose === null) return;
+
+    const patch = {};
+    if (String(nextDate || '').trim()) patch.date = String(nextDate).trim();
+    if (String(nextStart || '').trim()) patch.start_time = String(nextStart).trim();
+    if (String(nextEnd || '').trim()) patch.end_time = String(nextEnd).trim();
+    patch.purpose = String(nextPurpose || '').trim();
+
+    try {
+      await window.CSMS.api.request(`/api/reservations/${encodeURIComponent(r.id)}`, {
+        method: 'PATCH',
+        body: patch,
+      });
+      await loadMyReservations();
+    } catch (e) {
+      window.alert(e && e.message ? e.message : 'Failed to update reservation.');
+    }
+  }
+
+  async function cancelReservation(r) {
+    if (!r || !r.id) return;
+    if (!window.confirm('Cancel this reservation?')) return;
+    if (!window.CSMS || !window.CSMS.api || typeof window.CSMS.api.request !== 'function') return;
+
+    try {
+      await window.CSMS.api.request(`/api/reservations/${encodeURIComponent(r.id)}/cancel`, {
+        method: 'PATCH',
+      });
+      await loadMyReservations();
+    } catch (e) {
+      window.alert(e && e.message ? e.message : 'Failed to cancel reservation.');
+    }
   }
 
   async function loadMyReservations() {
