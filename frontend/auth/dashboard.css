@@ -597,6 +597,41 @@
     font-weight: 700;
   }
 
+  .res-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: 2px;
+  }
+
+  .res-action-btn {
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+
+  .res-action-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .res-action-btn--secondary {
+    background: #ffffff;
+    color: #043AA3;
+    border: 1.5px solid rgba(4, 58, 163, 0.25);
+  }
+
+  .res-action-btn--danger {
+    background: rgba(220, 53, 69, 0.12);
+    color: #9a1b28;
+    border: 1.5px solid rgba(220, 53, 69, 0.35);
+  }
+
   @media (max-width: 900px) {
     .my-res-list { grid-template-columns: 1fr; }
   }
