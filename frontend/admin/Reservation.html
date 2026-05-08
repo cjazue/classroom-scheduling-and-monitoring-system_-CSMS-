@@ -54,10 +54,10 @@
         </section>
 
         <section class="stats-row">
-          <a href="PermissionReq.html"><article class="stat-card stat-card-muted">
+          <a href="Users.html"><article class="stat-card stat-card-muted">
             <span class="stat-bar" aria-hidden="true"></span>
             <div class="stat-copy">
-            <p>Request Permission</p>
+            <p>Users</p>
               <strong>0</strong>
             </div>
           </article>
@@ -311,6 +311,13 @@
       if (el) el.textContent = value || '—';
     }
 
+    function displayName(full) {
+      if (window.CSMS && window.CSMS.format && typeof window.CSMS.format.displayName === 'function') {
+        return window.CSMS.format.displayName(full);
+      }
+      return String(full || '').trim();
+    }
+
     function showModal() {
       const overlay = document.getElementById('successModal');
       if (overlay) overlay.classList.add('active');
@@ -331,7 +338,7 @@
 
       const name = document.createElement('div');
       name.className = 'request-name';
-      name.textContent = reservation.requestor_name || 'Unknown';
+      name.textContent = displayName(reservation.requestor_name) || 'Unknown';
 
       const sub = document.createElement('div');
       sub.className = 'request-sub';
@@ -416,7 +423,7 @@
       const roomLbl = roomLabel(room, r.room_id);
       const reason = r.purpose ? r.purpose : '—';
 
-      setText('successStudentName', r.requestor_name || '—');
+      setText('successStudentName', displayName(r.requestor_name) || '—');
       // UI label says "Subject"; best-fit is Course/Section.
       setText('successSubject', r.course_section || '—');
       setText('successRoomBadge', roomLbl);

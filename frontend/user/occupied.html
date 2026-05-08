@@ -133,74 +133,32 @@
             </div>
           </div>
 
-          <div class="table-shell">
-            <div class="table-head">
-              <span>Name</span>
-              <span>Section</span>
-              <span>Date</span>
-              <span>Building</span>
-              <span>Room</span>
-              <span>TIME</span>
-            </div>
-
-            <div class="table-row green">
-              <span>Carl Tarug</span>
-              <span>BSIT 1-8</span>
-              <span>04/16/2026</span>
-              <span>NB</span>
-              <span>369</span>
-              <span>12:30PM - 1:00PM</span>
-            </div>
-
-            <div class="table-row">
-              <span>Kent Espelita</span>
-              <span>BSIT 1-10</span>
-              <span>04/01/2026</span>
-              <span>NB</span>
-              <span>301</span>
-              <span>12:30PM - 1:00PM</span>
-            </div>
-
-            <div class="table-row green">
-              <span>Mark Aldren Llagas</span>
-              <span>BSIT 1-9</span>
-              <span>04/10/2026</span>
-              <span>CAS</span>
-              <span>301</span>
-              <span>12:30PM - 1:00PM</span>
-            </div>
-
-            <div class="table-row green">
-              <span>Mark Aldren Llagas</span>
-              <span>BSIT 1-9</span>
-              <span>04/18/2026</span>
-              <span>CAS</span>
-              <span>301</span>
-              <span>12:30PM - 1:00PM</span>
-            </div>
-
-            <div class="table-row green">
-              <span>Mark Aldren Llagas</span>
-              <span>BSIT 1-9</span>
-              <span>04/16/2026</span>
-              <span>CAS</span>
-              <span>301</span>
-              <span>12:30PM - 1:00PM</span>
+          <div class="table-section">
+            <div class="table-section-title">Occupied by Official Schedules</div>
+            <div class="table-shell" id="scheduleTable">
+              <div class="table-head">
+                <span>Subject</span>
+                <span>Section</span>
+                <span>Date</span>
+                <span>Building</span>
+                <span>Room</span>
+                <span>TIME</span>
               </div>
-
-                          <div class="table-row green">
-              <span>Mark Aldren Llagas</span>
-              <span>BSIT 1-9</span>
-              <span>04/16/2026</span>
-              <span>CAS</span>
-              <span>301</span>
-              <span>12:30PM - 1:00PM</span>
             </div>
-          
+          </div>
 
-              
-
-            
+          <div class="table-section">
+            <div class="table-section-title">Occupied by Reservations</div>
+            <div class="table-shell" id="reservationTable">
+              <div class="table-head">
+                <span>Requestor</span>
+                <span>Section</span>
+                <span>Date</span>
+                <span>Building</span>
+                <span>Room</span>
+                <span>TIME</span>
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -211,7 +169,8 @@
     'use strict';
 
     const searchInput = document.querySelector('.search-box input');
-    const tableShell = document.querySelector('.table-shell');
+    const scheduleShell = document.getElementById('scheduleTable');
+    const reservationShell = document.getElementById('reservationTable');
     const stats = document.querySelectorAll('.stats-row strong');
     const startInput = document.getElementById('slotStart');
     const endInput = document.getElementById('slotEnd');
@@ -250,9 +209,9 @@
       if (b === 'CAS') row.classList.add('blue');
     }
 
-    function clearRows() {
-      if (!tableShell) return;
-      tableShell.querySelectorAll('.table-row').forEach(function (row) {
+    function clearRows(shell) {
+      if (!shell) return;
+      shell.querySelectorAll('.table-row').forEach(function (row) {
         row.remove();
       });
     }
@@ -277,8 +236,8 @@
       return { start, end };
     }
 
-    function renderRows(events, iso) {
-      clearRows();
+    function renderRows(shell, events, iso) {
+      clearRows(shell);
 
       const dateLabel = mmddyyyyFromIso(iso);
 
@@ -304,7 +263,9 @@
           end = s.end_time || null;
         } else if (ev && ev.type === 'reservation') {
           const r = ev.reservation || {};
-          name = r.requestor_name || '—';
+          name = (window.CSMS && window.CSMS.format && typeof window.CSMS.format.displayName === 'function')
+            ? (window.CSMS.format.displayName(r.requestor_name) || '—')
+            : (r.requestor_name || '—');
           section = r.course_section || '—';
           start = r.start_time || null;
           end = r.end_time || null;
@@ -317,7 +278,7 @@
         row.appendChild(makeSpan(formatRoomCell(room, room && room.id ? room.id : '')));
         row.appendChild(makeSpan(`${to12hCompact(start)} - ${to12hCompact(end)}`));
 
-        tableShell.appendChild(row);
+        shell.appendChild(row);
       });
     }
 
@@ -326,7 +287,8 @@
 
       if (!window.CSMS || !window.CSMS.api || typeof window.CSMS.api.request !== 'function') return;
 
-      clearRows();
+      clearRows(scheduleShell);
+      clearRows(reservationShell);
 
       const slot = getSlotTimes();
       if (!slot.start || !slot.end || slot.start >= slot.end) {
@@ -363,7 +325,10 @@
         const items = data && Array.isArray(data.events) ? data.events : [];
         const occupiedRoomsCount = data && Array.isArray(data.occupied_room_ids) ? data.occupied_room_ids.length : null;
 
-        renderRows(items, iso);
+        const schedulesOnly = items.filter((e) => e && e.type === 'schedule');
+        const reservationsOnly = items.filter((e) => e && e.type === 'reservation');
+        renderRows(scheduleShell, schedulesOnly, iso);
+        renderRows(reservationShell, reservationsOnly, iso);
         if (typeof availableRooms === 'number') setStat(1, availableRooms);
         if (typeof totalRooms === 'number') setStat(2, totalRooms);
         setStat(
@@ -379,13 +344,15 @@
 
     function applySearchFilter() {
       const value = searchInput && searchInput.value ? searchInput.value.toLowerCase() : '';
-      if (!tableShell) return;
-      tableShell.querySelectorAll('.table-row').forEach(function (row) {
-        const spans = row.querySelectorAll('span');
-        const rowText = Array.from(spans)
-          .map((s) => (s.textContent || '').toLowerCase())
-          .join(' ');
-        row.style.display = !value || rowText.includes(value) ? 'grid' : 'none';
+      const shells = [scheduleShell, reservationShell].filter(Boolean);
+      shells.forEach(function (shell) {
+        shell.querySelectorAll('.table-row').forEach(function (row) {
+          const spans = row.querySelectorAll('span');
+          const rowText = Array.from(spans)
+            .map((s) => (s.textContent || '').toLowerCase())
+            .join(' ');
+          row.style.display = !value || rowText.includes(value) ? 'grid' : 'none';
+        });
       });
     }
 

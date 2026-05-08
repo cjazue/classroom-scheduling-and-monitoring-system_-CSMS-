@@ -262,7 +262,7 @@ svg {
   background: var(--light-panel);
   border-radius: 24px;
   padding: 22px 20px;
-    height: 566px;
+  min-height: 566px;
   overflow: auto;
 }
 
@@ -329,10 +329,22 @@ svg {
   color: #6d7483;
 }
 
+.table-section {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.table-section-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--blue-main);
+  padding: 0 6px;
+}
 
 .table-shell {
   max-width: 1020px;
-  max-height: 382px;
+  max-height: 240px;
   margin: 0 auto;
   overflow-y: auto;
   border-radius: 8px;
@@ -379,6 +391,10 @@ svg {
 
 .table-row.green {
   background: var(--green-row);
+}
+
+.table-row.blue {
+  background: var(--blue-2);
 }
 
 @media (max-width: 1280px) {

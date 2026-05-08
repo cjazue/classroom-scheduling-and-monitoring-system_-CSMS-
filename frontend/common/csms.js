@@ -182,6 +182,39 @@
   const CSMS = {
     storage: STORAGE,
     api: { request },
+    format: {
+      displayName(full) {
+        const s = String(full || '').trim().replace(/\s+/g, ' ');
+        if (!s) return '';
+
+        // Support "LAST, FIRST MIDDLE"
+        if (s.includes(',')) {
+          const parts = s.split(',').map((p) => p.trim()).filter(Boolean);
+          if (parts.length >= 2) {
+            const last = parts[0];
+            const rest = parts.slice(1).join(' ');
+            return CSMS.format.displayName(`${rest} ${last}`);
+          }
+        }
+
+        const parts = s.split(' ').filter(Boolean);
+        if (parts.length === 1) return parts[0];
+        if (parts.length === 2) return `${parts[0]} ${parts[1]}`;
+
+        const suffixRaw = parts[parts.length - 1] || '';
+        const suffixKey = suffixRaw.replace(/\./g, '').toUpperCase();
+        const knownSuffix = suffixKey === 'JR' || suffixKey === 'SR' || suffixKey === 'II' || suffixKey === 'III' || suffixKey === 'IV' || suffixKey === 'V';
+
+        const first = parts[0];
+        const last = knownSuffix ? parts[parts.length - 2] : parts[parts.length - 1];
+        const middle = parts[1] || '';
+        const mi = middle ? String(middle).replace(/[^a-zA-Z]/g, '').slice(0, 1).toUpperCase() : '';
+
+        let out = mi ? `${first} ${mi}. ${last}` : `${first} ${last}`;
+        if (knownSuffix) out += ` ${suffixRaw}`;
+        return out;
+      },
+    },
     auth: {
       isLoggedIn() {
         return !!getAccessToken() && !!getRefreshToken();

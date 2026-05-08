@@ -2,7 +2,7 @@
  *
  * - Loads the current user via /api/auth/me
  * - Replaces placeholder profile text with real DB values
- * - Optional: allows quick edits via prompts (name, course/section, password)
+ * - View-only profile rendering (no edits)
  */
 
 (function () {
@@ -23,10 +23,11 @@
     }
   }
 
-  function firstName(full) {
-    const s = (full || '').trim();
-    if (!s) return '';
-    return s.split(/\s+/)[0] || s;
+  function displayName(full) {
+    if (window.CSMS && window.CSMS.format && typeof window.CSMS.format.displayName === 'function') {
+      return window.CSMS.format.displayName(full);
+    }
+    return String(full || '').trim();
   }
 
   function setInfoRowValue(row, value) {
@@ -57,7 +58,7 @@
 
     const hello = document.querySelector('.profile-card .card-header h1');
     if (hello) {
-      const name = firstName(user.name) || 'there';
+      const name = displayName(user.name) || 'there';
       hello.textContent = `Hello, ${name}!`;
     }
 
@@ -69,7 +70,7 @@
         .trim()
         .toLowerCase();
 
-      if (key === 'name') setInfoRowValue(row, user.name || '—');
+      if (key === 'name') setInfoRowValue(row, displayName(user.name) || '—');
       else if (key === 'position') setInfoRowValue(row, roleLabel(user.role));
       else if (key === 'subject') {
         const v =
@@ -87,44 +88,12 @@
     });
 
     const profileBtn = document.querySelector('.profile-card .profile-btn');
-    if (!profileBtn) return;
+    if (profileBtn) profileBtn.style.display = 'none';
 
-    if (profileBtn.dataset && profileBtn.dataset.csmsWired === '1') return;
-    if (profileBtn.dataset) profileBtn.dataset.csmsWired = '1';
-
-    profileBtn.addEventListener('click', async function (e) {
-      e.preventDefault();
-
-      const current = (window.CSMS && window.CSMS.auth && window.CSMS.auth.getUser)
-        ? window.CSMS.auth.getUser()
-        : user;
-
-      const nextName = window.prompt('Update name:', current && current.name ? current.name : '');
-      if (nextName === null) return;
-
-      const patch = { name: String(nextName || '').trim() };
-
-      if (current && (current.role === 'authorized_user' || current.role === 'student')) {
-        const nextCS = window.prompt(
-          'Update course/section (e.g. BSIT 1-1):',
-          current && current.course_section ? current.course_section : ''
-        );
-        if (nextCS === null) return;
-        patch.course_section = String(nextCS || '').trim().toUpperCase();
-      }
-
-      const nextPw = window.prompt('New password (leave blank to keep):', '');
-      if (nextPw === null) return;
-      if (String(nextPw || '').trim()) patch.password = String(nextPw);
-
-      try {
-        const updated = await window.CSMS.auth.updateMe(patch);
-        if (updated) await renderProfile();
-        window.alert('Profile updated.');
-      } catch (err) {
-        window.alert(err && err.message ? err.message : 'Failed to update profile.');
-      }
-    });
+    const changePicture = document.querySelector('.profile-card .change-picture');
+    if (changePicture) changePicture.style.display = 'none';
+    const uploadInput = document.getElementById('upload');
+    if (uploadInput) uploadInput.style.display = 'none';
   }
 
   document.addEventListener('DOMContentLoaded', renderProfile);
