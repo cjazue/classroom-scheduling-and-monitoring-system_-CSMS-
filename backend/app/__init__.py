@@ -62,6 +62,22 @@ def create_app(config_name: str = None) -> Flask:
     app.register_blueprint(schedules_bp)
     app.register_blueprint(profile_bp)
 
+    # -------------------------
+    # Auxiliary tables (imports)
+    # -------------------------
+    # The project uses SQL bootstrap scripts for the core schema, but the import-tracking
+    # tables are SQLAlchemy-only. Create them if missing so uploads work without requiring
+    # an explicit migration step in local/dev.
+    try:
+        from app.models.import_batch import ImportBatch, ScheduleImportItem, StudentImportItem
+
+        with app.app_context():
+            ImportBatch.__table__.create(db.engine, checkfirst=True)
+            ScheduleImportItem.__table__.create(db.engine, checkfirst=True)
+            StudentImportItem.__table__.create(db.engine, checkfirst=True)
+    except Exception as e:
+        print(f"[aux_tables] Failed to ensure import tables: {e}")
+
     @app.errorhandler(404)
     def not_found(e):
         return jsonify({"success": False, "error": "Resource not found."}), 404
