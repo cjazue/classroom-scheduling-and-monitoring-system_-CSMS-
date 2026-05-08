@@ -41,6 +41,13 @@
     return [first, mi, last].map((s) => String(s || '').trim()).filter(Boolean).join(' ');
   }
 
+  function displayName(full) {
+    if (window.CSMS && window.CSMS.format && typeof window.CSMS.format.displayName === 'function') {
+      return window.CSMS.format.displayName(full);
+    }
+    return String(full || '').trim();
+  }
+
   function totalAdminStrongEl() {
     const cards = document.querySelectorAll('.stats-row .stat-card');
     for (const card of cards) {
@@ -71,6 +78,8 @@
     const name = document.createElement('div');
     name.className = 'request-name';
     name.textContent = admin.name || '—';
+
+    name.textContent = displayName(admin.name) || name.textContent;
 
     const sub = document.createElement('div');
     sub.className = 'request-sub';
@@ -156,7 +165,7 @@
     if (!admin) return;
 
     const nameEl = document.getElementById('delete-name');
-    if (nameEl) nameEl.textContent = admin.name || '—';
+    if (nameEl) nameEl.textContent = displayName(admin.name) || '—';
     const labelEl = document.getElementById('delete-admin-label');
     if (labelEl) labelEl.textContent = admin.id || 'Admin';
 
@@ -226,10 +235,10 @@
 
       if (selectedCard && updated) {
         const nameEl = selectedCard.querySelector('.request-name');
-        if (nameEl) nameEl.textContent = updated.name || '—';
+        if (nameEl) nameEl.textContent = displayName(updated.name) || '—';
       }
 
-      setSuccessInfo(`Name: ${updated && updated.name ? updated.name : nextName} | ID: ${selectedAdminId}`);
+      setSuccessInfo(`Name: ${displayName(updated && updated.name ? updated.name : nextName)} | ID: ${selectedAdminId}`);
       showPanel('success-panel');
     } catch (e) {
       window.alert(e && e.message ? e.message : 'Failed to update admin.');

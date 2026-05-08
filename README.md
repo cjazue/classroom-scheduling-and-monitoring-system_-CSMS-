@@ -48,12 +48,17 @@ Notes:
 
 ## Roles & pages
 
-- Students / Authorized users: `dashboard.html`, `campus.html` → `building.html` → `room.html`
-- Admins / Superadmin: `Admindashboard.html`
-  - Reservation approvals: `Reservation.html` (approves/rejects `pending` reservations)
-  - Permission requests: `PermissionReq.html` (promotes `student` → `authorized_user`)
+- Student: `frontend/user/home.html` → `occupied.html` / `available.html`
+- Authorized user (reservations): `frontend/auth/dashboard.html` → `campus.html` → `building.html` → `room.html`
+- Admin: `frontend/admin/home.html`
+  - User management: `frontend/admin/Users.html` (CRUD + promote `student` → `authorized_user`)
+  - Reservation approvals: `frontend/admin/Reservation.html` (approve/reject `pending` reservations)
+- Super admin: `frontend/superadmin/Super Admin.html`
+  - Admin CRUD: `frontend/superadmin/Super Admin.html`, `frontend/superadmin/Create Admin.html`
+  - Imports: `frontend/superadmin/Imports.html` (upload student/schedule .xlsx)
+  - Schedule CRUD: `frontend/superadmin/Schedules.html`
 
 ## Configuration
 
 - Backend env vars (optional): `SQLALCHEMY_DATABASE_URI`, `SECRET_KEY`, `JWT_SECRET_KEY`, `PORT`, `FLASK_ENV`
-- Frontend API base URL: `frontend/assets/js/api.js` (`API_BASE`, auto-detected; override via `localStorage.API_BASE` if needed)
+- XLSX imports require `openpyxl` (install it if you plan to use upload features).

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSMS Super Admin - Imports</title>
+  <link rel="stylesheet" href="Super Admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    .upload-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(4,58,163,0.08);
+    }
+    .upload-card h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #043AA3;
+    }
+    .upload-card label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #6b7a99;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .upload-card input[type="file"],
+    .upload-card input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #d0d5dd;
+    }
+    .upload-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .upload-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-upload {
+      background: #043AA3;
+      color: #fff;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .btn-upload:disabled { opacity: 0.7; cursor: not-allowed; }
+    .import-result {
+      font-size: 12px;
+      color: #6b7a99;
+      line-height: 1.35;
+    }
+    @media (max-width: 850px) {
+      .bottom-row { grid-template-columns: 1fr; }
+      .upload-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-shell">
+    <div class="menu">
+      <input type="checkbox" id="menu"/>
+
+      <div class="logo">
+          CSMS
+        <label for="menu"></label>
+      </div>
+
+        <div class="items">
+          <a href="Super Admin.html" class="item"><img src="ASSETS/home.jpg" alt="Home Icon" class="nav-icon">Home</a>
+          <a href="aboutus.html" class="item"><img src="ASSETS/info.jpg" alt="Home Icon" class="nav-icon">About</a>
+          <a href="homepage.html" class="item">Logout</a>
+        </div>
+
+    </div>
+
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <div class="sidebar-menu">
+          <div class="sidebar-card sidebar-card--outline">
+              <a href="profile2.html">
+                <i class="fa-regular fa-circle-user" style="font-size: 60px; color: #043AA3;"></i>
+              </a>
+            <span>Profile</span>
+          </div>
+
+          <div class="sidebar-card sidebar-card--light">
+                <i class="fa-solid fa-table-cells-large" style="font-size: 50px; color: white;"></i>
+            <span>Dashboard</span>
+          </div>
+        </div>
+        <a href="homepage.html">
+        <button class="logout-btn" type="button">Log out</button>
+        </a>
+      </aside>
+
+      <main class="content">
+        <section class="title-row">
+          <h1>Super Admin</h1>
+          <div class="title-line"></div>
+        </section>
+
+        <section class="stats-row">
+          <a href="Super Admin.html">
+            <div class="stat-card stat-card--muted">
+              <span class="stat-bar"></span>
+              <div class="stat-copy">
+                <p>Manage Admin</p>
+                <img src="ASSETS/cog.svg">
+              </div>
+            </div>
+          </a>
+
+          <a href="Schedules.html">
+            <div class="stat-card stat-card--muted">
+              <span class="stat-bar"></span>
+              <div class="stat-copy">
+                <p>Schedules</p>
+                <img src="ASSETS/circle.svg">
+              </div>
+            </div>
+          </a>
+
+          <div class="stat-card stat-card--bright">
+            <span class="stat-bar"></span>
+            <div class="stat-copy">
+              <p>Imports</p>
+              <strong id="statImportCount">0</strong>
+            </div>
+          </div>
+        </section>
+
+        <div class="bg-container">
+          <div class="bottom-row">
+            <div class="request-panel">
+              <div class="panel-header">
+                <span class="panel-title">Upload .xlsx</span>
+              </div>
+
+              <div class="request-list" style="gap:14px;">
+                <form class="upload-card" id="formStudentImport">
+                  <h3>Student Data (.xlsx)</h3>
+                  <div>
+                    <label for="studentFile">File</label>
+                    <input id="studentFile" type="file" accept=".xlsx" required>
+                  </div>
+                  <div>
+                    <label for="studentDefaultPassword">Default Password (used when a row has no password)</label>
+                    <input id="studentDefaultPassword" type="text" value="Student@1234">
+                  </div>
+                  <div class="upload-actions">
+                    <button class="btn-upload" type="submit" id="btnStudentUpload">Upload</button>
+                  </div>
+                  <div class="import-result" id="studentImportResult"></div>
+                </form>
+
+                <form class="upload-card" id="formScheduleImport">
+                  <h3>Schedule Data (.xlsx)</h3>
+                  <div>
+                    <label for="scheduleFile">File</label>
+                    <input id="scheduleFile" type="file" accept=".xlsx" required>
+                  </div>
+                  <div class="upload-row">
+                    <div>
+                      <label for="scheduleSection">Section (optional override)</label>
+                      <input id="scheduleSection" type="text" placeholder="BSIT 1-1">
+                    </div>
+                    <div style="display:flex; align-items:flex-end;">
+                      <label style="display:flex; align-items:center; gap:10px; margin:0; color:#043AA3; font-weight:800;">
+                        <input id="scheduleReplace" type="checkbox" checked>
+                        Replace existing schedules for section
+                      </label>
+                    </div>
+                  </div>
+                  <div class="upload-actions">
+                    <button class="btn-upload" type="submit" id="btnScheduleUpload">Upload</button>
+                  </div>
+                  <div class="import-result" id="scheduleImportResult"></div>
+                </form>
+              </div>
+            </div>
+
+            <div class="details-panel">
+              <div class="details-header">
+                <h2 style="margin:0;">Import History</h2>
+              </div>
+              <div class="details-body" style="display:block; width:100%;">
+                <div class="request-list" id="importHistory"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script src="/common/superadmin_imports.js"></script>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
+

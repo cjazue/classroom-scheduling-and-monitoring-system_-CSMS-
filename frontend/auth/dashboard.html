@@ -116,35 +116,47 @@
 
     <div class="cards">
           <div class="campus-grid">
-            <article class="campus-card">
+            <article class="campus-card" data-campus-code="MAIN">
               <div class="campus-image-holder">
                 <img class="campus-image" src="ASSETS/maysan.jpg" alt="Maysan Campus">
               </div>
               <h2>Maysan Campus</h2>
-                <p class="no-schedule">No classes</p>
+                <p class="no-schedule campus-res-status" data-campus-status>No reservation</p>
             </article>
 
-            <article class="campus-card">
+            <article class="campus-card" data-campus-code="ANNEX">
               <div class="campus-image-holder">
                 <img class="campus-image" src="ASSETS/annex.jpg" alt="Annex Campus">
               </div>
               <h2>Annex Campus</h2>
-              <p class="no-schedule">No Schedule</p>
+              <p class="no-schedule campus-res-status" data-campus-status>No reservation</p>
             </article>
 
-            <article class="campus-card">
+            <article class="campus-card" data-campus-code="CPAG">
               <div class="campus-image-holder">
                 <img class="campus-image" src="ASSETS/cpag.jpg" alt="CPAG Campus">
               </div>
               <h2>CPAG Campus</h2>
-                <p class="no-schedule">No Schedule</p>  
+                <p class="no-schedule campus-res-status" data-campus-status>No reservation</p>  
             </article>
             </div>
+          </div>
+
+          <hr style="margin: 22px 10px; border: 0; height: 1px; background: rgba(17, 69, 175, 0.22);">
+
+          <div class="my-reservations">
+            <div class="schedule-header" style="margin-bottom: 10px;">
+              <button class="schedule-btn" type="button">My Reservations</button>
+            </div>
+
+            <div id="myReservationsEmpty" class="no-schedule" style="margin-top: 10px;">No reservations yet</div>
+            <div id="myReservationsList" class="my-res-list" aria-live="polite"></div>
           </div>
         </section>
       </main>
     </div>
   
         <script src="calendar.js"></script>
+        <script src="/common/auth_dashboard_reservations.js"></script>
 </body>
 </html>
