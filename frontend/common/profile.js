@@ -96,5 +96,70 @@
     if (uploadInput) uploadInput.style.display = 'none';
   }
 
-  document.addEventListener('DOMContentLoaded', renderProfile);
+  function setupProfilePictureUpload() {
+    const editBtn = document.getElementById('edit-btn');
+    const profilePic = document.getElementById('profile-pic');
+
+    console.log('Setting up profile picture upload...');
+    console.log('Edit button found:', !!editBtn);
+    console.log('Profile pic found:', !!profilePic);
+
+    if (!editBtn || !profilePic) {
+      console.warn('Could not find required elements for profile picture upload');
+      return;
+    }
+
+    // Create hidden file input if it doesn't exist
+    let pictureInput = document.getElementById('picture-input');
+    if (!pictureInput) {
+      pictureInput = document.createElement('input');
+      pictureInput.type = 'file';
+      pictureInput.id = 'picture-input';
+      pictureInput.accept = 'image/*';
+      pictureInput.style.display = 'none';
+      document.body.appendChild(pictureInput);
+      console.log('Created hidden file input');
+    }
+
+    // When the edit button is clicked, trigger the file input
+    editBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      console.log('Change Picture button clicked');
+      pictureInput.click();
+    });
+
+    // When a file is selected, display it as the profile picture
+    pictureInput.addEventListener('change', function (e) {
+      console.log('File selected');
+      const file = e.target.files[0];
+      if (!file) {
+        console.log('No file selected');
+        return;
+      }
+
+      // Validate that the file is an image
+      if (!file.type.startsWith('image/')) {
+        alert('Please select a valid image file.');
+        console.warn('File is not an image:', file.type);
+        return;
+      }
+
+      console.log('Reading file:', file.name);
+      // Create a FileReader to read the file
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        // Update the profile picture src with the selected image
+        console.log('File loaded, updating profile picture');
+        profilePic.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    console.log('Profile picture upload setup complete');
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    renderProfile();
+    setupProfilePictureUpload();
+  });
 })();

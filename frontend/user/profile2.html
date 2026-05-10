@@ -25,8 +25,8 @@
       </div>
 
         <div class="items">
-          <a href="home.html" class="item"><img src="ASSETS/home.png" alt="Home Icon" class="nav-icon">Home</a>
-          <a href="about us.html" class="item"><img src="ASSETS/info.png" alt="Home Icon" class="nav-icon">About</a>
+          <a href="home.html" class="item"><img src="../ASSETS/home.jpg" alt="Home Icon" class="nav-icon">Home</a>
+          <a href="about us.html" class="item"><img src="../ASSETS/info.jpg" alt="Home Icon" class="nav-icon">About</a>
           <a href="homepage.html" class="item">Logout</a>
         </div>
     </div>
@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <a href="homepage.html"><button class="logout-btn" type="button">Log out</button></a>
+        <a href="home.html"><button class="logout-btn" type="button">Log out</button></a>
       </aside>
 
       <main class="content">
@@ -60,7 +60,9 @@
               </div>
              <div class="profile-content">
                 <div class="avatar-wrapper">
-                <img id="profile-pic" class="profile-avatar" src="ASSETS/user.jpg" alt="Profile Picture">
+                <img id="profile-pic" class="profile-avatar" src="../ASSETS/user.jpg" alt="Profile Picture">
+                <button id="edit-btn" class="edit-btn">Change Picture<i class="fa-solid fa-pen-to-square"></i></button>
+                <input type="file" id="picture-input" accept="image/*" style="display: none;">
             </div>
 
                 <div class="info-block">
@@ -73,16 +75,11 @@
         </div>
 
         <!-- Buttons -->
-        <div class="actions">
-
-            <a href="dashboard.html"><button class="outline-btn">My Room</button></a>
-            <a href="campus.html"><button class="filled-btn">Reserved Room</button></a>
-        </div>
     </div>
 
       </main>
     </div>
-        <script src="/common/profile.js"></script>
+        <script src="../common/profile.js"></script>
 
 </body>
 </html>
