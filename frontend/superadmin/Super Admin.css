@@ -281,6 +281,13 @@ svg {
   font-size: 20px;
   font-weight: normal;
   margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+img {
+  width: 40px;
+  height: 40px;
 }
 
 .stat-copy strong {

@@ -184,7 +184,37 @@ svg {
 
 
   /* Profile */
-
+  .edit-btn {
+          transform: none;
+          margin-top: 8px;
+          background-color: white;
+          color: #034EDF;
+          border: solid 1px #034EDF;
+          border-radius: 10px;
+          padding: 10px 16px;
+          font-size: 0.85rem;
+          font-weight: 500;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          min-width: auto;
+          justify-content: center;
+          transition: all 0.2s ease;
+          pointer-events: auto;
+          white-space: nowrap;
+          z-index: 10;
+      }
+  .edit-btn:hover {
+    background: #92abf5;
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: all 0.2s ease;
+  }
+  
+  .edit-btn:active {
+    transform: scale(0.98);
+  }
 
 
   /* Campus */
@@ -209,6 +239,7 @@ svg {
     min-width: 212px;
     padding: 18px 30px;
     font-family: 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 30px;
   }
 
 .content {

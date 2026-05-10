@@ -277,6 +277,28 @@
 
     window.saveDetails = saveDetails;
     window.confirmDelete = confirmDelete;
+    
+    // Expose functions for inline onclick handlers in HTML
+    window.showDetails = function (first, last, mi, email, contact, id, address, adminLabel) {
+      selectedAdminId = adminLabel;
+      const admin = {
+        id: adminLabel,
+        name: combineName(first, mi, last),
+        email: email
+      };
+      adminsById.set(adminLabel, admin);
+      fillDetails(admin);
+      showPanel('details-panel');
+    };
+    
+    window.showDelete = function (name, adminLabel) {
+      selectedAdminId = adminLabel;
+      const nameEl = document.getElementById('delete-name');
+      if (nameEl) nameEl.textContent = displayName(name) || '—';
+      const labelEl = document.getElementById('delete-admin-label');
+      if (labelEl) labelEl.textContent = adminLabel || 'Admin';
+      showPanel('delete-panel');
+    };
   }
 
   document.addEventListener('DOMContentLoaded', function () {
