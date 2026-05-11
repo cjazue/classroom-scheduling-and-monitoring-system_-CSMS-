@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSMS Admin Dashboard</title>
+  <link rel="stylesheet" href="/static/css/admin/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="menu">
+    <input type="checkbox" id="menu"/>
+
+    <div class="logo">
+      CSMS
+      <label for="menu"></label>
+    </div>
+
+    <div class="items">
+      <a href="home.html" class="item"><img src="/ASSETS/home.jpg" alt="Home Icon" class="nav-icon">Home</a>
+      <a href="aboutus.html" class="item"><img src="/ASSETS/info.jpg" alt="About Icon" class="nav-icon">About</a>
+      <a href="/auth/homepage.html" class="item">Logout</a>
+    </div>
+  </div>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-menu">
+        <div class="sidebar-card sidebar-card--outline">
+          <a href="profile2.html">
+            <i class="fa-regular fa-circle-user" style="font-size: 60px; color: #043AA3;"></i>
+          </a>
+          <span>Profile</span>
+        </div>
+
+        <div class="sidebar-card sidebar-card--light">
+          <i class="fa-solid fa-table-cells-large" style="font-size: 40px; color: white;"></i>
+          <span>Dashboard</span>
+        </div>
+      </div>
+
+    <a href="/auth/homepage.html">
+        <button class="logout-btn" type="button">Log out</button>
+    </a>
+    </aside>
+
+    <main class="content">
+      <section class="title-row">
+        <h1>Admin</h1>
+        <div class="title-line" aria-hidden="true"></div>
+      </section>
+
+      <section class="stats-row">
+        <a href="Users.html">
+          <article class="stat-card stat-card-muted">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Total Users</p>
+              <strong id="statTotalUsers">0</strong>
+            </div>
+          </article>
+        </a>
+
+        <a href="Reservation.html">
+          <article class="stat-card">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Total Reservations</p>
+              <strong id="statTotalReservations">0</strong>
+            </div>
+          </article>
+        </a>
+
+        <a href="schedules.html">
+          <article class="stat-card stat-card-bright">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Total Rooms</p>
+              <strong id="statTotalRooms">0</strong>
+            </div>
+          </article>
+        </a>
+      </section>
+
+      <script>
+        (function () {
+          'use strict';
+
+          function setText(id, value) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = value == null ? '—' : String(value);
+          }
+
+          async function loadMetrics() {
+            if (!window.CSMS || !window.CSMS.api || typeof window.CSMS.api.request !== 'function') return;
+
+            try {
+              const resp = await window.CSMS.api.request('/api/admin/metrics', { method: 'GET' });
+              const data = resp && resp.data ? resp.data : null;
+              if (!data) return;
+
+              setText('statTotalUsers', data.users_total);
+              setText('statTotalReservations', data.reservations_total);
+              setText('statTotalRooms', data.rooms_total);
+            } catch {
+              // Keep dashboard usable even if metrics fail.
+            }
+          }
+
+          document.addEventListener('DOMContentLoaded', loadMetrics);
+        })();
+      </script>
+    </main>
+  </div>
+</body>
+</html>

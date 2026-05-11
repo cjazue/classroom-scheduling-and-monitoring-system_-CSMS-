@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSMS Admin - Users</title>
+  <link rel="stylesheet" href="/static/css/admin/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    .panel-tools-inline {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .user-search {
+      flex: 1;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: 8px 10px;
+      border-radius: 12px;
+      color: #fff;
+    }
+    .user-search input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #fff;
+    }
+    .user-search input::placeholder { color: rgba(255,255,255,0.75); }
+
+    .btn-create {
+      background: #fff;
+      color: #043AA3;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s, opacity 0.2s;
+      white-space: nowrap;
+    }
+    .btn-create:hover { opacity: 0.9; transform: scale(1.02); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.14);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s, opacity 0.2s;
+      white-space: nowrap;
+    }
+    .btn-secondary:hover { opacity: 0.92; transform: scale(1.02); }
+
+    .user-import-hint {
+      margin-top: 8px;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .user-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .user-group-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: 10px 12px;
+      border-radius: 12px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .user-group-header:focus-visible {
+      outline: 3px solid rgba(255,255,255,0.65);
+      outline-offset: 2px;
+    }
+    .user-group-count {
+      font-weight: 700;
+      opacity: 0.92;
+    }
+    .user-group-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .user-group.collapsed .user-group-items { display: none; }
+
+    .user-form {
+      width: 100%;
+      display: grid;
+      gap: 12px;
+      align-items: start;
+    }
+    .user-form .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .user-form label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #043AA3;
+      margin-bottom: 6px;
+    }
+    .user-form input, .user-form select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #d0d5dd;
+      outline: none;
+      background: #fff;
+    }
+    .user-form .actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .btn-danger {
+      background: #fff;
+      color: #c0392b;
+      border: 1.5px solid rgba(192,57,43,0.35);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .btn-danger:hover { opacity: 0.9; }
+
+    .details-body {
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+
+    .details-empty {
+      width: 100%;
+      text-align: center;
+      color: #6b7a99;
+      padding: 20px 10px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 650px) {
+      .user-form .row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="menu">
+    <input type="checkbox" id="menu"/>
+
+    <div class="logo">
+        CSMS
+      <label for="menu"></label>
+    </div>
+      <div class="items">
+        <a href="home.html" class="item"><img src="/ASSETS/home.jpg" alt="Home Icon" class="nav-icon">Home</a>
+        <a href="aboutus.html" class="item"><img src="/ASSETS/info.jpg" alt="Home Icon" class="nav-icon">About</a>
+        <a href="/auth/homepage.html" class="item">Logout</a>
+      </div>
+  </div>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <div class="sidebar-menu">
+        <div class="sidebar-card sidebar-card--outline">
+            <a href="profile2.html">
+              <i class="fa-regular fa-circle-user" style="font-size: 60px; color: #043AA3;"></i>
+            </a>
+          <span>Profile</span>
+        </div>
+
+        <div class="sidebar-card sidebar-card--light">
+              <i class="fa-solid fa-table-cells-large" style="font-size: 40px; color: white;"></i>
+          <span>Dashboard</span>
+        </div>
+      </div>
+      <a href="/auth/homepage.html">
+      <button class="logout-btn" type="button">Log out</button>
+      </a>
+    </aside>
+
+    <main class="content">
+      <section class="title-row">
+        <h1>Admin</h1>
+        <div class="title-line" aria-hidden="true"></div>
+      </section>
+
+      <section class="stats-row">
+        <a href="Users.html">
+          <article class="stat-card stat-card-muted">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Users</p>
+              <strong id="statTotalUsers">0</strong>
+            </div>
+          </article>
+        </a>
+
+        <a href="Reservation.html">
+          <article class="stat-card">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Total Reservations</p>
+              <strong id="statPendingReservations">0</strong>
+            </div>
+          </article>
+        </a>
+
+        <article class="stat-card stat-card-bright">
+          <span class="stat-bar" aria-hidden="true"></span>
+          <div class="stat-copy">
+            <p>Total Room</p>
+            <strong id="statTotalRooms">0</strong>
+          </div>
+        </article>
+      </section>
+
+      <div class="bottom-row">
+        <div class="request-panel">
+          <div class="panel-header">
+            <span class="panel-title">User Management</span>
+            <div class="panel-tools-inline">
+              <label class="user-search" aria-label="Search users">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="userSearch" type="text" placeholder="Search name or email">
+              </label>
+              <button class="btn-create" type="button" onclick="openCreateUser()">+ Create</button>
+            </div>
+          </div>
+          <div class="request-list" id="userList"></div>
+        </div>
+
+        <div class="details-panel">
+          <div class="details-header">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+              <span style="font-weight:800; color:#043AA3;" id="userPanelTitle">User Details</span>
+              <span style="font-weight:700; color:#6b7a99;" id="userLabel">—</span>
+            </div>
+          </div>
+          <div class="details-body">
+            <div class="details-empty" id="userEmpty">Select a user from the list, or create a new user.</div>
+            <form id="userForm" class="user-form" style="display:none;">
+              <input type="hidden" id="userId" value="">
+
+              <div class="row">
+                <div>
+                  <label for="userName">Name</label>
+                  <input id="userName" type="text" placeholder="Full name" required>
+                </div>
+                <div>
+                  <label for="userEmail">Email</label>
+                  <input id="userEmail" type="email" placeholder="email@example.com" required>
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <label for="userStudentId">Student ID (optional)</label>
+                  <input id="userStudentId" type="text" placeholder="21-0001">
+                </div>
+                <div>
+                  <label for="userCourseSection">Course/Section (optional)</label>
+                  <input id="userCourseSection" type="text" placeholder="BSIT 1-1">
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <label for="userRole">Role</label>
+                  <select id="userRole">
+                    <option value="student">Student</option>
+                    <option value="authorized_user">Authorized User</option>
+                  </select>
+                </div>
+                <div style="display:flex; align-items:flex-end; gap:10px;">
+                  <label style="display:flex; align-items:center; gap:10px; margin:0; color:#043AA3; font-weight:800;">
+                    <input id="userIsActive" type="checkbox" checked>
+                    Active
+                  </label>
+                </div>
+              </div>
+
+              <div>
+                <label for="userPassword">Password (required for new users)</label>
+                <input id="userPassword" type="password" placeholder="Leave blank to keep unchanged">
+              </div>
+
+              <div class="actions">
+                <button class="btn-decline" type="button" onclick="closeUserForm()">Cancel</button>
+                <button class="btn-danger" type="button" id="btnDeleteUser" onclick="deleteSelectedUser()" style="display:none;">Delete</button>
+                <button class="btn-approve" type="submit" id="btnSaveUser">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <script src="/static/js/common/admin_users.js"></script>
+    </main>
+  </div>
+</body>
+</html>

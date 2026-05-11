@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSMS Student View</title>
+  <link rel="stylesheet" href="/static/css/user/available.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <div class="page-shell">
+    <div class="menu">
+      <input type="checkbox" id="menu"/>
+
+      <div class="logo">
+          CSMS
+        <label for="menu"></label>
+      </div>
+
+        <div class="items">
+          <a href="home.html" class="item"><img src="../ASSETS/home.jpg" alt="Home Icon" class="nav-icon">Home</a>
+          <a href="about us.html" class="item"><img src="../ASSETS/info.jpg" alt="Home Icon" class="nav-icon">About</a>
+          <a href="homepage.html" class="item">Log out</a>
+        </div>
+
+    </div>
+
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <div class="sidebar-menu">
+          <div class="sidebar-card sidebar-card--outline">
+              <a href="profile2.html">
+                <i class="fa-regular fa-circle-user" style="font-size: 60px; color: #043AA3;"></i>
+              </a>
+            <span>Profile</span>
+          </div>
+
+          <div class="sidebar-card sidebar-card--light">
+                <i class="fa-solid fa-table-cells-large" style="font-size: 40px; color: white;"></i>
+            <span>Dashboard</span>
+          </div>
+        </div>
+        <a href="home.html">
+        <button class="logout-btn" type="button">Log out</button>
+        </a>
+      </aside>
+
+      <main class="content">
+        <section class="title-row">
+          <h1>Student View</h1>
+          <div class="title-line" aria-hidden="true"></div>
+        </section>
+
+        <section class="stats-row">
+          <a href="occupied.html">
+          <article class="stat-card stat-card-muted">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Occupied Rooms</p>
+              <strong>6</strong>
+            </div>
+          </article>
+          </a>
+
+          <article class="stat-card">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Available Rooms</p>
+              <strong>40</strong>
+            </div>
+          </article>
+
+          <article class="stat-card stat-card-bright">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Total Rooms</p>
+              <strong>50</strong>
+            </div>
+          </article>
+        </section>
+
+        <div class="panel">
+          <div class="panel-top">
+            <div class="panel-badge">Available Room</div>
+
+            <div class="panel-tools">
+              <label class="search-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="11" cy="11" r="6.5"></circle>
+                  <path d="m16 16 4 4"></path>
+                </svg>
+                <input type="text" placeholder="Search Building">
+              </label>
+
+              <div class="calendar-wrapper">
+                <button id="toggleCalendar">Select Date ▼</button>
+                    <div id="calendarContainer" style="display: none;">
+                        <div class="calendar">
+                            <div class="header">
+                                <div id="prev" class="btn"><i class="fa-solid fa-arrow-left"></i></div>
+                                <div id="month-year"></div>
+                                <div id="next" class="btn"><i class="fa-solid fa-arrow-right"></i></div>
+                            </div>
+
+                                  <div class="weekdays">
+                                      <div>Sun</div>
+                                      <div>Mon</div>
+                                      <div>Tue</div>
+                                      <div>Wed</div>
+                                      <div>Thu</div>
+                                      <div>Fri</div>
+                                      <div>Sat</div>
+                                        </div>
+                                            <div class="days" id="days"></div>
+                                        </div>
+                                    </div>
+                          </div>
+
+              <label class="date-box" style="padding: 0 14px;">
+                <span style="font-weight:600;">Time</span>
+                <input id="slotStart" type="time" value="07:00" style="border:none;outline:none;background:transparent;color:#444;" />
+                <span>to</span>
+                <input id="slotEnd" type="time" value="21:00" style="border:none;outline:none;background:transparent;color:#444;" />
+              </label>
+            </div>
+          </div>
+
+          <div class="table-shell">
+            <div class="table-head">
+              <span>Date</span>
+              <span>Building</span>              
+              <span>Floor</span>
+              <span>Room</span>
+              <span>TIME</span>
+            </div>
+
+            <div class="table-row green">
+              <span>04/16/2026</span>
+              <span>NB</span>
+              <span>2</span>
+              <span>369</span>
+              <span>5:30PM - 8:00PM</span>
+            </div>
+
+            <div class="table-row green">
+              <span>04/16/2026</span>
+              <span>CAS</span>
+              <span>2</span>
+              <span>201</span>
+              <span>12:30PM - 1:00PM</span>
+            </div>
+
+            <div class="table-row green">
+              <span>04/16/2026</span>
+              <span>NB</span>
+              <span>1</span>
+              <span>201</span>
+              <span>1:30PM - 5:00PM</span>
+            </div>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+<script>
+  const searchInput = document.querySelector('.search-box input');
+  const tableRows = document.querySelectorAll('.table-row');
+
+
+  function colorRows() {
+      tableRows.forEach(function (row) {
+        const building = row.querySelectorAll('span')[1].textContent.trim().toUpperCase(); // ← index 1 for Building
+        row.classList.remove('green', 'blue');
+        if (building === 'NB') {
+          row.classList.add('green');
+        } else if (building === 'CAS') {
+          row.classList.add('blue');
+        }
+      });
+    }
+
+colorRows();
+
+  searchInput.addEventListener('keyup', function () {
+    const value = searchInput.value.toLowerCase();
+
+    tableRows.forEach(function (row) {
+      const spans = row.querySelectorAll('span');
+      const rowText = Array.from(spans).map(s => s.textContent.toLowerCase()).join(' ');
+
+      if (rowText.includes(value) || value === "") {
+        row.style.display = "grid";
+      } else {
+        row.style.display = "none";
+      }
+    });
+  });
+</script>
+<script>
+  (function () {
+    'use strict';
+
+    const searchInput = document.querySelector('.search-box input');
+    const tableShell = document.querySelector('.table-shell');
+    const stats = document.querySelectorAll('.stats-row strong');
+    const startInput = document.getElementById('slotStart');
+    const endInput = document.getElementById('slotEnd');
+
+    let currentIso = null;
+
+    function fmt2(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function mmddyyyyFromIso(iso) {
+      if (!iso) return '—';
+      const d = new Date(iso + 'T00:00:00');
+      if (Number.isNaN(d.getTime())) return String(iso);
+      return `${fmt2(d.getMonth() + 1)}/${fmt2(d.getDate())}/${d.getFullYear()}`;
+    }
+
+    function to12hCompact(hhmm) {
+      if (!hhmm) return '—';
+      const h = parseInt(String(hhmm).slice(0, 2), 10);
+      const m = String(hhmm).slice(3, 5);
+      if (!Number.isFinite(h) || !m) return String(hhmm);
+      const ap = h < 12 ? 'AM' : 'PM';
+      const hr = h % 12 || 12;
+      return `${hr}:${m}${ap}`;
+    }
+
+    function setStat(index, value) {
+      if (stats && stats[index]) stats[index].textContent = String(value);
+    }
+
+    function applyRowColor(row, buildingCode) {
+      const b = (buildingCode || '').trim().toUpperCase();
+      row.classList.remove('green', 'blue');
+      if (b === 'NB') row.classList.add('green');
+      if (b === 'CAS') row.classList.add('blue');
+    }
+
+    function clearRows() {
+      if (!tableShell) return;
+      tableShell.querySelectorAll('.table-row').forEach(function (row) {
+        row.remove();
+      });
+    }
+
+    function makeSpan(text) {
+      const s = document.createElement('span');
+      s.textContent = text;
+      return s;
+    }
+
+    function formatRoomCell(room) {
+      const code = room && room.code ? room.code : room && room.id ? room.id : '';
+      if (!code) return '—';
+      const m = String(code).match(/(\d+)/);
+      return m ? m[1] : String(code);
+    }
+
+    function getSlotTimes() {
+      const start = startInput && startInput.value ? String(startInput.value) : '07:00';
+      const end = endInput && endInput.value ? String(endInput.value) : '21:00';
+      return { start, end };
+    }
+
+    function renderRows(rooms, iso, slot) {
+      clearRows();
+
+      const dateLabel = mmddyyyyFromIso(iso);
+      const timeLabel = slot ? `${to12hCompact(slot.start)} - ${to12hCompact(slot.end)}` : '—';
+
+      (rooms || []).forEach(function (room) {
+        const row = document.createElement('div');
+        row.className = 'table-row';
+
+        const building = room && room.building_code ? room.building_code : '';
+        applyRowColor(row, building);
+
+        row.appendChild(makeSpan(dateLabel));
+        row.appendChild(makeSpan(building || '—'));
+        row.appendChild(makeSpan(room && typeof room.floor === 'number' ? String(room.floor) : '—'));
+        row.appendChild(makeSpan(formatRoomCell(room)));
+        row.appendChild(makeSpan(timeLabel));
+
+        tableShell.appendChild(row);
+      });
+    }
+
+    async function loadForDate(iso) {
+      currentIso = iso;
+
+      if (!window.CSMS || !window.CSMS.api || typeof window.CSMS.api.request !== 'function') return;
+
+      clearRows();
+
+      const slot = getSlotTimes();
+      if (!slot.start || !slot.end || slot.start >= slot.end) {
+        alert('Invalid time range. Start time must be before end time.');
+        return;
+      }
+
+      try {
+        const totalResp = await window.CSMS.api.request('/api/rooms?is_active=true&per_page=1', { method: 'GET' });
+        const totalRooms =
+          totalResp && totalResp.data && totalResp.data.pagination ? totalResp.data.pagination.total : null;
+
+        const availResp = await window.CSMS.api.request(
+          `/api/rooms?is_active=true&available_on=${encodeURIComponent(iso)}` +
+            `&available_from=${encodeURIComponent(slot.start)}` +
+            `&available_until=${encodeURIComponent(slot.end)}` +
+            `&per_page=100`,
+          { method: 'GET' }
+        );
+
+        const rooms =
+          availResp && availResp.data && Array.isArray(availResp.data.items) ? availResp.data.items : [];
+        const availableRooms =
+          availResp && availResp.data && availResp.data.pagination ? availResp.data.pagination.total : rooms.length;
+
+        renderRows(rooms, iso, slot);
+
+        if (typeof totalRooms === 'number') setStat(2, totalRooms);
+        setStat(1, availableRooms);
+        if (typeof totalRooms === 'number' && typeof availableRooms === 'number') {
+          setStat(0, Math.max(0, totalRooms - availableRooms));
+        }
+
+        applySearchFilter();
+      } catch (e) {
+        alert(e && e.message ? e.message : 'Failed to load available rooms.');
+      }
+    }
+
+    function applySearchFilter() {
+      const value = searchInput && searchInput.value ? searchInput.value.toLowerCase() : '';
+      if (!tableShell) return;
+      tableShell.querySelectorAll('.table-row').forEach(function (row) {
+        const spans = row.querySelectorAll('span');
+        const rowText = Array.from(spans)
+          .map((s) => (s.textContent || '').toLowerCase())
+          .join(' ');
+        row.style.display = !value || rowText.includes(value) ? 'grid' : 'none';
+      });
+    }
+
+    if (searchInput) searchInput.addEventListener('keyup', applySearchFilter);
+    if (startInput) startInput.addEventListener('change', function () { if (currentIso) loadForDate(currentIso); });
+    if (endInput) endInput.addEventListener('change', function () { if (currentIso) loadForDate(currentIso); });
+
+    document.addEventListener('csms:date-selected', function (e) {
+      const iso = e && e.detail && e.detail.iso ? e.detail.iso : null;
+      if (!iso) return;
+      loadForDate(iso);
+    });
+
+    // Fallback if calendar.js isn't present.
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!currentIso) {
+        const today = new Date();
+        const iso = `${today.getFullYear()}-${fmt2(today.getMonth() + 1)}-${fmt2(today.getDate())}`;
+        loadForDate(iso);
+      }
+    });
+
+    // Poll to reflect latest DB schedules/reservations.
+    setInterval(function () {
+      if (currentIso) loadForDate(currentIso);
+    }, 30000);
+  })();
+</script>
+      <script src="/static/js/user/calendar.js"></script>
+</body>
+</html>

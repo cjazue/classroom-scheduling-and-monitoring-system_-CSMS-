@@ -3,3 +3,7 @@ __pycache__/
 *.db
 .env
 instance/
+.venv/
+backend/.venv/
+.pytest_cache/
+*.log

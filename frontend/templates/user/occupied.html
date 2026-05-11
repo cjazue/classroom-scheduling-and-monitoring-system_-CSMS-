@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSMS Student View</title>
+  <link rel="stylesheet" href="/static/css/user/occupied.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  <div class="page-shell">
+    <div class="menu">
+      <input type="checkbox" id="menu"/>
+
+      <div class="logo">
+          CSMS
+        <label for="menu"></label>
+      </div>
+
+        <div class="items">
+          <a href="home.html" class="item"><img src="../ASSETS/home.jpg" alt="Home Icon" class="nav-icon">Home</a>
+          <a href="about us.html" class="item"><img src="../ASSETS/info.jpg" alt="Home Icon" class="nav-icon">About</a>
+          <a href="homepage.html" class="item">Log out</a>
+        </div>
+
+    </div>
+
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <div class="sidebar-menu">
+          <div class="sidebar-card sidebar-card--outline">
+              <a href="profile2.html">
+                <i class="fa-regular fa-circle-user" style="font-size: 60px; color: #043AA3;"></i>
+              </a>
+            <span>Profile</span>
+          </div>
+
+          <div class="sidebar-card sidebar-card--light">
+                <i class="fa-solid fa-table-cells-large" style="font-size: 40px; color: white;"></i>
+            <span>Dashboard</span>
+          </div>
+        </div>
+        <a href="home.html">
+        <button class="logout-btn" type="button">Log out</button>
+        </a>
+      </aside>
+
+      <main class="content">
+        <section class="title-row">
+          <h1>Student View</h1>
+          <div class="title-line" aria-hidden="true"></div>
+        </section>
+
+        <section class="stats-row">
+            <article class="stat-card stat-card-muted">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Occupied Rooms</p>
+              <strong>6</strong>
+            </div>
+          </article>
+          </a>
+
+
+          <a href="available.html">
+          <article class="stat-card">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Available Rooms</p> 
+              <strong>40</strong>
+            </div>
+          </article>
+          </a>
+
+          <article class="stat-card stat-card-bright">
+            <span class="stat-bar" aria-hidden="true"></span>
+            <div class="stat-copy">
+              <p>Total Rooms</p>
+              <strong>50</strong>
+            </div>
+          </article>
+        </section>
+
+        <div class="panel">
+          <div class="panel-top">
+            <div class="panel-badge">Occupied Room</div>
+
+            <div class="panel-tools">
+              <label class="search-box">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="11" cy="11" r="6.5"></circle>
+                  <path d="m16 16 4 4"></path>
+                </svg>
+                <input type="text" placeholder="Search Building">
+              </label>
+
+              <div class="calendar-wrapper">
+                <button id="toggleCalendar">Select Date ▼</button>
+                    <div id="calendarContainer" style="display: none;">
+                        <div class="calendar">
+                            <div class="header">
+                                <div id="prev" class="btn"><i class="fa-solid fa-arrow-left"></i></div>
+                                <div id="month-year"></div>
+                                <div id="next" class="btn"><i class="fa-solid fa-arrow-right"></i></div>
+                            </div>
+
+                                  <div class="weekdays">
+                                      <div>Sun</div>
+                                      <div>Mon</div>
+                                      <div>Tue</div>
+                                      <div>Wed</div>
+                                      <div>Thu</div>
+                                      <div>Fri</div>
+                                      <div>Sat</div>
+                                        </div>
+                                            <div class="days" id="days"></div>
+                                        </div>
+                                    </div>
+                          </div>
+
+              <label class="date-box" style="padding: 0 14px;">
+                <span style="font-weight:600;">Time</span>
+                <input id="slotStart" type="time" value="07:00" style="border:none;outline:none;background:transparent;color:#444;" />
+                <span>to</span>
+                <input id="slotEnd" type="time" value="21:00" style="border:none;outline:none;background:transparent;color:#444;" />
+              </label>
+            </div>
+          </div>
+
+          <div class="table-section">
+            <div class="table-section-title">Occupied by Official Schedules</div>
+            <div class="table-shell" id="scheduleTable">
+              <div class="table-head">
+                <span>Subject</span>
+                <span>Section</span>
+                <span>Date</span>
+                <span>Building</span>
+                <span>Room</span>
+                <span>TIME</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-section">
+            <div class="table-section-title">Occupied by Reservations</div>
+            <div class="table-shell" id="reservationTable">
+              <div class="table-head">
+                <span>Requestor</span>
+                <span>Section</span>
+                <span>Date</span>
+                <span>Building</span>
+                <span>Room</span>
+                <span>TIME</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+<script>
+  (function () {
+    'use strict';
+
+    const searchInput = document.querySelector('.search-box input');
+    const scheduleShell = document.getElementById('scheduleTable');
+    const reservationShell = document.getElementById('reservationTable');
+    const stats = document.querySelectorAll('.stats-row strong');
+    const startInput = document.getElementById('slotStart');
+    const endInput = document.getElementById('slotEnd');
+
+    let currentIso = null;
+
+    function fmt2(n) {
+      return String(n).padStart(2, '0');
+    }
+
+    function mmddyyyyFromIso(iso) {
+      if (!iso) return '—';
+      const d = new Date(iso + 'T00:00:00');
+      if (Number.isNaN(d.getTime())) return String(iso);
+      return `${fmt2(d.getMonth() + 1)}/${fmt2(d.getDate())}/${d.getFullYear()}`;
+    }
+
+    function to12hCompact(hhmm) {
+      if (!hhmm) return '—';
+      const h = parseInt(String(hhmm).slice(0, 2), 10);
+      const m = String(hhmm).slice(3, 5);
+      if (!Number.isFinite(h) || !m) return String(hhmm);
+      const ap = h < 12 ? 'AM' : 'PM';
+      const hr = h % 12 || 12;
+      return `${hr}:${m}${ap}`;
+    }
+
+    function setStat(index, value) {
+      if (stats && stats[index]) stats[index].textContent = String(value);
+    }
+
+    function applyRowColor(row, buildingCode) {
+      const b = (buildingCode || '').trim().toUpperCase();
+      row.classList.remove('green', 'blue');
+      if (b === 'NB') row.classList.add('green');
+      if (b === 'CAS') row.classList.add('blue');
+    }
+
+    function clearRows(shell) {
+      if (!shell) return;
+      shell.querySelectorAll('.table-row').forEach(function (row) {
+        row.remove();
+      });
+    }
+
+    function makeSpan(text) {
+      const s = document.createElement('span');
+      s.textContent = text;
+      return s;
+    }
+
+    function formatRoomCell(room, fallbackRoomId) {
+      const code = room && room.code ? room.code : fallbackRoomId || '';
+      if (!code) return '—';
+      // Prefer just the number for CAS rooms (CAS201 -> 201).
+      const m = String(code).match(/(\d+)/);
+      return m ? m[1] : String(code);
+    }
+
+    function getSlotTimes() {
+      const start = startInput && startInput.value ? String(startInput.value) : '07:00';
+      const end = endInput && endInput.value ? String(endInput.value) : '21:00';
+      return { start, end };
+    }
+
+    function renderRows(shell, events, iso) {
+      clearRows(shell);
+
+      const dateLabel = mmddyyyyFromIso(iso);
+
+      (events || []).forEach(function (ev) {
+        const row = document.createElement('div');
+        row.className = 'table-row';
+
+        const room = ev && ev.room ? ev.room : null;
+        const building = room && room.building_code ? room.building_code : '';
+
+        applyRowColor(row, building);
+
+        let name = '—';
+        let section = '—';
+        let start = null;
+        let end = null;
+
+        if (ev && ev.type === 'schedule') {
+          const s = ev.schedule || {};
+          name = s.subject_code || s.subject || 'Class';
+          section = s.section || '—';
+          start = s.start_time || null;
+          end = s.end_time || null;
+        } else if (ev && ev.type === 'reservation') {
+          const r = ev.reservation || {};
+          name = (window.CSMS && window.CSMS.format && typeof window.CSMS.format.displayName === 'function')
+            ? (window.CSMS.format.displayName(r.requestor_name) || '—')
+            : (r.requestor_name || '—');
+          section = r.course_section || '—';
+          start = r.start_time || null;
+          end = r.end_time || null;
+        }
+
+        row.appendChild(makeSpan(name));
+        row.appendChild(makeSpan(section));
+        row.appendChild(makeSpan(dateLabel));
+        row.appendChild(makeSpan(building || (room && room.building ? room.building : '—')));
+        row.appendChild(makeSpan(formatRoomCell(room, room && room.id ? room.id : '')));
+        row.appendChild(makeSpan(`${to12hCompact(start)} - ${to12hCompact(end)}`));
+
+        shell.appendChild(row);
+      });
+    }
+
+    async function loadForDate(iso) {
+      currentIso = iso;
+
+      if (!window.CSMS || !window.CSMS.api || typeof window.CSMS.api.request !== 'function') return;
+
+      clearRows(scheduleShell);
+      clearRows(reservationShell);
+
+      const slot = getSlotTimes();
+      if (!slot.start || !slot.end || slot.start >= slot.end) {
+        alert('Invalid time range. Start time must be before end time.');
+        return;
+      }
+
+      try {
+        // Total rooms (for the stat cards).
+        const totalResp = await window.CSMS.api.request('/api/rooms?is_active=true&per_page=1', { method: 'GET' });
+        const totalRooms =
+          totalResp && totalResp.data && totalResp.data.pagination ? totalResp.data.pagination.total : null;
+
+        // Available rooms for the selected time slot and occupied rooms/events from schedules + reservations.
+        const availResp = await window.CSMS.api.request(
+          `/api/rooms?is_active=true&available_on=${encodeURIComponent(iso)}` +
+            `&available_from=${encodeURIComponent(slot.start)}` +
+            `&available_until=${encodeURIComponent(slot.end)}` +
+            `&per_page=1`,
+          { method: 'GET' }
+        );
+        const availableRooms =
+          availResp && availResp.data && availResp.data.pagination ? availResp.data.pagination.total : null;
+
+        const occResp = await window.CSMS.api.request(
+          `/api/schedules/occupancy?date=${encodeURIComponent(iso)}` +
+            `&available_from=${encodeURIComponent(slot.start)}` +
+            `&available_until=${encodeURIComponent(slot.end)}` +
+            `&include_reservations=true`,
+          { method: 'GET' }
+        );
+
+        const data = occResp && occResp.data ? occResp.data : null;
+        const items = data && Array.isArray(data.events) ? data.events : [];
+        const occupiedRoomsCount = data && Array.isArray(data.occupied_room_ids) ? data.occupied_room_ids.length : null;
+
+        const schedulesOnly = items.filter((e) => e && e.type === 'schedule');
+        const reservationsOnly = items.filter((e) => e && e.type === 'reservation');
+        renderRows(scheduleShell, schedulesOnly, iso);
+        renderRows(reservationShell, reservationsOnly, iso);
+        if (typeof availableRooms === 'number') setStat(1, availableRooms);
+        if (typeof totalRooms === 'number') setStat(2, totalRooms);
+        setStat(
+          0,
+          typeof occupiedRoomsCount === 'number'
+            ? occupiedRoomsCount
+            : new Set(items.map((e) => (e && e.room_id ? e.room_id : null)).filter(Boolean)).size
+        );
+      } catch (e) {
+        alert(e && e.message ? e.message : 'Failed to load occupancy.');
+      }
+    }
+
+    function applySearchFilter() {
+      const value = searchInput && searchInput.value ? searchInput.value.toLowerCase() : '';
+      const shells = [scheduleShell, reservationShell].filter(Boolean);
+      shells.forEach(function (shell) {
+        shell.querySelectorAll('.table-row').forEach(function (row) {
+          const spans = row.querySelectorAll('span');
+          const rowText = Array.from(spans)
+            .map((s) => (s.textContent || '').toLowerCase())
+            .join(' ');
+          row.style.display = !value || rowText.includes(value) ? 'grid' : 'none';
+        });
+      });
+    }
+
+    if (searchInput) searchInput.addEventListener('keyup', applySearchFilter);
+    if (startInput) startInput.addEventListener('change', function () { if (currentIso) loadForDate(currentIso).then(applySearchFilter); });
+    if (endInput) endInput.addEventListener('change', function () { if (currentIso) loadForDate(currentIso).then(applySearchFilter); });
+
+    document.addEventListener('csms:date-selected', function (e) {
+      const iso = e && e.detail && e.detail.iso ? e.detail.iso : null;
+      if (!iso) return;
+      loadForDate(iso).then(applySearchFilter);
+    });
+
+    // Fallback if calendar.js isn't present.
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!currentIso) {
+        const today = new Date();
+        const iso = `${today.getFullYear()}-${fmt2(today.getMonth() + 1)}-${fmt2(today.getDate())}`;
+        loadForDate(iso).then(applySearchFilter);
+      }
+    });
+
+    // Poll to reflect latest DB schedules/reservations.
+    setInterval(function () {
+      if (currentIso) loadForDate(currentIso).then(applySearchFilter);
+    }, 30000);
+  })();
+</script>
+      <script src="/static/js/user/calendar.js"></script>
+</body>
+</html>

@@ -1,64 +1,124 @@
 # Classroom Scheduling and Monitoring System (CSMS)
 
-This repo is split into a Flask API backend and a static HTML/JS/CSS frontend.
+CSMS is a classroom scheduling and reservation system with role-based access (Super Admin, Admin, Authorized User, Student). It runs as a single Flask application that serves both:
 
-## Folder structure
+- A JSON API under `/api/*`
+- A static HTML/CSS/JS frontend under `/`
 
-- `backend/` - Flask API (`run.py`, app package, migrations, tests)
-- `frontend/` - Static pages (`*.html`) + assets
-  - `frontend/assets/css/` - stylesheets
-  - `frontend/assets/js/` - JavaScript modules
-  - `frontend/assets/img/` - images
+## Technologies Used
 
-## Quick start (Windows PowerShell)
+- **Python 3.14**
+- **Flask** (API + static frontend serving)
+- **Flask-SQLAlchemy** + **Flask-Migrate** (database access + migrations)
+- **Flask-JWT-Extended** (JWT auth: access + refresh tokens)
+- **SQLite** (local/dev) and **PostgreSQL** (production-ready option via `DATABASE_URL`/`SQLALCHEMY_DATABASE_URI`)
+- **openpyxl** (XLSX imports + template generation)
+- **HTML/CSS/JavaScript** (no build step)
 
-### 1) Backend + Frontend (single server)
+## System Architecture
 
-#### Prereqs
-- Python dependencies
-- SQLite DB initialization
+- `backend/app/__init__.py` creates the Flask app and registers blueprints.
+- Backend routes live in `backend/app/routes/*` and are mounted under `/api/*`.
+- Frontend is static:
+  - HTML pages: `frontend/templates/<role>/*.html`
+  - CSS/JS: `frontend/static/css/**`, `frontend/static/js/**`
+  - Images/icons: `frontend/ASSETS/**`
+- When serving an HTML page, the backend injects `/static/js/common/csms.js` into `<head>`. This script provides:
+  - `window.CSMS.api.request()` (API client wrapper)
+  - login/logout + token storage
+  - role-based route guarding based on URL prefix (`/superadmin/*`, `/admin/*`, `/auth/*`, `/user/*`)
+
+## User Roles & Features
+
+- **Super Admin**
+  - Manage Admin accounts
+  - Import Students (`.xlsx`) and Schedules (`.xlsx`) + view import history
+  - View schedules and overall users
+- **Admin**
+  - Manage Students / Authorized Users
+  - Approve / reject reservations
+  - View room occupancy (schedule + reservations)
+- **Authorized User**
+  - Create reservations, view status, cancel requests
+- **Student**
+  - View occupied/available rooms
+
+## Key Functionalities
+
+- Room directory + availability queries
+- Reservation workflow (create → pending → approve/reject; cancel)
+- Schedule imports (XLSX) and schedule/occupancy dashboards
+- Student imports (XLSX) with a required default password
+
+## Setup Instructions (Local / Windows PowerShell)
+
+### 1) Install backend dependencies
 
 ```powershell
 cd backend
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+```
 
-REM (Optional) initialize database from the provided SQL files
-REM If CSMS_BOOTSTRAP_SQLITE=true (default), it will bootstrap only when DB looks uninitialized.
-set CSMS_BOOTSTRAP_SQLITE=true
+### 2) Configure environment
 
-REM Use the default local DB file (backend/app.db)
-set SQLALCHEMY_DATABASE_URI=sqlite:///app.db
+```powershell
+# Environment selection
+$env:FLASK_ENV = "development"   # use "production" for deploys
 
+# Database (SQLite dev default)
+$env:SQLALCHEMY_DATABASE_URI = "sqlite:///app.db"
+
+# Optional: auto-bootstrap SQLite from SQL scripts if DB looks uninitialized
+$env:CSMS_BOOTSTRAP_SQLITE = "true"
+
+# Optional: CORS allowlist (disabled by default). Example:
+# $env:CORS_ORIGINS = "https://csms.example.com,https://admin.example.com"
+
+# Optional: upload limit (bytes). Default: 10 MiB
+# $env:MAX_CONTENT_LENGTH = "10485760"
+```
+
+### 3) Run
+
+```powershell
 python run.py
 ```
 
 Then open `http://localhost:5000/`.
 
-> Notes
-> - API is served under `/api/*`.
-> - The app serves the static frontend under `/`.
-> - Bootstrap is conservative and will skip if `users` table exists and has rows.
+## Deployment Notes
 
+- Set `FLASK_ENV=production` and provide **both** `SECRET_KEY` and `JWT_SECRET_KEY`. The app will refuse to start in production if they are missing.
+- Use a production WSGI server (don’t rely on the Flask dev server).
+  - Windows-friendly example (from `backend/`): `waitress-serve --listen=0.0.0.0:5000 run:app`
+  - Linux example (from `backend/`): `gunicorn -w 2 -b 0.0.0.0:5000 run:app`
+- Prefer PostgreSQL for multi-user deployments.
+- Put the app behind a reverse proxy (nginx/Apache) for HTTPS and caching.
 
-Notes:
-- The backend serves the frontend from `frontend/` and exposes the API under `/api/*`.
-- Seeding prints the Superadmin credentials to the terminal. You can override them via env vars in `backend/seeds/seed.py`.
+## Imports (XLSX)
 
-## Roles & pages
+- Student imports require `openpyxl`.
+- Student imports require a `default_password` (set in the Super Admin Imports page, or via `CSMS_DEFAULT_STUDENT_PASSWORD`).
 
-- Student: `frontend/user/home.html` → `occupied.html` / `available.html`
-- Authorized user (reservations): `frontend/auth/dashboard.html` → `campus.html` → `building.html` → `room.html`
-- Admin: `frontend/admin/home.html`
-  - User management: `frontend/admin/Users.html` (CRUD + promote `student` → `authorized_user`)
-  - Reservation approvals: `frontend/admin/Reservation.html` (approve/reject `pending` reservations)
-- Super admin: `frontend/superadmin/Super Admin.html`
-  - Admin CRUD: `frontend/superadmin/Super Admin.html`, `frontend/superadmin/Create Admin.html`
-  - Imports: `frontend/superadmin/Imports.html` (upload student/schedule .xlsx)
-  - Schedule CRUD: `frontend/superadmin/Schedules.html`
+## Tests
 
-## Configuration
+```powershell
+cd backend
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements-dev.txt
+python -m pytest -q
+```
 
-- Backend env vars (optional): `SQLALCHEMY_DATABASE_URI`, `SECRET_KEY`, `JWT_SECRET_KEY`, `PORT`, `FLASK_ENV`
-- XLSX imports require `openpyxl` (install it if you plan to use upload features).
+## File Structure Overview
+
+- `backend/`
+  - `app/` Flask app package (config, models, routes, utils)
+  - `migrations/` Alembic migrations
+  - `seeds/` seed script for local/dev
+  - `tests/` pytest test suite
+- `frontend/`
+  - `templates/` HTML pages grouped by role
+  - `static/` CSS + JS assets
+  - `ASSETS/` shared images/icons
