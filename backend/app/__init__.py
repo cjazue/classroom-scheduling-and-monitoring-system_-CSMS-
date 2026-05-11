@@ -10,8 +10,13 @@ load_dotenv()
 
 def create_app(config_name: str = None) -> Flask:
     config_name = config_name or os.environ.get("FLASK_ENV", "default")
-    app = Flask(__name__)
-    app.config.from_object(config[config_name])
+    # We serve the frontend (including /static/*) via the catch-all route below,
+    # so disable Flask's built-in static route to avoid URL conflicts.
+    app = Flask(__name__, static_folder=None)
+    cfg = config[config_name]
+    app.config.from_object(cfg)
+    if hasattr(cfg, "init_app"):
+        cfg.init_app(app)
 
     # ---- SQLite bootstrap (dev/local) ----
     # If your provided database is already initialized, this will automatically skip.
@@ -35,7 +40,20 @@ def create_app(config_name: str = None) -> Flask:
 
     migrate.init_app(app, db)
     jwt.init_app(app)
-    cors.init_app(app, resources={r"/api/*": {"origins": "*"}})
+
+    cors_origins = app.config.get("CORS_ORIGINS") or []
+    if cors_origins:
+        cors.init_app(app, resources={r"/api/*": {"origins": cors_origins}})
+
+
+    @app.after_request
+    def _security_headers(resp):
+        # Safe baseline headers for a static frontend + JSON API deployment.
+        resp.headers.setdefault("X-Content-Type-Options", "nosniff")
+        resp.headers.setdefault("X-Frame-Options", "SAMEORIGIN")
+        resp.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+        resp.headers.setdefault("Content-Security-Policy", "frame-ancestors 'self'")
+        return resp
 
 
     @jwt.token_in_blocklist_loader
@@ -70,11 +88,13 @@ def create_app(config_name: str = None) -> Flask:
     # an explicit migration step in local/dev.
     try:
         from app.models.import_batch import ImportBatch, ScheduleImportItem, StudentImportItem
+        from app.models.cancellation_request import CancellationRequest
 
         with app.app_context():
             ImportBatch.__table__.create(db.engine, checkfirst=True)
             ScheduleImportItem.__table__.create(db.engine, checkfirst=True)
             StudentImportItem.__table__.create(db.engine, checkfirst=True)
+            CancellationRequest.__table__.create(db.engine, checkfirst=True)
     except Exception as e:
         print(f"[aux_tables] Failed to ensure import tables: {e}")
 
@@ -90,6 +110,10 @@ def create_app(config_name: str = None) -> Flask:
     def internal_error(e):
         db.session.rollback()
         return jsonify({"success": False, "error": "Internal server error."}), 500
+
+    @app.errorhandler(413)
+    def request_too_large(e):
+        return jsonify({"success": False, "error": "Request entity too large."}), 413
 
     @jwt.expired_token_loader
     def expired_token_callback(jwt_header, jwt_payload):
@@ -117,6 +141,7 @@ def create_app(config_name: str = None) -> Flask:
     # -------------------------
     repo_root = Path(__file__).resolve().parents[2]
     frontend_dir = repo_root / "frontend"
+    templates_dir = frontend_dir / "templates"
 
     @app.route("/", defaults={"path": "index.html"})
     @app.route("/<path:path>")
@@ -125,11 +150,28 @@ def create_app(config_name: str = None) -> Flask:
         if path.startswith("api/") or path == "api":
             return jsonify({"success": False, "error": "Resource not found."}), 404
 
+        # Hard-block Windows reserved device names to avoid hangs when serving files on Windows.
+        # (e.g., /static/js/NUL, /CON.txt). Keep this conservative and URL-structure only.
+        try:
+            parts = [p for p in path.replace("\\", "/").split("/") if p]
+            if any(p in (".", "..") for p in parts):
+                return jsonify({"success": False, "error": "Resource not found."}), 404
+            reserved = {"CON", "PRN", "AUX", "NUL", "CONIN$", "CONOUT$"}
+            for i in range(0, 10):
+                reserved.add(f"COM{i}")
+                reserved.add(f"LPT{i}")
+            for part in parts:
+                base = part.split(".")[0].strip().upper()
+                if base in reserved:
+                    return jsonify({"success": False, "error": "Resource not found."}), 404
+        except Exception:
+            pass
+
         if not frontend_dir.exists():
             return jsonify({"success": False, "error": "Frontend directory not found."}), 500
 
         # If `frontend/index.html` isn't present, fall back to the auth landing page.
-        # (The repo uses role-based folders like `frontend/auth/*` instead of a root index.)
+        # (This repo serves static HTML from `frontend/templates/*` with role-based URL prefixes.)
         if path == "index.html" and not (frontend_dir / "index.html").exists():
             from flask import redirect
 
@@ -137,7 +179,10 @@ def create_app(config_name: str = None) -> Flask:
 
         # Serve HTML with a tiny bootstrap script injected into <head> so the static
         # pages can talk to the Flask API (auth guard, token handling, logout wiring).
-        requested = frontend_dir / path
+        requested = templates_dir / path
+        if not (requested.exists() and requested.is_file() and requested.suffix.lower() == ".html"):
+            requested = frontend_dir / path
+
         if requested.exists() and requested.is_file() and requested.suffix.lower() == ".html":
             try:
                 html = requested.read_text(encoding="utf-8")
@@ -145,9 +190,9 @@ def create_app(config_name: str = None) -> Flask:
                 # Be permissive for legacy encodings in student-provided HTML.
                 html = requested.read_text(encoding="utf-8", errors="ignore")
 
-            inject = '<script src="/common/csms.js"></script>'
+            inject = '<script src="/static/js/common/csms.js"></script>'
             lower = html.lower()
-            if "/common/csms.js" not in lower:
+            if "/static/js/common/csms.js" not in lower:
                 if "</head>" in lower:
                     # Case-insensitive insert before </head>.
                     idx = lower.rfind("</head>")
@@ -161,6 +206,23 @@ def create_app(config_name: str = None) -> Flask:
 
         # Serve files directly from /frontend (css, js, images, etc.)
         from flask import send_from_directory
+
+        # Existing file under /frontend wins first.
+        direct = frontend_dir / path
+        if direct.exists() and direct.is_file():
+            return send_from_directory(str(frontend_dir), path)
+
+        # Backwards-compatible lookups: legacy URLs like /user/home.css now live under /static/css/user/home.css.
+        suffix = direct.suffix.lower()
+        if suffix == ".css":
+            candidate = frontend_dir / "static" / "css" / path
+            if candidate.exists() and candidate.is_file():
+                return send_from_directory(str(frontend_dir), f"static/css/{path}")
+        if suffix == ".js":
+            candidate = frontend_dir / "static" / "js" / path
+            if candidate.exists() and candidate.is_file():
+                return send_from_directory(str(frontend_dir), f"static/js/{path}")
+
         return send_from_directory(str(frontend_dir), path)
 
     return app

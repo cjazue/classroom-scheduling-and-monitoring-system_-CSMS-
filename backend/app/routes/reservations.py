@@ -11,6 +11,7 @@ from app.models.reservation import Reservation, ReservationStatus, STATUS_API_TO
 from app.models.room import Room, Building, Campus
 from app.models.schedule import Schedule, normalize_room_token
 from app.models.user import User
+from app.models.cancellation_request import CancellationRequest, CancellationStatus
 from app.utils import (
     admin_required,
     authorized_user_required,
@@ -167,6 +168,33 @@ def list_reservations():
 
     query = query.order_by(Reservation.date.desc(), Reservation.start_time.asc())
     data = paginate_query(query, lambda r: r.to_dict())
+
+    # Enrich with pending cancellation requests (if any).
+    try:
+        items = data.get("items") if isinstance(data, dict) else None
+        ids = [it.get("id") for it in (items or []) if isinstance(it, dict) and it.get("id")]
+        if ids:
+            pending_rows = (
+                CancellationRequest.query.filter(
+                    CancellationRequest.reservation_id.in_(ids),
+                    CancellationRequest.status == CancellationRequest.db_status(CancellationStatus.PENDING),
+                )
+                .order_by(CancellationRequest.requested_at.desc())
+                .all()
+            )
+            pending_by_res = {}
+            for req in pending_rows:
+                if req.reservation_id and req.reservation_id not in pending_by_res:
+                    pending_by_res[req.reservation_id] = req
+
+            for it in items:
+                rid = it.get("id")
+                req = pending_by_res.get(rid)
+                if req:
+                    it["cancellation"] = req.to_dict()
+    except Exception:
+        # Non-fatal; keep list endpoint resilient.
+        pass
     return success_response(data)
 
 
@@ -269,6 +297,9 @@ def cancel_reservation(reservation_id: str):
     if not user or not user.is_active:
         return error_response("Account inactive.", 403)
 
+    if user.role_key != "authorized_user":
+        return error_response("Only authorized users can request cancellations.", 403)
+
     reservation = Reservation.query.get_or_404(reservation_id)
 
     if user.role_key == "authorized_user" and reservation.user_id != user_id:
@@ -277,10 +308,95 @@ def cancel_reservation(reservation_id: str):
     if reservation.status_key in (ReservationStatus.REJECTED, ReservationStatus.CANCELLED):
         return error_response(f"Reservation is already {reservation.status_key}.", 409)
 
+    existing = (
+        CancellationRequest.query.filter(
+            CancellationRequest.reservation_id == reservation.id,
+            CancellationRequest.status == CancellationRequest.db_status(CancellationStatus.PENDING),
+        )
+        .order_by(CancellationRequest.requested_at.desc())
+        .first()
+    )
+    if existing:
+        return success_response(existing.to_dict(), "Cancellation request already submitted.")
+
+    req = CancellationRequest(
+        id=_gen_id("CAN"),
+        reservation_id=reservation.id,
+        requested_by=user_id,
+        requested_at=datetime.utcnow(),
+        status=CancellationRequest.db_status(CancellationStatus.PENDING),
+        created_at=datetime.utcnow(),
+        updated_at=datetime.utcnow(),
+    )
+
+    db.session.add(req)
+    db.session.commit()
+    return success_response(req.to_dict(), "Cancellation requested. Awaiting admin review.", 201)
+
+
+@reservations_bp.route("/<reservation_id>/cancellation/approve", methods=["PATCH"])
+@admin_required
+def approve_cancellation(reservation_id: str):
+    reviewer_id = get_jwt_identity()
+    reservation = Reservation.query.get_or_404(reservation_id)
+
+    req = (
+        CancellationRequest.query.filter(
+            CancellationRequest.reservation_id == reservation.id,
+            CancellationRequest.status == CancellationRequest.db_status(CancellationStatus.PENDING),
+        )
+        .order_by(CancellationRequest.requested_at.desc())
+        .first()
+    )
+    if not req:
+        return error_response("No pending cancellation request found.", 404)
+
+    req.status = CancellationRequest.db_status(CancellationStatus.APPROVED)
+    req.reviewed_by = reviewer_id
+    req.reviewed_at = datetime.utcnow()
+    req.updated_at = datetime.utcnow()
+
     reservation.status = Reservation.db_status(ReservationStatus.CANCELLED)
     reservation.updated_at = datetime.utcnow()
+
     db.session.commit()
-    return success_response(reservation.to_dict(), "Reservation cancelled.")
+    return success_response(
+        {"reservation": reservation.to_dict(), "cancellation": req.to_dict()},
+        "Cancellation approved.",
+    )
+
+
+@reservations_bp.route("/<reservation_id>/cancellation/reject", methods=["PATCH"])
+@admin_required
+def reject_cancellation(reservation_id: str):
+    reviewer_id = get_jwt_identity()
+    reservation = Reservation.query.get_or_404(reservation_id)
+
+    data = request.get_json(silent=True) or {}
+    review_note = (data.get("review_note") or "").strip() or None
+
+    req = (
+        CancellationRequest.query.filter(
+            CancellationRequest.reservation_id == reservation.id,
+            CancellationRequest.status == CancellationRequest.db_status(CancellationStatus.PENDING),
+        )
+        .order_by(CancellationRequest.requested_at.desc())
+        .first()
+    )
+    if not req:
+        return error_response("No pending cancellation request found.", 404)
+
+    req.status = CancellationRequest.db_status(CancellationStatus.REJECTED)
+    req.reviewed_by = reviewer_id
+    req.reviewed_at = datetime.utcnow()
+    req.review_note = review_note
+    req.updated_at = datetime.utcnow()
+
+    db.session.commit()
+    return success_response(
+        {"reservation": reservation.to_dict(), "cancellation": req.to_dict()},
+        "Cancellation rejected.",
+    )
 
 
 @reservations_bp.route("/<reservation_id>", methods=["PATCH"])
@@ -502,7 +618,7 @@ def update_reservation(reservation_id: str):
 def delete_reservation(reservation_id: str):
     """Delete a reservation.
 
-    - Authorized users: soft-delete (cancel) their own reservation.
+    - Authorized users: request cancellation (admin-reviewed).
     - Admin/superadmin: hard-delete any reservation record.
     """
     user_id = get_jwt_identity()
@@ -516,12 +632,33 @@ def delete_reservation(reservation_id: str):
         return error_response("You can only delete your own reservations.", 403)
 
     if user.role_key == "authorized_user":
-        if reservation.status_key == ReservationStatus.CANCELLED:
-            return error_response("Reservation is already cancelled.", 409)
-        reservation.status = Reservation.db_status(ReservationStatus.CANCELLED)
-        reservation.updated_at = datetime.utcnow()
+        if reservation.status_key in (ReservationStatus.REJECTED, ReservationStatus.CANCELLED):
+            return error_response(f"Reservation is already {reservation.status_key}.", 409)
+
+        existing = (
+            CancellationRequest.query.filter(
+                CancellationRequest.reservation_id == reservation.id,
+                CancellationRequest.status == CancellationRequest.db_status(CancellationStatus.PENDING),
+            )
+            .order_by(CancellationRequest.requested_at.desc())
+            .first()
+        )
+        if existing:
+            return success_response(existing.to_dict(), "Cancellation request already submitted.")
+
+        req = CancellationRequest(
+            id=_gen_id("CAN"),
+            reservation_id=reservation.id,
+            requested_by=user_id,
+            requested_at=datetime.utcnow(),
+            status=CancellationRequest.db_status(CancellationStatus.PENDING),
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow(),
+        )
+
+        db.session.add(req)
         db.session.commit()
-        return success_response(reservation.to_dict(), "Reservation cancelled.")
+        return success_response(req.to_dict(), "Cancellation requested. Awaiting admin review.", 201)
 
     # Admin / superadmin: remove from history entirely.
     db.session.delete(reservation)

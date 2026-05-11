@@ -8,6 +8,8 @@ from flask_jwt_extended import get_jwt_identity
 from app.extensions import db
 from app.models.import_batch import ImportBatch, StudentImportItem
 from app.models.user import User
+from app.models.reservation import Reservation, ReservationStatus
+from app.models.room import Room
 from app.utils import (
     admin_required,
     success_response,
@@ -26,6 +28,31 @@ def _gen_user_id(prefix: str = "AUTH") -> str:
 
 def _gen_id(prefix: str) -> str:
     return f"{prefix}{uuid4().hex[:10].upper()}"
+
+
+@admin_bp.route("/metrics", methods=["GET"])
+@admin_required
+def metrics():
+    """Lightweight admin dashboard summary."""
+    users_total = User.query.filter(
+        ~User.role.in_([User.db_role("admin"), User.db_role("superadmin")])
+    ).count()
+
+    reservations_total = Reservation.query.count()
+    reservations_pending = Reservation.query.filter(
+        Reservation.status == Reservation.db_status(ReservationStatus.PENDING)
+    ).count()
+
+    rooms_total = Room.query.filter(Room.is_active == 1).count()
+
+    return success_response(
+        {
+            "users_total": users_total,
+            "reservations_total": reservations_total,
+            "reservations_pending": reservations_pending,
+            "rooms_total": rooms_total,
+        }
+    )
 
 
 def _norm_header(value: object) -> str:
@@ -377,18 +404,15 @@ def delete_user(user_id: str):
 @admin_bp.route("/import/students", methods=["POST"])
 @admin_required
 def import_students_xlsx():
-    """Import students/users from an .xlsx file.
-
-    Accepts a workbook with headers such as:
-      - name, email, student_id (optional), course_section (optional), role (optional), password (optional)
-    """
+    # Admin .xlsx imports removed: keep this route blocked for backward compatibility.
+    return error_response("Student import via .xlsx is available in Super Admin only.", 403)
     file = request.files.get("file")
     if not file:
-        return error_response("file is required (.xlsx).", 422)
+      return error_response("file is required (.xlsx).", 422)
     if not str(file.filename or "").lower().endswith(".xlsx"):
         return error_response("Only .xlsx files are supported.", 422)
 
-    default_password = (request.form.get("default_password") or "Student@1234").strip()
+    default_password = (request.form.get("default_password") or "").strip()
     valid, msg = validate_password(default_password)
     if not valid:
         return error_response(f"default_password invalid: {msg}", 422)

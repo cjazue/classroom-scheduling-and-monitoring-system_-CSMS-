@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+DEFAULT_SECRET_KEY = "dev-secret-key-change-in-prod-please-set-SECRET_KEY"
+DEFAULT_JWT_SECRET_KEY = "jwt-secret-key-change-in-prod-please-set-JWT_SECRET_KEY"
+
 
 def get_database_url():
 
@@ -19,14 +22,22 @@ def get_database_url():
 
 
 class Config:
-    SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key-change-in-prod")
+    SECRET_KEY = os.getenv("SECRET_KEY", DEFAULT_SECRET_KEY)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "jwt-secret-key-change-in-prod")
+    JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", DEFAULT_JWT_SECRET_KEY)
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=8)
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=7)
 
     SQLALCHEMY_DATABASE_URI = get_database_url()
+
+    # Upload safety: default 10 MiB (set MAX_CONTENT_LENGTH to override).
+    MAX_CONTENT_LENGTH = int(os.getenv("MAX_CONTENT_LENGTH", str(10 * 1024 * 1024)))
+
+    # CORS: keep disabled by default (same-origin frontend). Set to a comma-separated
+    # allowlist (e.g., "https://csms.example.com,https://admin.example.com") if you
+    # serve the frontend from a different origin.
+    CORS_ORIGINS = [o.strip() for o in os.getenv("CORS_ORIGINS", "").split(",") if o.strip()]
 
 
 class DevelopmentConfig(Config):
@@ -39,9 +50,15 @@ class ProductionConfig(Config):
 
     @classmethod
     def init_app(cls, app):
-        uri = cls.SQLALCHEMY_DATABASE_URI or ""
+        # Enforce secrets for production deployments.
+        if not app.config.get("SECRET_KEY") or app.config.get("SECRET_KEY") == DEFAULT_SECRET_KEY:
+            raise RuntimeError("SECRET_KEY must be set for production.")
+        if not app.config.get("JWT_SECRET_KEY") or app.config.get("JWT_SECRET_KEY") == DEFAULT_JWT_SECRET_KEY:
+            raise RuntimeError("JWT_SECRET_KEY must be set for production.")
+
+        uri = app.config.get("SQLALCHEMY_DATABASE_URI") or ""
         if uri.startswith("postgres://"):
-            cls.SQLALCHEMY_DATABASE_URI = uri.replace("postgres://", "postgresql://", 1)
+            app.config["SQLALCHEMY_DATABASE_URI"] = uri.replace("postgres://", "postgresql://", 1)
 
 
 class TestingConfig(Config):

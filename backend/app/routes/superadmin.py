@@ -2,10 +2,11 @@ from __future__ import annotations
 
 from datetime import datetime, time
 from io import BytesIO
+import os
 import re
 from uuid import uuid4
 
-from flask import Blueprint, request
+from flask import Blueprint, request, send_file
 from flask_jwt_extended import get_jwt_identity
 from app.extensions import db
 from app.models.reservation import Reservation, ReservationStatus
@@ -127,6 +128,99 @@ def _load_xlsx_workbook(file_storage):
         return wb, None
     except Exception as e:
         return None, f"Failed to read .xlsx file: {e}"
+
+
+def _xlsx_bytes_response(wb, download_name: str):
+    buf = BytesIO()
+    wb.save(buf)
+    buf.seek(0)
+    return send_file(
+        buf,
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        as_attachment=True,
+        download_name=download_name,
+    )
+
+
+def _make_import_template_workbook(sheet_title: str, headers: list[str], sample_rows: list[list[object]], notes: list[str]):
+    try:
+        from openpyxl import Workbook  # type: ignore
+        from openpyxl.styles import Alignment, Font, PatternFill  # type: ignore
+        from openpyxl.utils import get_column_letter  # type: ignore
+    except Exception:
+        return None, "Missing dependency: openpyxl. Install it to enable .xlsx templates."
+
+    wb = Workbook()
+    ws = wb.active
+    ws.title = sheet_title
+
+    ws.append(headers)
+    for row in sample_rows:
+        ws.append(row)
+
+    # Header style.
+    header_font = Font(bold=True, color="FFFFFF")
+    header_fill = PatternFill("solid", fgColor="043AA3")
+    header_alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+    for col_idx, header in enumerate(headers, start=1):
+        cell = ws.cell(row=1, column=col_idx)
+        cell.font = header_font
+        cell.fill = header_fill
+        cell.alignment = header_alignment
+        ws.column_dimensions[get_column_letter(col_idx)].width = max(12, min(45, len(str(header)) + 6))
+
+    ws.freeze_panes = "A2"
+    ws.auto_filter = f"A1:{get_column_letter(len(headers))}1"
+
+    if notes:
+        info = wb.create_sheet("Instructions")
+        info.append(["CSMS Import Template Notes"])
+        info["A1"].font = Font(bold=True)
+        for n in notes:
+            info.append([n])
+        info.column_dimensions["A"].width = 140
+        info.freeze_panes = "A2"
+
+    return wb, None
+
+
+@superadmin_bp.route("/import/templates/students.xlsx", methods=["GET"])
+@superadmin_required
+def download_student_import_template():
+    headers = ["Name", "Email", "Student ID", "Course", "Section"]
+    sample = [["Juan Dela Cruz", "juan.delacruz@example.com", "12-3456", "BSIT", "1-1"]]
+    notes = [
+        "Required columns: Name, Email.",
+        "Optional columns: Student ID, Course, Section.",
+        "Student ID format: NN-NNNN (example: 12-3456).",
+        "Course + Section will be combined into Course Section (AAAA X-X) during import.",
+        "Passwords are set automatically during import (no password column required).",
+    ]
+
+    wb, err = _make_import_template_workbook("Students", headers, sample, notes)
+    if err:
+        return error_response(err, 500)
+    return _xlsx_bytes_response(wb, "csms_students_template.xlsx")
+
+
+@superadmin_bp.route("/import/templates/schedules.xlsx", methods=["GET"])
+@superadmin_required
+def download_schedule_import_template():
+    headers = ["Section", "Subject", "Subject Code", "Day", "Room", "Start Time", "End Time", "Campus", "Building"]
+    sample = [["BSIT 1-1", "Programming 1", "IT101", "Monday", "RM101", "07:30", "09:00", "", ""]]
+    notes = [
+        "Required columns: Day, Room, Start Time, End Time.",
+        "Section can be provided per row OR via the 'Section' form field in the upload UI.",
+        "Section format: AAAA X-X (example: BSIT 1-1).",
+        "Day accepts: Monday, Tue, Wed, Thu, Fri, Sat, Sun (case-insensitive).",
+        "Time accepts: Excel time values, 24-hour HH:MM (07:30), or 12-hour H:MMAM/PM (7:30AM).",
+        "Campus and Building are optional metadata fields.",
+    ]
+
+    wb, err = _make_import_template_workbook("Schedules", headers, sample, notes)
+    if err:
+        return error_response(err, 500)
+    return _xlsx_bytes_response(wb, "csms_schedules_template.xlsx")
 
 @superadmin_bp.route("/admins", methods=["POST"])
 @superadmin_required
@@ -286,6 +380,36 @@ def metrics():
             "reservations_by_status": reservations_by_status,
         }
     )
+
+
+@superadmin_bp.route("/users", methods=["GET"])
+@superadmin_required
+def list_all_users():
+    """Super Admin view of all users across all roles."""
+    query = User.query.order_by(User.created_at.desc())
+
+    role = (request.args.get("role") or "").strip().lower()
+    if role:
+        if role not in ("superadmin", "admin", "authorized_user", "student"):
+            return error_response("Invalid role filter.", 422)
+        query = query.filter(User.role == User.db_role(role))
+
+    is_active = request.args.get("is_active")
+    if is_active is not None:
+        query = query.filter_by(is_active=is_active.lower() == "true")
+
+    search = (request.args.get("search") or "").strip()
+    if search:
+        query = query.filter(
+            db.or_(
+                User.name.ilike(f"%{search}%"),
+                User.email.ilike(f"%{search}%"),
+                User.student_id.ilike(f"%{search}%"),
+            )
+        )
+
+    data = paginate_query(query, lambda u: u.to_dict(include_sensitive=True))
+    return success_response(data)
 
 
 @superadmin_bp.route("/schedules", methods=["GET"])
@@ -514,7 +638,12 @@ def import_students_xlsx():
     if not str(file.filename or "").lower().endswith(".xlsx"):
         return error_response("Only .xlsx files are supported.", 422)
 
-    default_password = (request.form.get("default_password") or "Student@1234").strip()
+    default_password = (
+        (request.form.get("default_password") or "").strip()
+        or (os.environ.get("CSMS_DEFAULT_STUDENT_PASSWORD") or "").strip()
+    )
+    if not default_password:
+        return error_response("default_password is required for imported students.", 422)
     valid, msg = validate_password(default_password)
     if not valid:
         return error_response(f"default_password invalid: {msg}", 422)
@@ -566,7 +695,22 @@ def import_students_xlsx():
                     return values[j]
                 return None
 
-            name = str(get("name", "full_name", "student_name") or "").strip()
+            first_name = str(get("first_name", "firstname", "first") or "").strip()
+            second_name = str(get("second_name", "secondname", "second") or "").strip()
+            middle_raw = str(get("middle_initial", "middle_name", "middlename", "middle", "mi") or "").strip()
+            last_name = str(get("last_name", "lastname", "surname", "last") or "").strip()
+
+            middle_initial = ""
+            if middle_raw:
+                # Always store/display Middle Initial (not full middle name).
+                # Keep this conservative: take the first alphabetic character only.
+                m = re.search(r"[A-Za-z]", middle_raw)
+                middle_initial = m.group(0).upper() if m else ""
+
+            composed_parts = [p for p in [first_name, second_name, (middle_initial or ""), last_name] if p]
+            composed_name = " ".join(composed_parts).strip()
+
+            name = composed_name or str(get("name", "full_name", "student_name") or "").strip()
             email = str(get("email", "email_address") or "").strip().lower()
             student_id = str(get("student_id", "student_number", "student_no") or "").strip()
             course = str(get("course") or "").strip().upper()

@@ -1,5 +1,8 @@
 import sys
 import os
+import secrets
+import string
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -102,7 +105,17 @@ def seed():
         # Superadmin
         sa_email = os.environ.get("SUPERADMIN_EMAIL", "superadmin@plv.edu.ph")
         sa_name = os.environ.get("SUPERADMIN_NAME", "PLV Superadmin")
-        sa_password = os.environ.get("SUPERADMIN_PASSWORD", "SuperAdmin@PLV2025")
+
+        def gen_password(length: int = 16) -> str:
+            chars = string.ascii_letters + string.digits
+            while True:
+                pw = "".join(secrets.choice(chars) for _ in range(length))
+                if any(c.islower() for c in pw) and any(c.isupper() for c in pw) and any(c.isdigit() for c in pw):
+                    return pw
+
+        sa_password = (os.environ.get("SUPERADMIN_PASSWORD") or "").strip() or gen_password()
+        if not os.environ.get("SUPERADMIN_PASSWORD"):
+            print("[seed] SUPERADMIN_PASSWORD not set; generated a temporary password.")
 
         existing_sa = User.query.filter_by(email=sa_email).first()
         if not existing_sa:
