@@ -396,7 +396,8 @@ svg {
 }
 
 .logo{
-    width: fit-content;
+    width: auto;
+    max-width: 100%;
     font-family: 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     color: white;
@@ -407,7 +408,12 @@ svg {
     align-items: center;
     justify-content: space-between;
     margin-left: 18px;
-    width: 70px;
+}
+
+.logo img {
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
 #menu{
